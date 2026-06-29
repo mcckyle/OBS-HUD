@@ -23,7 +23,7 @@
   justify-content: flex-end;
   align-items: flex-start;
   overflow: hidden;
-  background transparent;
+  background: transparent;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
