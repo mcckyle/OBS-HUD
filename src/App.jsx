@@ -1,12 +1,12 @@
 //Filename: App.jsx
 //Author: Kyle McColgan
-//Date: 28 June 2026
+//Date: 29 June 2026
 //Description: This file contains the App component for the OBS HUD project.
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Compass, Clock } from 'lucide-react';
-import './App.css'
+import './App.css';
 
 export default function App() {
   const [seconds, setSeconds] = useState(0);
@@ -16,40 +16,40 @@ export default function App() {
 
   //1. Live Session Timer.
   useEffect(() => {
-    const timer = setInterval(() => setSeconds(prev => prev + 1), 1000);
+    const timer = setInterval(() => setSeconds(time => time + 1), 1000);
     return () => clearInterval(timer);
   }, []);
 
   //2. JSON Polling Loop (Checks public/mission.json every 3000ms).
   useEffect(() => {
-    const fetchMission = async () => {
+    const syncMission = async () => {
       try
       {
         //Cache-busting URL parameter ensures Linux browser parses fresh data...
         const response = await fetch(`/mission.json?t=${Date.now()}`);
         if (!response.ok)
         {
-          throw new Error("Mission profile unavailable!");
+          return;
         }
 
         const data = await response.json();
-        if ((data.objective) && (data.objective !== currentMission))
+        if (data.objective)
         {
           setCurrentMission(data.objective);
         }
       }
       catch (error)
       {
-        console.error("Mission Sync Error:", error);
+        console.warn("Mission feed unavailable:");
       }
     };
 
     //Execute immediately on mount, then track every three seconds...
-    fetchMission();
-    const pollInterval = setInterval(fetchMission, 3000);
+    syncMission();
+    const pollInterval = setInterval(syncMission, 3000);
 
     return () => clearInterval(pollInterval);
-  }, [currentMission]);
+  }, []);
 
   //Formatter function to cleanly display clock digits.
   const formatTime = (totalSeconds) => {
@@ -61,55 +61,51 @@ export default function App() {
 
   //Transparent wrapper that spans the OBS canvas...
   return (
-    <div className="canvas-wrapper">
+    <main className="hud-stage">
 
-      {/* Container with a slide-in-from-right animation. */}
-      <motion.section
-        className="hud-box"
-        initial={{ opacity: 0, x: 40 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+    <motion.section
+        className="hud-panel"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
       >
         {/* Header / System Status. */}
-        <header className="hud-header">
-          <span>NAV_SYSTEM_v1.61</span>
-          <div className="status-flex">{/* ● ONLINE </span>*/}
-            <span className="status-indicator" />
+        <header className="hud-top">
+          <span>NAV_COMPUTER</span>
+          <div className="online">
+            <span />
             ONLINE
           </div>
         </header>
 
         {/* Section 1: Elapsed Timer Module. */}
-        <div className="hud-row">
-          <Clock className="hud-icon" />
+        <section className="hud-module">
+          <Clock />
           <div>
-            <div className="label">Mission Time</div>
-            <div className="value">{formatTime(seconds)}</div>
+            <small>SESSION TIME</small>
+            <strong>{formatTime(seconds)}</strong>
           </div>
-        </div>
+        </section>
 
         {/* Section 2: Dynamic Objective Module. */}
-        <div className="hud-row">
-          <Compass className="hud-icon spin" />
-          <div className="text-container">
-            <div className="label">Current Objective</div>
-
-            {/* AnimatePresence handles smooth transition when text changes. */}
+        <section className="hud-module">
+          <Compass className="rotating" />
+          <div>
+            <small>OBJECTIVE</small>
             <AnimatePresence mode="wait">
-              <motion.div
+              <motion.p
                 key={currentMission}
                 className="mission-text"
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.25 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
               >
                 {currentMission}
-              </motion.div>
+              </motion.p>
             </AnimatePresence>
           </div>
-        </div>
+        </section>
       </motion.section>
-    </div>
+    </main>
   );
 };

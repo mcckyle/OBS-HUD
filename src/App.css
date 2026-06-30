@@ -1,20 +1,19 @@
 /* Filename: src/App.css */
 
 :root {
-  --hud-cyan: #22d3ee;
-  --hud-text: #e2e8f0;
-  --hud-muted: #94a3b8;
+  --cyan: #22d3ee;
+  --cyan-soft: rgba(34, 211, 238, 0.18);
 
-  --panel-bg: rgba(3, 12, 24, 0.72);
-  --panel-border: rgba(34, 211, 238, 0.28);
-  --panel-glow: rgba(34, 211, 238, 0.18);
-  --space: 1rem;
+  --text: #e5f6ff;
+  --muted: #7dd3fc;
+
+  --panel: rgba(2, 8, 23, 0.72);
 }
-
 * { box-sizing: border-box; }
+body { margin: 0; overflow: hidden; }
 
 /* Positioning on the OBS 1080p canvas. */
-.canvas-wrapper
+.hud-stage
 {
   width: 100vw;
   height: 100vh;
@@ -22,113 +21,110 @@
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
-  overflow: hidden;
   background: transparent;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-family: ui-monospace, monospace;
 }
 
-/* HUD Panel Styles. */
-.hud-box
+/* Main glass console styles. */
+.hud-panel
 {
   position: relative;
-  width: 340px;
+  overflow: hidden;
+
+  width: 350px;
   padding: 1.25rem;
   color: var(--hud-text);
-  background: linear-gradient(135deg, rgba(34, 211, 238, 0.08), transparent 45%), var(--panel-bg);
-  border: 1px solid var(--panel-border);
-  border-radius: 14px;
-  backdrop-filter: blur(14px);
-  box-shadow: 0 0 25px var(--panel-glow);
-  overflow: hidden;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.10), transparent 50%), var(--panel);
+  border: 1px solid rgba(34, 211, 238, 0.28);
+  border-radius: 18px;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 0 35px rgba(34, 211, 238, 0.15);
 }
-.hud-box::after
+.hud-panel::before
 {
   content: "";
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(to bottom, transparent, transparent 3px, rgba(255, 255, 255, 0.025) 4px);
+  background: linear-gradient(transparent 50%, rgba(34, 211, 238, 0.03) 50%);
+  background-size: 100% 6px;
   pointer-events: none;
 }
 
 /* System Meta Header Styles. */
-.hud-header
+.hud-top
 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 0.75rem;
+  padding-bottom: 0.8rem;
   margin-bottom: 1rem;
   border-bottom: 1px solid rgba(34, 211, 238, 0.18);
-  color: var(--hud-cyan);
+  color: var(--cyan);
   font-size: 0.65rem;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
 }
 
 /* Animated Green Indicator Styles. */
-.status-flex { display: flex; align-items: center; gap: 0.4rem; color: var(--hud-muted); }
-.status-indicator
+.online { display: flex; align-items: center; gap: 0.4rem; color: var(--muted); }
+.online span
 {
   width: 0.45rem;
   height: 0.45rem;
-  border-radius: 999px;
-  background: #10b981;
+  border-radius: 50%;
+  background: #34d399;
 
-  animation: pulse 1.8s infinite;
+  animation: pulse 2s infinite;
 }
 
 /* Layout Grid for Row alignment Styles. */
-.hud-row
+.hud-module
 {
   display: flex;
-  gap: 0.9rem;
-  margin-bottom: var(--space);
+  gap: 1rem;
+  margin-bottom: 1.1rem;
 }
-.hud-row:last-child { margin-bottom: 0; }
+.hud-module:last-child { margin-bottom: 0; }
 
 /* Lucide Icons Styling. */
-.hud-icon
+.hud-module svg
 {
-  width: 1.3rem;
-  height: 1.3rem;
-  color: var(--hud-cyan);
-  margin-top: 0.15rem;
-  flex-shrink: 0;
+  width: 1.4rem;
+  height: 1.4rem;
+  color: var(--cyan);
+  margin-top: 0.2rem;
+}
+small
+{
+  display: block;
+  color: var(--muted);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+}
+strong
+{
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--text);
+  font-size: 1.35rem;
+}
+p
+{
+  margin: 0.3rem 0 0;
+  color: var(--text);
+  line-height: 1.4;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 /* Custom CSS Slow Rotation for the Compass Icon. */
-.spin { animation: rotate 18s linear infinite; }
-
-.label
-{
-  color: var(--hud-muted);
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-}
-
-.value
-{
-  margin-top: 0.2rem;
-  color: #cffafe;
-  font-size: 1.25rem;
-  font-weight: 700;
-}
-
-.mission-text
-{
-  margin-top: 0.3rem;
-  color: var(--hud-text);
-  font-size: 0.9rem;
-  line-height: 1.4;
-  font-weight: 600;
-}
+.rotating { animation: rotate 20s linear infinite; }
 
 /* ====================================
    ANIMATIONS STYLES.
 ======================================= */
 @keyframes pulse
 {
-  50% { opacity: 0.35; transform: scale(0.8); }
+  50% { opacity: 0.3; transform: scale(0.8); }
 }
 @keyframes rotate
 {
