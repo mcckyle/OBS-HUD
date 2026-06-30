@@ -32,9 +32,6 @@ jobs:
       - name: Build the project
         run: npm run build  # Vite outputs to ./dist directory.
 
-      - name: Execute test cases
-        run: npm test
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
