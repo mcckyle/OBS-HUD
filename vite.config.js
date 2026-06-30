@@ -5,4 +5,5 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: '/OBS-HUD/',
   plugins: [react()],
+  publicDir: 'public',
 })

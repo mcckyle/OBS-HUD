@@ -12,7 +12,7 @@ export default function App() {
   const [seconds, setSeconds] = useState(0);
 
   //Change text below per quest...
-  const [currentMission, setCurrentMission] = useState("Initializing Navigation...");
+  const [currentMission, setCurrentMission] = useState("Initalizing Navigation...");
 
   //1. Live Session Timer.
   useEffect(() => {
