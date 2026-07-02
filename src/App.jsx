@@ -1,6 +1,6 @@
 //Filename: App.jsx
 //Author: Kyle McColgan
-//Date: 29 June 2026
+//Date: 1 July 2026
 //Description: This file contains the App component for the OBS HUD project.
 
 import React, { useState, useEffect } from 'react';
@@ -10,8 +10,6 @@ import './App.css';
 
 export default function App() {
   const [seconds, setSeconds] = useState(0);
-
-  //Change text below per quest...
   const [currentMission, setCurrentMission] = useState("Initializing Navigation...");
 
   //1. Live Session Timer.
@@ -26,7 +24,7 @@ export default function App() {
       try
       {
         //Cache-busting URL parameter ensures Linux browser parses fresh data...
-        const response = await fetch(`/mission.json?t=${Date.now()}`);
+        const response = await fetch(`./mission.json?t=${Date.now()}`);
         if (!response.ok)
         {
           return;
@@ -40,7 +38,7 @@ export default function App() {
       }
       catch (error)
       {
-        console.warn("Mission feed unavailable:");
+        console.warn("Navigation feed unavailable!");
       }
     };
 
@@ -65,40 +63,41 @@ export default function App() {
 
     <motion.section
         className="hud-panel"
-        initial={{ opacity: 0, y: -20 }}
+        initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
+        transition={{ duration: 0.6 }}
       >
         {/* Header / System Status. */}
-        <header className="hud-top">
-          <span>NAV_COMPUTER</span>
-          <div className="online">
+        <header className="hud-header">
+          <div>
+            <span>NAVIGATION SYSTEM</span>
+          </div>
+          <div className="hud-status">
             <span />
             ONLINE
           </div>
         </header>
 
         {/* Section 1: Elapsed Timer Module. */}
-        <section className="hud-module">
+        <section className="hud-item">
           <Clock />
           <div>
-            <small>SESSION TIME</small>
+            <span className="hud-label">SESSION</span>
             <strong>{formatTime(seconds)}</strong>
           </div>
         </section>
 
         {/* Section 2: Dynamic Objective Module. */}
-        <section className="hud-module">
-          <Compass className="rotating" />
+        <section className="hud-item">
+          <Compass className="hud-compass" />
           <div>
-            <small>OBJECTIVE</small>
+            <span className="hud-label">OBJECTIVE</span>
             <AnimatePresence mode="wait">
               <motion.p
                 key={currentMission}
-                className="mission-text"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                initial={{ opacity: 0, x: 8 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -8 }}
               >
                 {currentMission}
               </motion.p>
