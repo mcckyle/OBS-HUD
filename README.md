@@ -1,16 +1,133 @@
-# React + Vite
+# OBS HUD
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple, modern, and lightweight browser-source HUD for OBS Studio inspired by the clean science-fiction interface of **Starfield**.
 
-Currently, two official plugins are available:
+Designed for livestreams, the overlay provides an elegant glass UI with a live session timer as well as a dynamically updating objective feed while remaining unobtrusive over gameplay.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* Minimal, distraction-free interface
+* Lightweight React + Vite application
+* Glassmorphism-inspired design
+* Live session timer
+* Dynamic objective updates via `mission.json`
+* Smooth Motion animations
+* Fully transparent browser source for OBS Studio
+* Easy to customize and extend
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Preview
+
+> Add a screenshot or animated GIF here after your first release.
+
+```
+./public/images/obs-hud-07022026.png
+```
+
+---
+
+## Getting Started
+
+### Clone the repository
+
+```bash
+git clone https://github.com/mcckyle/OBS-HUD.git
+cd OBS-HUD
+```
+
+### Install dependencies
+
+```bash
+npm install
+```
+
+### Start the development server
+
+```bash
+npm run dev
+```
+
+### Build for production
+
+```bash
+npm run build
+```
+
+---
+
+## Mission Feed
+
+The overlay polls `public/mission.json` every few seconds.
+
+Example:
+
+```json
+{
+  "objective": "Explore New Atlantis"
+}
+```
+
+Updating the JSON automatically updates the objective displayed in OBS.
+
+---
+
+## Using with OBS Studio
+
+1. Build the project.
+2. Add a **Browser Source** in OBS Studio.
+3. Point the source to the generated application or your local development server.
+4. Set the browser background to transparent.
+5. Position the overlay wherever you prefer.
+
+---
+
+## Project Structure
+
+```
+src/
+├── App.jsx
+├── App.css
+├── index.css
+└── main.jsx
+
+public/
+└── mission.json
+```
+
+---
+
+## Customization
+
+The HUD is intentionally easy to customize.
+
+You can easily modify:
+
+* Colors
+* Typography
+* Panel layout
+* Icons
+* Animation timing
+* Polling interval
+* Mission feed
+
+---
+
+## Built With
+
+* React
+* Vite
+* Motion
+* Lucide Icons
+
+---
+
+## License
+
+This project is licensed under the MIT License.
+
+---
+
+Created with ❤️ for immersive livestreams.
