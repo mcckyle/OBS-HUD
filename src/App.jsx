@@ -1,12 +1,22 @@
 //Filename: App.jsx
 //Author: Kyle McColgan
-//Date: 1 July 2026
+//Date: 2 July 2026
 //Description: This file contains the App component for the OBS HUD project.
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Compass, Clock } from 'lucide-react';
 import './App.css';
+
+const MISSION_REFRESH_MS = 3000;
+
+//Formatter function to cleanly display clock digits.
+const formatTime = (totalSeconds) => {
+  const hrs = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+  const mins = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+  const secs = String(totalSeconds % 60).padStart(2, '0');
+  return `${hrs}:${mins}:${secs}`;
+};
 
 export default function App() {
   const [seconds, setSeconds] = useState(0);
@@ -44,18 +54,10 @@ export default function App() {
 
     //Execute immediately on mount, then track every three seconds...
     syncMission();
-    const pollInterval = setInterval(syncMission, 3000);
+    const pollInterval = setInterval(syncMission, MISSION_REFRESH_MS);
 
     return () => clearInterval(pollInterval);
   }, []);
-
-  //Formatter function to cleanly display clock digits.
-  const formatTime = (totalSeconds) => {
-    const hrs = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
-    const mins = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
-    const secs = String(totalSeconds % 60).padStart(2, '0');
-    return `${hrs}:${mins}:${secs}`;
-  };
 
   //Transparent wrapper that spans the OBS canvas...
   return (
@@ -69,9 +71,7 @@ export default function App() {
       >
         {/* Header / System Status. */}
         <header className="hud-header">
-          <div>
-            <span>NAVIGATION SYSTEM</span>
-          </div>
+          <span className="hud-title">NAVIGATION SYSTEM</span>
           <div className="hud-status">
             <span />
             ONLINE
@@ -79,7 +79,7 @@ export default function App() {
         </header>
 
         {/* Section 1: Elapsed Timer Module. */}
-        <section className="hud-item">
+        <section className="hud-item" aria-label="Session timer">
           <Clock />
           <div>
             <span className="hud-label">SESSION</span>
@@ -88,16 +88,17 @@ export default function App() {
         </section>
 
         {/* Section 2: Dynamic Objective Module. */}
-        <section className="hud-item">
+        <section className="hud-item" aria-label="Current objective">
           <Compass className="hud-compass" />
           <div>
             <span className="hud-label">OBJECTIVE</span>
             <AnimatePresence mode="wait">
               <motion.p
                 key={currentMission}
-                initial={{ opacity: 0, x: 8 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -8 }}
+                initial={{ opacity: 0, y: 4, scale: 0.99 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -4, scale: 0.99 }}
+                transition={{ duration: 0.3, scale: 1 }}
               >
                 {currentMission}
               </motion.p>

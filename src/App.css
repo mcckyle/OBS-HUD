@@ -2,9 +2,12 @@
 
 :root {
   --hud-cyan: #38d8ff;
-  --hud-text: #eafaff;
-  --hud-muted: #8bbdce;
-  --hud-panel: rgba(4, 12, 24, 0.68);
+  --hud-text: #edf8ff;
+  --hud-muted: #9cb8c9;
+  --hud-accent: #73d7ff;
+  --hud-panel: rgba(5, 12, 20, 0.72);
+  --hud-border: rgba(115, 215, 255, 0.18);
+  --hud-highlight: rgba(115, 215, 255, 0.12);
 }
 * { box-sizing: border-box; }
 body { margin: 0; overflow: hidden; }
@@ -25,22 +28,42 @@ body { margin: 0; overflow: hidden; }
 /* Main glass console styles. */
 .hud-panel
 {
-  width: 330px;
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+
+  width: clamp(290px, 18vw, 320px);
   padding: 20px;
   color: var(--hud-text);
   background: linear-gradient(135deg, rgba(56, 216, 255, 0.12), transparent 60%), var(--hud-panel);
   border: 1px solid rgba(56, 216, 255, 0.25);
   border-radius: 20px;
-  backdrop-filter: blur(20px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45), 0 0 30px rgba(56, 216, 255, 0.12);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35), 0 0 18px var(--hud-highlight);
+
+  animation: breathe 10s ease-in-out infinite;
 }
-/*.hud-panel::before
+.hud-panel::before
 {
   content: "";
   position: absolute;
-  inset: 0;
-  background: linear-gradient(transparent 50%, rgba(34, 211, 238, 0.03) 50%);
-  background-size: 100% 6px;
+  inset: 0 auto auto 0;
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(56, 216, 255, 0.7), transparent);
+  opacity: 0.7;
+  pointer-events: none;
+}
+/*.hud-panel::after
+{
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.03);
   pointer-events: none;
 }*/
 
@@ -51,13 +74,13 @@ body { margin: 0; overflow: hidden; }
   justify-content: space-between;
   align-items: center;
   padding-bottom: 14px;
-  margin-bottom: 18px;
   border-bottom: 1px solid rgba(56, 216, 255, 0.18);
 }
+.hud-title { flex: 1; color: var(--hud-text); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; }
 .hud-label { display: block; color: var(--hud-muted); font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; }
 
 /* Animated Green Indicator Styles. */
-.hud-status { display: flex; align-items: center; gap: 7px; color: var(--hud-cyan); font-size: 0.65rem; letter-spacing: 0.12em; }
+.hud-status { display: flex; align-items: center; gap: 7px; color: var(--hud-cyan); font-size: 0.65rem; letter-spacing: 0.12em; opacity: 0.82; }
 .hud-status span
 {
   width: 7px;
@@ -72,25 +95,30 @@ body { margin: 0; overflow: hidden; }
 .hud-item
 {
   display: flex;
-  gap: 14px;
-  margin-top: 18px;
+  align-items: flex-start;
+  gap: 1rem;
 }
+.hud-item > div { flex: 1; min-width: 0; }
 
 /* Lucide Icons Styling. */
 .hud-item svg
 {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   color: var(--hud-cyan);
-  margin-top: 4px;
+  opacity: 0.9;
+  stroke-width: 1.75;
 }
 
 .hud-item strong
 {
   display: block;
   margin-top: 4px;
-  font-size: 1.35rem;
-  letter-spacing: 0.04em;
+  font-size: 1.55rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
 }
 .hud-item p
 {
@@ -98,14 +126,25 @@ body { margin: 0; overflow: hidden; }
   color: var(--hud-text);
   font-size: 0.9rem;
   line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 
 /* Custom CSS Slow Rotation for the Compass Icon. */
-.hud-compass { animation: rotate 25s linear infinite; }
+.hud-compass { animation: rotate 60s linear infinite; }
+
+@media (prefers-reduced-motion: reduce)
+{
+  .hud-panel, .hud-compass, .hud-status span { animation: none; }
+}
 
 /* ====================================
    ANIMATIONS STYLES.
 ======================================= */
+@keyframes breathe
+{
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1px); }
+}
 @keyframes pulse
 {
   50% { opacity: 0.35; transform: scale(0.8); }
