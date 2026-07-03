@@ -21,11 +21,8 @@ Designed for livestreams, the overlay provides an elegant glass UI with a live s
 
 ## Preview
 
-> Add a screenshot or animated GIF here after your first release.
-
-```
-./public/images/obs-hud-07022026.png
-```
+![Overlay Screenshot](./public/images/obs-hud-07022026.png)
+*A glimpse of the overlay, captured with a screenshot.*
 
 ---
 
