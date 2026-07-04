@@ -1,18 +1,18 @@
 /* Filename: src/App.css */
 
 :root {
-  --hud-cyan: #38d8ff;
-  --hud-text: #edf8ff;
-  --hud-muted: #9cb8c9;
-  --hud-accent: #73d7ff;
-  --hud-panel: rgba(5, 12, 20, 0.72);
-  --hud-border: rgba(115, 215, 255, 0.18);
-  --hud-highlight: rgba(115, 215, 255, 0.12);
+  /* Starfield NASA-punk Inspired Palette. */
+  --hud-bg: rgba(7, 10, 15, 0.85); /* Deep space dark gray. */
+  --hud-border: rgba(237, 248, 255, 0.15); /* Light cosmic framing. */
+  --hud-text-main: #edf8ff; /* Crisp instrumentation text. */
+  --hud-text-muted: #9cb8c9; /* Slate data readouts. */
+  --hud-accent: #dfaa37; /* Constellation Flight-Suit Gold. */
+  --hud-accent-glow: rgba(223, 170, 55, 0.15);
 }
 * { box-sizing: border-box; }
-body { margin: 0; overflow: hidden; }
+body { margin: 0; overflow: hidden; background: transparent; }
 
-/* Positioning on the OBS 1080p canvas. */
+/* Positioning on the OBS 1080p canvas. Places overlay top-right. */
 .hud-stage
 {
   width: 100vw;
@@ -20,12 +20,13 @@ body { margin: 0; overflow: hidden; }
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
-  padding: 32px;
+  padding: 40px;
   background: transparent;
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Main glass console styles. */
+/* Main glass flight console layout styles. */
 .hud-panel
 {
   position: relative;
@@ -33,39 +34,27 @@ body { margin: 0; overflow: hidden; }
 
   display: flex;
   flex-direction: column;
-  gap: 1.4rem;
+  gap: 1.5rem;
 
-  width: clamp(290px, 18vw, 320px);
-  padding: 20px;
-  color: var(--hud-text);
-  background: linear-gradient(135deg, rgba(56, 216, 255, 0.12), transparent 60%), var(--hud-panel);
-  border: 1px solid rgba(56, 216, 255, 0.25);
-  border-radius: 20px;
-  backdrop-filter: blur(16px);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35), 0 0 18px var(--hud-highlight);
-
-  animation: breathe 10s ease-in-out infinite;
+  width: 300px;
+  padding: 24px;
+  color: var(--hud-text-main);
+  background: linear-gradient(135deg, var(--hud-accent-glow), transparent 50%), var(--hud-bg);
+  border: 1px solid var(--hud-border);
+  border-radius: 8px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 .hud-panel::before
 {
   content: "";
   position: absolute;
-  inset: 0 auto auto 0;
-  width: 120px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(56, 216, 255, 0.7), transparent);
-  opacity: 0.7;
-  pointer-events: none;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--hud-accent);
 }
-/*.hud-panel::after
-{
-  content: "";
-  position: absolute;
-  inset: 1px;
-  border-radius: inherit;
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  pointer-events: none;
-}*/
 
 /* System Meta Header Styles. */
 .hud-header
@@ -73,22 +62,22 @@ body { margin: 0; overflow: hidden; }
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 14px;
-  border-bottom: 1px solid rgba(56, 216, 255, 0.18);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--hud-border);
 }
-.hud-title { flex: 1; color: var(--hud-text); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; }
-.hud-label { display: block; color: var(--hud-muted); font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; }
+.hud-title { flex: 1; color: var(--hud-text-main); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; }
+.hud-label { display: block; color: var(--hud-text-muted); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; }
 
 /* Animated Green Indicator Styles. */
-.hud-status { display: flex; align-items: center; gap: 7px; color: var(--hud-cyan); font-size: 0.65rem; letter-spacing: 0.12em; opacity: 0.82; }
-.hud-status span
+.hud-status { display: flex; align-items: center; gap: 8px; color: var(--hud-text-main); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; }
+.hud-status-dot
 {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background: #34d399;
+  background: #ef4444;
 
-  animation: pulse 2s infinite;
+  animation: pulse-glow 2s infinite;
 }
 
 /* Layout Grid for Row alignment Styles. */
@@ -96,58 +85,58 @@ body { margin: 0; overflow: hidden; }
 {
   display: flex;
   align-items: flex-start;
-  gap: 1rem;
+  gap: 1.15rem;
 }
 .hud-item > div { flex: 1; min-width: 0; }
 
 /* Lucide Icons Styling. */
-.hud-item svg
+.hud-icon
 {
-  width: 20px;
-  height: 20px;
-  color: var(--hud-cyan);
-  opacity: 0.9;
-  stroke-width: 1.75;
+  width: 18px;
+  height: 18px;
+  color: var(--hud-accent);
+  stroke-width: 1.5;
+  flex-shrink: 0;
 }
 
 .hud-item strong
 {
   display: block;
-  margin-top: 4px;
-  font-size: 1.55rem;
-  font-weight: 650;
-  letter-spacing: 0.08em;
+  margin-top: 2px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--hud-text-main);
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1, "lnum" 1;
 }
-.hud-item p
+.hud-ticker-text
 {
-  margin: 6px 0 0;
-  color: var(--hud-text);
-  font-size: 0.9rem;
-  line-height: 1.4;
+  margin: 2px 0 0;
+  color: var(--hud-accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1.3;
+  text-transform: uppercase;
   overflow-wrap: anywhere;
 }
 
 /* Custom CSS Slow Rotation for the Compass Icon. */
-.hud-compass { animation: rotate 60s linear infinite; }
+/*.hud-compass { animation: rotate 60s linear infinite; }*/
 
 @media (prefers-reduced-motion: reduce)
 {
-  .hud-panel, .hud-compass, .hud-status span { animation: none; }
+  .hud-status-dot { animation: none; }
 }
 
 /* ====================================
    ANIMATIONS STYLES.
 ======================================= */
-@keyframes breathe
+@keyframes pulse-glow
 {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-1px); }
-}
-@keyframes pulse
-{
-  50% { opacity: 0.35; transform: scale(0.8); }
+  0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  50% { opacity: 0.4; transform: scale(0.9); box-shadow: 0 0 8px 2px rgba(239, 68, 68, 0.4); }
 }
 @keyframes rotate
 {

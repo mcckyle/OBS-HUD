@@ -1,11 +1,12 @@
 //Filename: App.jsx
 //Author: Kyle McColgan
-//Date: 2 July 2026
+//Date: 3 July 2026
 //Description: This file contains the App component for the OBS HUD project.
 
 import React, { useState, useEffect } from 'react';
+import { useYouTubeData } from "./hooks/useYouTubeData";
 import { motion, AnimatePresence } from 'motion/react';
-import { Compass, Clock } from 'lucide-react';
+import { Clock, Shield, Radio } from 'lucide-react';
 import './App.css';
 
 const MISSION_REFRESH_MS = 3000;
@@ -20,7 +21,10 @@ const formatTime = (totalSeconds) => {
 
 export default function App() {
   const [seconds, setSeconds] = useState(0);
-  const [currentMission, setCurrentMission] = useState("Initializing Navigation...");
+
+  //Pull live statistics directly via the new hook.
+  const { subscriberCount, latestSubscriber } = useYouTubeData();
+  const goalString = `${subscriberCount} / 2000`;
 
   //1. Live Session Timer.
   useEffect(() => {
@@ -29,35 +33,33 @@ export default function App() {
   }, []);
 
   //2. JSON Polling Loop (Checks public/mission.json every 3000ms).
-  useEffect(() => {
-    const syncMission = async () => {
-      try
-      {
-        //Cache-busting URL parameter ensures Linux browser parses fresh data...
-        const response = await fetch(`./mission.json?t=${Date.now()}`);
-        if (!response.ok)
-        {
-          return;
-        }
-
-        const data = await response.json();
-        if (data.objective)
-        {
-          setCurrentMission(data.objective);
-        }
-      }
-      catch (error)
-      {
-        console.warn("Navigation feed unavailable!");
-      }
-    };
-
-    //Execute immediately on mount, then track every three seconds...
-    syncMission();
-    const pollInterval = setInterval(syncMission, MISSION_REFRESH_MS);
-
-    return () => clearInterval(pollInterval);
-  }, []);
+//   useEffect(() => {
+//     const syncMission = async () => {
+//       try
+//       {
+//         const response = await fetch(`./mission.json?t=${Date.now()}`);
+//         if (!response.ok)
+//         {
+//           return;
+//         }
+//
+//         const data = await response.json();
+//         if (data.objective)
+//         {
+//           setCurrentMission(data.objective);
+//         }
+//       }
+//       catch (error)
+//       {
+//         console.warn("Navigation feed unavailable!");
+//       }
+//     };
+//
+//     syncMission();
+//     const pollInterval = setInterval(syncMission, MISSION_REFRESH_MS);
+//
+//     return () => clearInterval(pollInterval);
+//   }, []);
 
   //Transparent wrapper that spans the OBS canvas...
   return (
@@ -71,36 +73,46 @@ export default function App() {
       >
         {/* Header / System Status. */}
         <header className="hud-header">
-          <span className="hud-title">NAVIGATION SYSTEM</span>
+          <span className="hud-title">CONSTELLATION BROADCAST</span>
           <div className="hud-status">
-            <span />
-            ONLINE
+            <span className="hud-status-dot" />
+            LIVE
           </div>
         </header>
 
         {/* Section 1: Elapsed Timer Module. */}
         <section className="hud-item" aria-label="Session timer">
-          <Clock />
+          <Clock className="hud-icon" />
           <div>
-            <span className="hud-label">SESSION</span>
+            <span className="hud-label">ELAPSED TIME</span>
             <strong>{formatTime(seconds)}</strong>
           </div>
         </section>
 
-        {/* Section 2: Dynamic Objective Module. */}
-        <section className="hud-item" aria-label="Current objective">
-          <Compass className="hud-compass" />
+        {/* Section 2: Live Subscriber Milestones. */}
+        <section className="hud-item" aria-label="Subscriber goal milestone">
+          <Shield className="hud-icon" />
           <div>
-            <span className="hud-label">OBJECTIVE</span>
+            <span className="hud-label">CREW CAPACITY</span>
+            <strong>{goalString}</strong>
+          </div>
+        </section>
+
+        {/* Section 3: Live Signal Metric Status. */}
+        <section className="hud-item" aria-label="Latest transmission signal">
+          <Radio className="hud-compass" />
+          <div>
+            <span className="hud-label">DATA FEED</span>
             <AnimatePresence mode="wait">
               <motion.p
-                key={currentMission}
-                initial={{ opacity: 0, y: 4, scale: 0.99 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -4, scale: 0.99 }}
-                transition={{ duration: 0.3, scale: 1 }}
+                key={latestSubscriber?.id || 'empty'}
+                initial={{ opacity: 0, x: -6, skewX: -5 }}
+                animate={{ opacity: 1, x: 0, skewX: 0 }}
+                exit={{ opacity: 0, x: 6, skewX: 5 }}
+                transition={{ duration: 0.25 }}
+                className="hud-ticker-text"
               >
-                {currentMission}
+                {latestSubscriber?.text || 'ESTABLISHING LINK...'}
               </motion.p>
             </AnimatePresence>
           </div>
