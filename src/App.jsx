@@ -24,7 +24,7 @@ export default function App() {
 
   //Pull live statistics directly via the new hook.
   const { subscriberCount, latestSubscriber } = useYouTubeData();
-  const goalString = `${subscriberCount} / 2000`;
+  const goalString = `${subscriberCount} / 1`;
 
   //1. Live Session Timer.
   useEffect(() => {
