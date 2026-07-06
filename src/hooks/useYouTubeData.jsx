@@ -1,13 +1,15 @@
 //Filename: useYouTubeData.jsx
 //Author: Kyle McColgan
-//Date: 3 July 2026
+//Date: 5 July 2026
 //Description: This file contains the YouTube API integration for the OBS HUD project.
 
 import React, { useState, useEffect } from 'react';
 
+const MAX_LENGTH = 72;
+
 export function useYouTubeData() {
   const [subscriberCount, setSubscriberCount] = useState('---');
-  const [latestSubscriber, setLatestSubscriber] = useState({ id: 'init', text: 'SYSTEM ONLINE '});
+  const [latestSubscriber, setLatestSubscriber] = useState({ id: 'init', text: 'SCANNING FREQUENCIES...'});
 
   useEffect(() => {
     let isMounted = true;
@@ -27,28 +29,58 @@ export function useYouTubeData() {
     const fetchYouTubeMetrics = async () => {
       try
       {
-          const targetUrl = 'https://www.googleapis.com/' + 'youtube' + '/v3/channels?part=statistics&id=' + channelId + '&key=' + apiKey;
+        //1. Fetch Subscriber Count
+        const statsUrl = 'https://www.googleapis.com/' + 'youtube' + '/v3/channels?part=statistics&id=' + channelId + '&key=' + apiKey;
+        const statsResponse = await fetch(statsUrl);
 
-
-        const response = await fetch(targetUrl);
-
-        if (!response.ok)
+        if (!statsResponse.ok)
         {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`Stats HTTP error! status: ${statsResponse.status}`);
         }
 
-        const data = await response.json();
-        if ((data.items) && (data.items.length > 0) && (isMounted))
+        const statsData = await statsResponse.json();
+        if ((statsData.items) && (statsData.items.length > 0) && (isMounted))
         {
-          const count = data.items[0].statistics.subscriberCount;
+          const count = statsData.items[0].statistics.subscriberCount;
 
           //Format to nicely readable string e.g. "1,250".
           setSubscriberCount(parseInt(count).toLocaleString());
+        }
+
+        //1. Fetch Latest Video Comment.
+        const commsUrl = 'https://www.googleapis.com/' + 'youtube' + '/v3/commentThreads?part=snippet&allThreadsRelatedToChannelId=' + channelId + '&maxResults=1&key=' + apiKey;
+
+        const commsResponse = await fetch(commsUrl);
+        if (commsResponse.ok)
+        {
+          const commsData = await commsResponse.json();
+
+          if ((commsData.items) && (commsData.items.length > 0) && (isMounted))
+          {
+            const commentSnippet = commsData.items[0].snippet.topLevelComment.snippet;
+            const author = commentSnippet.authorDisplayName;
+            const textContent = commentSnippet.textDisplay;
+            const truncated = textContent.length > MAX_LENGTH ? `${textContent.slice(0, MAX_LENGTH)}…` : textContent;
+
+            //Format to nicely readable string e.g. "1,250".
+            setLatestSubscriber({
+              id: commsData.items[0].id,
+              text: `COMMS • ${author.toUpperCase()} • ${truncated.toUpperCase()}`
+            });
+          }
+          else if (isMounted)
+          {
+            setLatestSubscriber({ id: 'empty', text: 'NO INBOUND TRANSMISSIONS' });
+          }
         }
       }
       catch (error)
       {
         console.error('Error fetching data from YouTube API:', error);
+        if (isMounted)
+        {
+          setLatestSubscriber({ id: 'error', text: 'DATA LINK CORRUPTED' });
+        }
       }
     };
 

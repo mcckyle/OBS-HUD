@@ -34,26 +34,37 @@ body { margin: 0; overflow: hidden; background: transparent; }
 
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.85rem;
 
-  width: 300px;
+  width: 260px;
   padding: 24px;
   color: var(--hud-text-main);
-  background: linear-gradient(135deg, var(--hud-accent-glow), transparent 50%), var(--hud-bg);
-  border: 1px solid var(--hud-border);
+  background: rgba(6, 10, 14, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
 }
 .hud-panel::before
 {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 40px;
-  height: 3px;
-  background: var(--hud-accent);
+  top: -1px;
+  left: -1px;
+  width: 26px;
+  height: 26px;
+  border-top: 2px solid var(--hud-accent);
+  border-left: 2px solid var(--hud-accent);
+}
+.hud-panel::after
+{
+  content: "";
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 26px;
+  height: 26px;
+  border-right: 2px solid var(--hud-accent);
+  border-bottom: 2px solid var(--hud-accent);
 }
 
 /* System Meta Header Styles. */
@@ -65,7 +76,7 @@ body { margin: 0; overflow: hidden; background: transparent; }
   padding-bottom: 12px;
   border-bottom: 1px solid var(--hud-border);
 }
-.hud-title { flex: 1; color: var(--hud-text-main); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; }
+.hud-title { flex: 1; color: var(--hud-text-main); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; }
 .hud-label { display: block; color: var(--hud-text-muted); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; }
 
 /* Animated Green Indicator Styles. */
@@ -84,18 +95,22 @@ body { margin: 0; overflow: hidden; background: transparent; }
 .hud-item
 {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 1.15rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
+.hud-item:last-child { padding-bottom: 0; border-bottom: none; }
+.hud-item-primary .hud-value { font-size: 2rem; letter-spacing: 0.08em; }
 .hud-item > div { flex: 1; min-width: 0; }
 
 /* Lucide Icons Styling. */
 .hud-icon
 {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   color: var(--hud-accent);
-  stroke-width: 1.5;
+  stroke-width: 1.2;
   flex-shrink: 0;
 }
 
@@ -114,16 +129,13 @@ body { margin: 0; overflow: hidden; background: transparent; }
 {
   margin: 2px 0 0;
   color: var(--hud-accent);
-  font-size: 0.85rem;
-  font-weight: 700;
+  font-size: 0.74rem;
+  font-weight: 500;
   letter-spacing: 0.05em;
-  line-height: 1.3;
+  line-height: 1.45;
   text-transform: uppercase;
   overflow-wrap: anywhere;
 }
-
-/* Custom CSS Slow Rotation for the Compass Icon. */
-/*.hud-compass { animation: rotate 60s linear infinite; }*/
 
 @media (prefers-reduced-motion: reduce)
 {
@@ -137,8 +149,4 @@ body { margin: 0; overflow: hidden; background: transparent; }
 {
   0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
   50% { opacity: 0.4; transform: scale(0.9); box-shadow: 0 0 8px 2px rgba(239, 68, 68, 0.4); }
-}
-@keyframes rotate
-{
-  to { transform: rotate(360deg); }
 }

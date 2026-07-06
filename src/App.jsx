@@ -1,6 +1,6 @@
 //Filename: App.jsx
 //Author: Kyle McColgan
-//Date: 3 July 2026
+//Date: 5 July 2026
 //Description: This file contains the App component for the OBS HUD project.
 
 import React, { useState, useEffect } from 'react';
@@ -9,9 +9,6 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Clock, Shield, Radio } from 'lucide-react';
 import './App.css';
 
-const MISSION_REFRESH_MS = 3000;
-
-//Formatter function to cleanly display clock digits.
 const formatTime = (totalSeconds) => {
   const hrs = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
   const mins = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
@@ -73,19 +70,19 @@ export default function App() {
       >
         {/* Header / System Status. */}
         <header className="hud-header">
-          <span className="hud-title">CONSTELLATION BROADCAST</span>
+          <span className="hud-title">STARFIELD LIVE</span>
           <div className="hud-status">
             <span className="hud-status-dot" />
-            LIVE
+            LINK ACTIVE
           </div>
         </header>
 
         {/* Section 1: Elapsed Timer Module. */}
-        <section className="hud-item" aria-label="Session timer">
+        <section className="hud-item hud-item-primary" aria-label="Session timer">
           <Clock className="hud-icon" />
           <div>
             <span className="hud-label">ELAPSED TIME</span>
-            <strong>{formatTime(seconds)}</strong>
+            <strong className="hud-value">{formatTime(seconds)}</strong>
           </div>
         </section>
 
@@ -100,15 +97,15 @@ export default function App() {
 
         {/* Section 3: Live Signal Metric Status. */}
         <section className="hud-item" aria-label="Latest transmission signal">
-          <Radio className="hud-compass" />
+          <Radio className="hud-icon" />
           <div>
             <span className="hud-label">DATA FEED</span>
             <AnimatePresence mode="wait">
               <motion.p
                 key={latestSubscriber?.id || 'empty'}
-                initial={{ opacity: 0, x: -6, skewX: -5 }}
-                animate={{ opacity: 1, x: 0, skewX: 0 }}
-                exit={{ opacity: 0, x: 6, skewX: 5 }}
+                initial={{ opacity: 0, x: 4 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -4 }}
                 transition={{ duration: 0.25 }}
                 className="hud-ticker-text"
               >
