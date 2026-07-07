@@ -1,6 +1,6 @@
 //Filename: useYouTubeData.jsx
 //Author: Kyle McColgan
-//Date: 5 July 2026
+//Date: 6 July 2026
 //Description: This file contains the YouTube API integration for the OBS HUD project.
 
 import React, { useState, useEffect } from 'react';
@@ -9,7 +9,7 @@ const MAX_LENGTH = 72;
 
 export function useYouTubeData() {
   const [subscriberCount, setSubscriberCount] = useState('---');
-  const [latestSubscriber, setLatestSubscriber] = useState({ id: 'init', text: 'SCANNING FREQUENCIES...'});
+  const [latestSubscriber, setLatestSubscriber] = useState({ id: 'init', text: 'CONNECTING...'});
 
   useEffect(() => {
     let isMounted = true;
@@ -65,12 +65,12 @@ export function useYouTubeData() {
             //Format to nicely readable string e.g. "1,250".
             setLatestSubscriber({
               id: commsData.items[0].id,
-              text: `COMMS • ${author.toUpperCase()} • ${truncated.toUpperCase()}`
+              text: `${author.toUpperCase()}\n${truncated.toUpperCase()}`
             });
           }
           else if (isMounted)
           {
-            setLatestSubscriber({ id: 'empty', text: 'NO INBOUND TRANSMISSIONS' });
+            setLatestSubscriber({ id: 'empty', text: 'NO RECENT TRANSMISSIONS' });
           }
         }
       }
@@ -79,7 +79,7 @@ export function useYouTubeData() {
         console.error('Error fetching data from YouTube API:', error);
         if (isMounted)
         {
-          setLatestSubscriber({ id: 'error', text: 'DATA LINK CORRUPTED' });
+          setLatestSubscriber({ id: 'error', text: 'SIGNAL LOST' });
         }
       }
     };
@@ -87,7 +87,7 @@ export function useYouTubeData() {
     //Initial load when stream starts...
     fetchYouTubeMetrics();
 
-    //Poll YouTube once every 2 minutes (YouTube API limits daily quotes, so avoid heavy spamming).
+    //Poll YouTube once every 2 minutes.
     const pollInterval = setInterval(fetchYouTubeMetrics, 120000);
 
     return () => {

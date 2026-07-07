@@ -1,6 +1,6 @@
 //Filename: App.jsx
 //Author: Kyle McColgan
-//Date: 5 July 2026
+//Date: 6 July 2026
 //Description: This file contains the App component for the OBS HUD project.
 
 import React, { useState, useEffect } from 'react';
@@ -18,10 +18,7 @@ const formatTime = (totalSeconds) => {
 
 export default function App() {
   const [seconds, setSeconds] = useState(0);
-
-  //Pull live statistics directly via the new hook.
   const { subscriberCount, latestSubscriber } = useYouTubeData();
-  const goalString = `${subscriberCount} / 1`;
 
   //1. Live Session Timer.
   useEffect(() => {
@@ -29,7 +26,68 @@ export default function App() {
     return () => clearInterval(timer);
   }, []);
 
-  //2. JSON Polling Loop (Checks public/mission.json every 3000ms).
+  //Transparent wrapper that spans the OBS canvas...
+  return (
+    <main className="hud-stage">
+
+    <motion.section
+        className="hud-panel"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+      >
+        {/* Header / System Status. */}
+        <header className="hud-header">
+          <span className="hud-title">STARFIELD LIVE</span>
+          <div className="hud-status">
+            <span className="hud-status-dot" />
+            ONLINE
+          </div>
+        </header>
+
+        {/* Section 1: Elapsed Timer Module. */}
+        <section className="hud-item hud-item-primary" aria-label="Session timer">
+          <Clock className="hud-icon" />
+          <div>
+            <span className="hud-label">ELAPSED TIME</span>
+            <strong className="hud-value">{formatTime(seconds)}</strong>
+          </div>
+        </section>
+
+        {/* Section 2: Live Subscriber Milestones. */}
+        <section className="hud-item" aria-label="Subscriber goal milestone">
+          <Shield className="hud-icon" />
+          <div>
+            <span className="hud-label">SUBSCRIBERS</span>
+            <strong>{subscriberCount}</strong>
+          </div>
+        </section>
+
+        {/* Section 3: Live Signal Metric Status. */}
+        <section className="hud-item" aria-label="Latest transmission signal">
+          <Radio className="hud-icon" />
+          <div>
+            <span className="hud-label">LATEST TRANSMISSION</span>
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={latestSubscriber?.id || 'empty'}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="hud-ticker-text"
+              >
+                {latestSubscriber?.text || 'LINK ACTIVE'}
+              </motion.p>
+            </AnimatePresence>
+          </div>
+        </section>
+      </motion.section>
+    </main>
+  );
+};
+
+//2. JSON Polling Loop (Checks public/mission.json every 3000ms).
 //   useEffect(() => {
 //     const syncMission = async () => {
 //       try
@@ -57,64 +115,3 @@ export default function App() {
 //
 //     return () => clearInterval(pollInterval);
 //   }, []);
-
-  //Transparent wrapper that spans the OBS canvas...
-  return (
-    <main className="hud-stage">
-
-    <motion.section
-        className="hud-panel"
-        initial={{ opacity: 0, y: -12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        {/* Header / System Status. */}
-        <header className="hud-header">
-          <span className="hud-title">STARFIELD LIVE</span>
-          <div className="hud-status">
-            <span className="hud-status-dot" />
-            LINK ACTIVE
-          </div>
-        </header>
-
-        {/* Section 1: Elapsed Timer Module. */}
-        <section className="hud-item hud-item-primary" aria-label="Session timer">
-          <Clock className="hud-icon" />
-          <div>
-            <span className="hud-label">ELAPSED TIME</span>
-            <strong className="hud-value">{formatTime(seconds)}</strong>
-          </div>
-        </section>
-
-        {/* Section 2: Live Subscriber Milestones. */}
-        <section className="hud-item" aria-label="Subscriber goal milestone">
-          <Shield className="hud-icon" />
-          <div>
-            <span className="hud-label">CREW CAPACITY</span>
-            <strong>{goalString}</strong>
-          </div>
-        </section>
-
-        {/* Section 3: Live Signal Metric Status. */}
-        <section className="hud-item" aria-label="Latest transmission signal">
-          <Radio className="hud-icon" />
-          <div>
-            <span className="hud-label">DATA FEED</span>
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={latestSubscriber?.id || 'empty'}
-                initial={{ opacity: 0, x: 4 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -4 }}
-                transition={{ duration: 0.25 }}
-                className="hud-ticker-text"
-              >
-                {latestSubscriber?.text || 'ESTABLISHING LINK...'}
-              </motion.p>
-            </AnimatePresence>
-          </div>
-        </section>
-      </motion.section>
-    </main>
-  );
-};
