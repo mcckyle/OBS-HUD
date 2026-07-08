@@ -39,13 +39,13 @@ body { margin: 0; overflow: hidden; background: transparent; }
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1, "lnum" 1;
 
-  width: 300px;
-  padding: 28px;
+  width: 320px;
+  padding: 24px 0;
   color: var(--hud-text-main);
-  background: rgba(7, 10, 15, 0.60);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(to bottom, rgba(6, 8, 11, 0.42), rgba(6, 8, 11, 0.18));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
 }
@@ -53,24 +53,20 @@ body { margin: 0; overflow: hidden; background: transparent; }
 {
   content: "";
   position: absolute;
-  top: -1px;
-  left: -1px;
-  width: 26px;
-  height: 26px;
-  border-top: 2px solid var(--hud-accent);
-  border-left: 2px solid var(--hud-accent);
+  left: 0;
+  top: 18px;
+  bottom: 18px;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--hud-accent), transparent);
 }
-.hud-panel::after
+/*.hud-panel::after
 {
   content: "";
   position: absolute;
-  right: -1px;
-  bottom: -1px;
-  width: 26px;
-  height: 26px;
+  inset: 0;
   border-right: 2px solid var(--hud-accent);
   border-bottom: 2px solid var(--hud-accent);
-}
+}*/
 
 /* System Meta Header Styles. */
 .hud-header
@@ -105,7 +101,7 @@ body { margin: 0; overflow: hidden; background: transparent; }
   padding-bottom: 1.2rem;
 }
 .hud-item:last-child { padding-bottom: 0; border-bottom: none; }
-.hud-item-primary .hud-value { font-size: 2.5rem; line-height: 1; letter-spacing: 0.08em; }
+.hud-item-primary .hud-value { font-size: 3.3rem; font-weight: 500; line-height: 1; letter-spacing: 0.18em; }
 .hud-item > div { flex: 1; min-width: 0; }
 
 /* Lucide Icons Styling. */

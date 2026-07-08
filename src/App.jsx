@@ -1,6 +1,6 @@
 //Filename: App.jsx
 //Author: Kyle McColgan
-//Date: 6 July 2026
+//Date: 7 July 2026
 //Description: This file contains the App component for the OBS HUD project.
 
 import React, { useState, useEffect } from 'react';
@@ -67,7 +67,7 @@ export default function App() {
         <section className="hud-item" aria-label="Latest transmission signal">
           <Radio className="hud-icon" />
           <div>
-            <span className="hud-label">LATEST TRANSMISSION</span>
+            <span className="hud-label">LATEST COMMS</span>
             <AnimatePresence mode="wait">
               <motion.p
                 key={latestSubscriber?.id || 'empty'}
