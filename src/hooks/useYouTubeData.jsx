@@ -1,6 +1,6 @@
 //Filename: useYouTubeData.jsx
 //Author: Kyle McColgan
-//Date: 6 July 2026
+//Date: 8 July 2026
 //Description: This file contains the YouTube API integration for the OBS HUD project.
 
 import React, { useState, useEffect } from 'react';
@@ -9,7 +9,7 @@ const MAX_LENGTH = 72;
 
 export function useYouTubeData() {
   const [subscriberCount, setSubscriberCount] = useState('---');
-  const [latestSubscriber, setLatestSubscriber] = useState({ id: 'init', text: 'CONNECTING...'});
+  const [latestMessage, setLatestMessage] = useState({ id: 'init', author: "", message: 'CONNECTING...'});
 
   useEffect(() => {
     let isMounted = true;
@@ -29,9 +29,10 @@ export function useYouTubeData() {
     const fetchYouTubeMetrics = async () => {
       try
       {
-        //1. Fetch Subscriber Count
+        //1. Parse Subscriber Count.
         const statsUrl = 'https://www.googleapis.com/' + 'youtube' + '/v3/channels?part=statistics&id=' + channelId + '&key=' + apiKey;
-        const statsResponse = await fetch(statsUrl);
+        const commsUrl = 'https://www.googleapis.com/' + 'youtube' + '/v3/commentThreads?part=snippet&allThreadsRelatedToChannelId=' + channelId + '&maxResults=1&key=' + apiKey;
+        const [statsResponse, commsResponse] = await Promise.all([fetch(statsUrl), fetch(commsUrl)]);
 
         if (!statsResponse.ok)
         {
@@ -47,10 +48,7 @@ export function useYouTubeData() {
           setSubscriberCount(parseInt(count).toLocaleString());
         }
 
-        //1. Fetch Latest Video Comment.
-        const commsUrl = 'https://www.googleapis.com/' + 'youtube' + '/v3/commentThreads?part=snippet&allThreadsRelatedToChannelId=' + channelId + '&maxResults=1&key=' + apiKey;
-
-        const commsResponse = await fetch(commsUrl);
+        //2. Parse Latest Video Comment.
         if (commsResponse.ok)
         {
           const commsData = await commsResponse.json();
@@ -63,14 +61,15 @@ export function useYouTubeData() {
             const truncated = textContent.length > MAX_LENGTH ? `${textContent.slice(0, MAX_LENGTH)}…` : textContent;
 
             //Format to nicely readable string e.g. "1,250".
-            setLatestSubscriber({
+            setLatestMessage({
               id: commsData.items[0].id,
-              text: `${author.toUpperCase()}\n${truncated.toUpperCase()}`
+              author: author.toUpperCase(),
+              message: truncated.toUpperCase()
             });
           }
           else if (isMounted)
           {
-            setLatestSubscriber({ id: 'empty', text: 'NO RECENT TRANSMISSIONS' });
+            setLatestMessage({ id: 'empty', author: "", message: 'NO RECENT TRANSMISSIONS' });
           }
         }
       }
@@ -79,7 +78,7 @@ export function useYouTubeData() {
         console.error('Error fetching data from YouTube API:', error);
         if (isMounted)
         {
-          setLatestSubscriber({ id: 'error', text: 'SIGNAL LOST' });
+          setLatestMessage({ id: 'error', author: "", message: 'SIGNAL LOST' });
         }
       }
     };
@@ -96,5 +95,5 @@ export function useYouTubeData() {
     };
   }, []);
 
-  return { subscriberCount, latestSubscriber };
+  return { subscriberCount, latestMessage };
 };
