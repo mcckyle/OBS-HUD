@@ -132,7 +132,7 @@ body { margin: 0; overflow: hidden; background: transparent; }
   height: 1px;
   background: linear-gradient(to right, rgba(223, 170, 55, 0.35), transparent);
 }
-.hud-item-primary .hud-value { font-size: 4.25rem; font-weight: 250; line-height: 1; letter-spacing: 0.12em; }
+.hud-item-primary .hud-value { font-size: 4rem; font-weight: 250; line-height: 1; letter-spacing: 0.12em; }
 .hud-item > div { flex: 1; min-width: 0; }
 
 .hud-item strong
