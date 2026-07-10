@@ -8,6 +8,7 @@
   --hud-text-muted: #9cb8c9; /* Slate data readouts. */
   --hud-accent: #dfaa37; /* Constellation Flight-Suit Gold. */
   --hud-accent-glow: rgba(223, 170, 55, 0.15);
+  --hud-padding: 30px;
 }
 * { box-sizing: border-box; }
 body { margin: 0; overflow: hidden; background: transparent; }
@@ -44,8 +45,8 @@ body { margin: 0; overflow: hidden; background: transparent; }
   padding: 30px 0;
   color: var(--hud-text-main);
   background: linear-gradient(180deg, rgba(18, 22, 28, 0.52), rgba(8, 10, 12, 0.18)), radial-gradient(circle at top, rgba(223, 170, 55, 0.06), transparent 55%);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
   border-radius: 2px;
   box-shadow: inset 1px 0 rgba(255, 255, 255, 0.08), inset 2px 0 rgba(223, 170, 55, 0.18);
 }
@@ -59,7 +60,7 @@ body { margin: 0; overflow: hidden; background: transparent; }
   width: 1px;
   background: linear-gradient(to bottom, transparent, var(--hud-accent), transparent);
 }
-.hud-panel::after
+/*.hud-panel::after
 {
   content: "";
   position: absolute;
@@ -69,7 +70,7 @@ body { margin: 0; overflow: hidden; background: transparent; }
   pointer-events: none;
 
   animation: scan 18s linear infinite;
-}
+}*/
 
 /* System Meta Header Styles. */
 .hud-header
@@ -81,7 +82,7 @@ body { margin: 0; overflow: hidden; background: transparent; }
   border-bottom: 1px solid var(--hud-border);
   opacity: 0.78;
 }
-.hud-header, .hud-item { padding-inline: 28px; }
+.hud-header, .hud-item { padding-inline: var(--hud-padding); }
 .hud-title { flex: 1; color: var(--hud-text-main); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; }
 .hud-label { display: block; color: var(--hud-text-muted); font-size: 0.58rem; letter-spacing: 0.24em; opacity: 0.70; text-transform: uppercase; }
 
@@ -114,13 +115,13 @@ body { margin: 0; overflow: hidden; background: transparent; }
 {
   content: "";
   position: absolute;
-  left: 28px;
+  left: var(--hud-padding);
   right: 0;
   top: 0;
   height: 1px;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.08), transparent);
+  background: linear-gradient(90deg, rgba(223, 170, 55, 0.22), rgba(255, 255, 255, 0.06) 18%, transparent 70%);
 }
-.hud-item-primary { position: relative; padding: 0 28px 2.25rem; margin-bottom: 0.25rem; }
+.hud-item-primary { position: relative; padding: 0 var(--hud-padding) 2.25rem; margin-bottom: 0.25rem; }
 .hud-item-primary::after
 {
   content: "";
@@ -131,7 +132,7 @@ body { margin: 0; overflow: hidden; background: transparent; }
   height: 1px;
   background: linear-gradient(to right, rgba(223, 170, 55, 0.35), transparent);
 }
-.hud-item-primary .hud-value { font-size: 3.4rem; font-weight: 300; line-height: 1; letter-spacing: 0.12em; }
+.hud-item-primary .hud-value { font-size: 4.25rem; font-weight: 250; line-height: 1; letter-spacing: 0.12em; }
 .hud-item > div { flex: 1; min-width: 0; }
 
 .hud-item strong
@@ -159,6 +160,7 @@ body { margin: 0; overflow: hidden; background: transparent; }
   overflow-wrap: anywhere;
   white-space: pre-line;
 }
+.hud-comms { min-height: 84px; }
 .hud-author
 {
   display: block;
@@ -188,7 +190,7 @@ body { margin: 0; overflow: hidden; background: transparent; }
 /* ====================================
    ANIMATIONS STYLES.
 ======================================= */
-@keyframes scan
+/*@keyframes scan
 {
   to { transform: translateY(100%); }
 }
@@ -196,4 +198,4 @@ body { margin: 0; overflow: hidden; background: transparent; }
 {
   0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 8px rgba(223, 170, 55, 0.25); }
   50% { opacity: 0.45; transform: scale(0.85); box-shadow: 0 0 16px rgba(223, 170, 55, 0.45); }
-}
+}*/

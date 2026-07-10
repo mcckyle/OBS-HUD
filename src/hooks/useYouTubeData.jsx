@@ -18,6 +18,9 @@ export function useYouTubeData() {
     const urlParams = new URLSearchParams(window.location.search);
     const apiKey = urlParams.get('key');
     const channelId = urlParams.get('channelId');
+    const API = "https://www.googleapis.com/youtube/v3";
+    const statsUrl = `${API}/channels?part=statistics&id=` + channelId + '&key=' + apiKey;
+    const commsUrl = `${API}/commentThreads?part=snippet&allThreadsRelatedToChannelId=` + channelId + '&maxResults=1&key=' + apiKey;
 
     //If variables are truly missing, stop execution.
     if ((!apiKey) || (!channelId))
@@ -30,8 +33,6 @@ export function useYouTubeData() {
       try
       {
         //1. Parse Subscriber Count.
-        const statsUrl = 'https://www.googleapis.com/' + 'youtube' + '/v3/channels?part=statistics&id=' + channelId + '&key=' + apiKey;
-        const commsUrl = 'https://www.googleapis.com/' + 'youtube' + '/v3/commentThreads?part=snippet&allThreadsRelatedToChannelId=' + channelId + '&maxResults=1&key=' + apiKey;
         const [statsResponse, commsResponse] = await Promise.all([fetch(statsUrl), fetch(commsUrl)]);
 
         if (!statsResponse.ok)
@@ -63,8 +64,8 @@ export function useYouTubeData() {
             //Format to nicely readable string e.g. "1,250".
             setLatestMessage({
               id: commsData.items[0].id,
-              author: author.toUpperCase(),
-              message: truncated.toUpperCase()
+              author: author,
+              message: truncated
             });
           }
           else if (isMounted)

@@ -1,6 +1,6 @@
 //Filename: App.jsx
 //Author: Kyle McColgan
-//Date: 8 July 2026
+//Date: 9 July 2026
 //Description: This file contains the App component for the OBS HUD project.
 
 import React, { useState, useEffect } from 'react';
@@ -46,10 +46,7 @@ export default function App() {
         {/* Header / System Status. */}
         <header className="hud-header">
           <span className="hud-title">STARFIELD LIVE</span>
-          <div className="hud-status">
-            <span className="hud-status-dot" />
-            ACTIVE
-          </div>
+          <div className="hud-status">SESSION</div>
         </header>
 
         {/* Section 1: Elapsed Timer Module. */}
@@ -60,7 +57,7 @@ export default function App() {
 
         {/* Section 2: Live Subscriber Milestones. */}
         <section className="hud-item" aria-label="Subscriber goal milestone">
-          <span className="hud-label">SUBSCRIBERS</span>
+          <span className="hud-label">CREW</span>
           <motion.strong
             key={subscriberCount}
             initial={{ opacity: 0.5, y: 4 }}
@@ -80,7 +77,7 @@ export default function App() {
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.28, ease: "easeOut" }}
+              transition={{ duration: 0.45, ease: "easeOut" }}
               variants={{
                 hidden: { opacity: 0, y: 6 },
                 show: {
@@ -102,32 +99,3 @@ export default function App() {
     </main>
   );
 };
-
-//2. JSON Polling Loop (Checks public/mission.json every 3000ms).
-//   useEffect(() => {
-//     const syncMission = async () => {
-//       try
-//       {
-//         const response = await fetch(`./mission.json?t=${Date.now()}`);
-//         if (!response.ok)
-//         {
-//           return;
-//         }
-//
-//         const data = await response.json();
-//         if (data.objective)
-//         {
-//           setCurrentMission(data.objective);
-//         }
-//       }
-//       catch (error)
-//       {
-//         console.warn("Navigation feed unavailable!");
-//       }
-//     };
-//
-//     syncMission();
-//     const pollInterval = setInterval(syncMission, MISSION_REFRESH_MS);
-//
-//     return () => clearInterval(pollInterval);
-//   }, []);
