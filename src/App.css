@@ -49,11 +49,10 @@ body { margin: 0; overflow: hidden; background: transparent; }
   max-width: 360px;
   padding: 30px 0;
   color: var(--hud-text-main);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.005)), radial-gradient(120% 70% at 0% 0%, rgba(223, 170, 55, 0.06), transparent 60%), rgba(10, 14, 18, 0.34);
-  backdrop-filter: blur(1.5px);
-  -webkit-backdrop-filter: blur(1.5px);
+  background: rgba(12, 15, 20, 0.18);
+  backdrop-filter: blur(0.8px);
+  -webkit-backdrop-filter: blur(0.8px);
   border-radius: 2px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18), inset 1px 0 rgba(255, 255, 255, 0.08);
 }
 .hud-panel::before
 {
@@ -62,8 +61,19 @@ body { margin: 0; overflow: hidden; background: transparent; }
   left: 0;
   top: 18px;
   bottom: 18px;
-  width: 1px;
+  width: 2px;
+  opacity: 0.5;
   background: linear-gradient(to bottom, transparent, var(--hud-accent), transparent);
+}
+.hud-panel::after
+{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.025), transparent);
+  pointer-events: none;
+
+  animation: sweep 12s linear infinite;
 }
 
 /* System Meta Header Styles. */
@@ -71,14 +81,19 @@ body { margin: 0; overflow: hidden; background: transparent; }
 {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--hud-border);
+  align-items: flex-start;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   opacity: 0.78;
 }
 .hud-header, .hud-item { padding-inline: var(--hud-padding); }
 .hud-title { flex: 1; color: var(--hud-text-main); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; }
 .hud-label { display: block; color: var(--hud-text-muted); font-size: 0.58rem; letter-spacing: 0.24em; opacity: 0.70; text-transform: uppercase; }
+.hud-system { display: flex; flex-direction: column; gap: 0.4rem; }
+.hud-system-id { color: var(--hud-text-muted); font-size: 0.55rem; letter-spacing: 0.22em; opacity: 0.55; text-transform: uppercase; }
+.hud-clock { display: flex; flex-direction: column; align-items: flex-end; gap: 0.35rem; text-align: right; }
+.hud-clock-sol { color: var(--hud-accent); font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; }
+.hud-clock-time { font-size: 0.72rem; letter-spacing: 0.16em; opacity: 0.82; font-variant-numeric: tabular-nums; }
 
 /* Animated Green Indicator Styles. */
 .hud-status { display: flex; align-items: center; gap: 8px; color: var(--hud-text-main); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; }
@@ -91,32 +106,11 @@ body { margin: 0; overflow: hidden; background: transparent; }
   align-items: flex-start;
   gap: 1rem;
   padding-bottom: 1.2rem;
-  padding-block: 1.8rem;
+  padding-block: 2.75rem;
 }
 .hud-item:last-child { padding-bottom: 0; border-bottom: none; }
-.hud-item:not(.hud-item-primary) { position: relative; }
-.hud-item:not(.hud-item-primary)::after
-{
-  content: "";
-  position: absolute;
-  left: var(--hud-padding);
-  right: 0;
-  top: 0;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(223, 170, 55, 0.22), rgba(255, 255, 255, 0.06) 18%, transparent 70%);
-}
 .hud-item-primary { position: relative; padding: 0 var(--hud-padding) 2.25rem; margin-bottom: 0.25rem; }
-.hud-item-primary::after
-{
-  content: "";
-  position: absolute;
-  left: var(--hud-padding);
-  right: 0;
-  bottom: 0;
-  height: 1px;
-  background: linear-gradient(to right, rgba(223, 170, 55, 0.35), transparent);
-}
-.hud-item-primary .hud-value { font-size: 4rem; font-weight: 300; line-height: 1; letter-spacing: 0.08em; }
+.hud-item-primary .hud-value { font-size: 4.25rem; font-weight: 200; line-height: 1; letter-spacing: 0.12em; }
 .hud-item > div { flex: 1; min-width: 0; }
 
 .hud-item strong
@@ -150,4 +144,10 @@ body { margin: 0; overflow: hidden; background: transparent; }
   font-size: 0.82rem;
   line-height: 1.55;
   overflow-wrap: anywhere;
+}
+
+@keyframes sweep
+{
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100%); }
 }

@@ -12,7 +12,6 @@ Designed for livestreams, the overlay provides an elegant glass UI with a live s
 * Lightweight React + Vite application
 * Glassmorphism-inspired design
 * Live session timer
-* Dynamic objective updates via `mission.json`
 * Smooth Motion animations
 * Fully transparent browser source for OBS Studio
 * Easy to customize and extend
@@ -21,7 +20,7 @@ Designed for livestreams, the overlay provides an elegant glass UI with a live s
 
 ## Preview
 
-![Overlay Screenshot](./public/images/obs-hud-07022026.png)
+![Overlay Screenshot](./public/images/Screenshot_20260712_203358.png)
 *A glimpse of the overlay, captured with a screenshot.*
 
 ---
@@ -55,22 +54,6 @@ npm run build
 
 ---
 
-## Mission Feed
-
-The overlay polls `public/mission.json` every few seconds.
-
-Example:
-
-```json
-{
-  "objective": "Explore New Atlantis"
-}
-```
-
-Updating the JSON automatically updates the objective displayed in OBS.
-
----
-
 ## Using with OBS Studio
 
 1. Build the project.
@@ -81,17 +64,37 @@ Updating the JSON automatically updates the objective displayed in OBS.
 
 ---
 
+
 ## Project Structure
 
 ```
-src/
-├── App.jsx
-├── App.css
-├── index.css
-└── main.jsx
-
-public/
-└── mission.json
+OBS-HUD/
+├── .github/              # GitHub workflows (CI/CD).
+├── public/               # Static assets (served as-is).
+├── src/                  # Application Source code.
+│   ├── components/       # Reusable React components.
+│   │   └── HudSection/
+│   │       └── HudSection.jsx     
+│   │
+│   ├── utils/
+│   │   └── time.js
+│   │
+│   ├── hooks/            # Custom React hooks.
+│   │   └── useYouTubeData.jsx
+│   │
+│   ├── App.jsx           # Main React application component.
+│   ├── main.jsx          # React DOM entry point.
+│   ├── App.css           # Styles specific to App.jsx.
+│   └── index.css         # Global styles.
+│
+├── .gitignore            # Specifies intentionally untracked files and folders to ignore.
+├── LICENSE               # Open source license for the project.
+├── README.md             # Project overview, instructions, and documentation.
+├── eslint.config.js      # ESLint configuration.
+├── index.html            # HTML entry point.
+├── vite.config.js        # Vite config for build and development.
+├── package.json          # Project metadata, dependencies, and scripts.
+└── package-lock.json     # Exact versions of installed dependencies.
 ```
 
 ---
@@ -108,7 +111,6 @@ You can easily modify:
 * Icons
 * Animation timing
 * Polling interval
-* Mission feed
 
 ---
 
@@ -117,7 +119,6 @@ You can easily modify:
 * React
 * Vite
 * Motion
-* Lucide Icons
 
 ---
 
