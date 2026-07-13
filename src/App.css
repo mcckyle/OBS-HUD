@@ -110,7 +110,7 @@ body { margin: 0; overflow: hidden; background: transparent; }
 }
 .hud-item:last-child { padding-bottom: 0; border-bottom: none; }
 .hud-item-primary { position: relative; padding: 0 var(--hud-padding) 2.25rem; margin-bottom: 0.25rem; }
-.hud-item-primary .hud-value { font-size: 4.25rem; font-weight: 200; line-height: 1; letter-spacing: 0.12em; }
+.hud-item-primary .hud-value { font-size: 3.75rem; font-weight: 200; line-height: 1; letter-spacing: 0.12em; }
 .hud-item > div { flex: 1; min-width: 0; }
 
 .hud-item strong
