@@ -1,0 +1,20 @@
+/* Filename: src/components/HudHeader/HudHeader.css */
+
+/* System Meta Header Styles. */
+.hud-header
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  opacity: 0.78;
+}
+.hud-header, .hud-item { padding-inline: var(--hud-padding); }
+.hud-title { flex: 1; color: var(--hud-text-main); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; }
+.hud-label { display: block; color: var(--hud-text-muted); font-size: 0.58rem; letter-spacing: 0.24em; opacity: 0.70; text-transform: uppercase; }
+.hud-system { display: flex; flex-direction: column; gap: 0.4rem; }
+.hud-system-id { color: var(--hud-text-muted); font-size: 0.55rem; letter-spacing: 0.22em; opacity: 0.55; text-transform: uppercase; }
+.hud-clock { display: flex; flex-direction: column; align-items: flex-end; gap: 0.35rem; text-align: right; }
+.hud-clock-sol { color: var(--hud-accent); font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; }
+.hud-clock-time { font-size: 0.72rem; letter-spacing: 0.16em; opacity: 0.82; font-variant-numeric: tabular-nums; }

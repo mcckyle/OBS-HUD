@@ -1,0 +1,23 @@
+/* Filename: src/components/TransmissionPanel/TransmissionPanel.css */
+
+.hud-comms { min-height: 84px; }
+.hud-author
+{
+  display: block;
+  margin-top: 0.45rem;
+  color: var(--hud-accent);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  text-shadow: 0 0 8px rgba(223, 170, 55, 0.10);
+}
+.hud-message
+{
+  margin: 0.45rem 0 0;
+  color: var(--hud-text-main);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}

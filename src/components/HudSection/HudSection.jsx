@@ -1,7 +1,9 @@
 //Filename: HudSection.jsx
 //Author: Kyle McColgan
-//Date: 12 July 2026
+//Date: 13 July 2026
 //Description: This file contains the HUD section component for the OBS HUD project.
+
+import "./HudSection.css";
 
 export default function HudSection({
     label,
