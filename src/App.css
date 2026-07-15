@@ -1,6 +1,7 @@
 /* Filename: src/App.css */
 
-:root {
+:root
+{
   /* Starfield NASA-punk Inspired Palette. */
   --hud-bg: rgba(7, 10, 15, 0.85); /* Deep space dark gray. */
   --hud-border: rgba(237, 248, 255, 0.15); /* Light cosmic framing. */
@@ -45,13 +46,10 @@ body { margin: 0; overflow: hidden; background: transparent; }
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1, "lnum" 1;
 
-  width: 400px;
-  max-width: 360px;
+  width: min(340px, 100%);
   padding: 30px 0;
   color: var(--hud-text-main);
-  background: rgba(12, 15, 20, 0.18);
-  backdrop-filter: blur(0.8px);
-  -webkit-backdrop-filter: blur(0.8px);
+  background: linear-gradient(180deg, rgba(8, 10, 14, 0.28), rgba(8, 10, 14, 0.18));
   border-radius: 2px;
 }
 .hud-panel::before
@@ -61,23 +59,23 @@ body { margin: 0; overflow: hidden; background: transparent; }
   left: 0;
   top: 18px;
   bottom: 18px;
-  width: 2px;
+  width: 3px;
   opacity: 0.5;
-  background: linear-gradient(to bottom, transparent, var(--hud-accent), transparent);
+  background: linear-gradient(180deg, transparent, rgba(223, 170, 55, 0.15) 15%, var(--hud-accent) 50%, rgba(223, 170, 55, 0.15) 85%, transparent);
+  box-shadow: 0 0 10px rgba(223, 170, 55, 0.18);
 }
 .hud-panel::after
 {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.025), transparent);
-  pointer-events: none;
+  background: radial-gradient(circle at top, rgba(223, 170, 55, 0.05), transparent 65%);
 
-  animation: sweep 12s linear infinite;
+  animation: breathe 8s ease-in-out infinite;
 }
 
-@keyframes sweep
+@keyframes breathe
 {
-  from { transform: translateY(-100%); }
-  to { transform: translateY(100%); }
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.40; }
 }

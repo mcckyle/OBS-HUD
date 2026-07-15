@@ -5,16 +5,38 @@
 {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  padding-bottom: 1.25rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  opacity: 0.78;
+  align-items: flex-end;
+  position: relative;
+  padding: 0 var(--hud-padding) 1.5rem;
+  margin-bottom: 0.50rem;
+}
+.hud-header::after
+{
+  content: "";
+  position: absolute;
+  left: var(--hud-padding);
+  right: var(--hud-padding);
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(223, 170, 55, 0.18) 30%, rgba(223, 170, 55, 0.08) 60%, transparent);
 }
 .hud-header, .hud-item { padding-inline: var(--hud-padding); }
-.hud-title { flex: 1; color: var(--hud-text-main); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; }
+.hud-title { color: var(--hud-text-main); font-size: 0.74rem; font-weight: 650; letter-spacing: 0.34em; line-height: 1; text-transform: uppercase; }
+.hud-title::before
+{
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 0.90rem;
+  margin-bottom: 0.10rem;
+  border-radius: 50%;
+  background: var(--hud-accent);
+  box-shadow: 0 0 8px rgba(223, 170, 55, 0.35);
+}
 .hud-label { display: block; color: var(--hud-text-muted); font-size: 0.58rem; letter-spacing: 0.24em; opacity: 0.70; text-transform: uppercase; }
-.hud-system { display: flex; flex-direction: column; gap: 0.4rem; }
-.hud-system-id { color: var(--hud-text-muted); font-size: 0.55rem; letter-spacing: 0.22em; opacity: 0.55; text-transform: uppercase; }
-.hud-clock { display: flex; flex-direction: column; align-items: flex-end; gap: 0.35rem; text-align: right; }
-.hud-clock-sol { color: var(--hud-accent); font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; }
-.hud-clock-time { font-size: 0.72rem; letter-spacing: 0.16em; opacity: 0.82; font-variant-numeric: tabular-nums; }
+.hud-system { display: flex; flex-direction: column; gap: 0.4rem; max-width: 65%; }
+.hud-system-id { margin-top: 0.45rem; color: var(--hud-text-muted); font-size: 0.52rem; letter-spacing: 0.24em; opacity: 0.55; }
+.hud-clock { display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem; font-variant-numeric: tabular-nums; text-align: right; }
+.hud-clock-sol { color: var(--hud-accent); font-size: 0.54rem; font-weight: 600; letter-spacing: 0.26em; opacity: 0.90; text-transform: uppercase; }
+.hud-clock-time { font-size: 0.82rem; font-weight: 500; color: var(--hud-text-main); white-space: nowrap; letter-spacing: 0.18em; opacity: 0.82; }

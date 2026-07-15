@@ -1,6 +1,6 @@
 //Filename: HudSection.jsx
 //Author: Kyle McColgan
-//Date: 13 July 2026
+//Date: 14 July 2026
 //Description: This file contains the HUD section component for the OBS HUD project.
 
 import "./HudSection.css";
@@ -17,7 +17,7 @@ export default function HudSection({
           aria-label={ariaLabel}
         >
           <span className="hud-label">{label}</span>
-          {children}
+            {children}
         </section>
     );
 }

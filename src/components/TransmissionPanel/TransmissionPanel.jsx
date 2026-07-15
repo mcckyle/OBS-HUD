@@ -1,6 +1,6 @@
 //Filename: TransmissionPanel.jsx
 //Author: Kyle McColgan
-//Date: 13 July 2026
+//Date: 14 July 2026
 //Description: This file contains the HUD Transmission Panel component for the OBS HUD project.
 
 import React from 'react';

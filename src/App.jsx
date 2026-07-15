@@ -1,30 +1,20 @@
 //Filename: App.jsx
 //Author: Kyle McColgan
-//Date: 13 July 2026
+//Date: 14 July 2026
 //Description: This file contains the App component for the OBS HUD project.
 
-import React, { useState, useEffect } from 'react';
 import HudHeader from "./components/HudHeader/HudHeader.jsx";
 import HudSection from "./components/HudSection/HudSection.jsx";
 import CrewPanel from "./components/CrewPanel/CrewPanel.jsx";
 import TransmissionPanel from "./components/TransmissionPanel/TransmissionPanel.jsx";
-import { formatTime, formatMissionTime } from "./utils/time.js";
+import SessionTimer from "./components/SessionTimer/SessionTimer.jsx";
 import { useYouTubeData } from "./hooks/useYouTubeData";
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
+
 import './App.css';
 
 export default function App()
 {
-  const [seconds, setSeconds] = useState(0);
-  const { subscriberCount, latestMessage } = useYouTubeData();
-  const [missionTime, setMissionTime] = useState(formatMissionTime());
-
-  //1. Live Session Timer.
-  useEffect(() => {
-    const timer = setInterval(() => setSeconds(time => time + 1), 1000);
-    return () => clearInterval(timer);
-  }, []);
-
   //Transparent wrapper that spans the OBS canvas...
   return (
     <main className="hud-stage">
@@ -51,7 +41,7 @@ export default function App()
           label="ELAPSED TIME"
           ariaLabel="Session timer"
         >
-          <strong className="hud-value">{formatTime(seconds)}</strong>
+          <SessionTimer />
         </HudSection>
 
         {/* Section 2: Live Subscriber Count. */}

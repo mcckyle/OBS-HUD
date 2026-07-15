@@ -1,25 +1,15 @@
 //Filename: HudHeader.jsx
 //Author: Kyle McColgan
-//Date: 13 July 2026
+//Date: 14 July 2026
 //Description: This file contains the HUD header component for the OBS HUD project.
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { formatTime, formatMissionTime } from "../../utils/time.js";
+import { motion } from 'motion/react';
+import { useMissionClock } from "../../hooks/useMissionClock";
 import "./HudHeader.css";
 
 export default function HudHeader()
 {
-    const [missionTime, setMissionTime] = useState(formatMissionTime());
-
-    //Mission timer.
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setMissionTime(formatMissionTime());
-        }, 1000);
-
-        return () => clearInterval(interval);
-    }, []);
+    const missionTime = useMissionClock();
 
     return (
         <header className="hud-header">
@@ -29,15 +19,16 @@ export default function HudHeader()
           </div>
           <div className="hud-clock">
             <span className="hud-clock-sol">SOL {missionTime.sol}</span>
-            <motion.span
+            <motion.time
               key={missionTime.time}
               className="hud-clock-time"
-              initial={{ opacity: 0.55 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.25 }}
+              dateTime={missionTime.time}
+              initial={{ opacity: 0.35, y: -2 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.18, ease: "easeOut" }}
             >
               {missionTime.time} UTC
-            </motion.span>
+            </motion.time>
           </div>
         </header>
     );

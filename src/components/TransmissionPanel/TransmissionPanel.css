@@ -1,23 +1,38 @@
 /* Filename: src/components/TransmissionPanel/TransmissionPanel.css */
 
-.hud-comms { min-height: 84px; }
+.hud-comms { min-height: 6rem; }
 .hud-author
 {
   display: block;
   margin-top: 0.45rem;
   color: var(--hud-accent);
-  font-size: 0.68rem;
+  font-size: 0.64rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.22em;
+  opacity: 0.90;
   text-transform: uppercase;
-
-  text-shadow: 0 0 8px rgba(223, 170, 55, 0.10);
+}
+.hud-author::before
+{
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 0.70rem;
+  margin-bottom: 0.08rem;
+  border-radius: 50%;
+  background: var(--hud-accent);
+  opacity: 0.80;
 }
 .hud-message
 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   margin: 0.45rem 0 0;
   color: var(--hud-text-main);
-  font-size: 0.82rem;
-  line-height: 1.55;
+  font-size: 0.84rem;
+  line-height: 1.65;
   overflow-wrap: anywhere;
 }

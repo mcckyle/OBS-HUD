@@ -1,15 +1,21 @@
 //Filename: useYouTubeData.jsx
 //Author: Kyle McColgan
-//Date: 8 July 2026
+//Date: 14 July 2026
 //Description: This file contains the YouTube API integration for the OBS HUD project.
 
 import React, { useState, useEffect } from 'react';
 
-const MAX_LENGTH = 72;
+const MAX_COMMENT_LENGTH = 72;
+const POLL_INTERVAL_MS = 120000;
+const STATUS = {
+  CONNECTING: "CONNECTING...",
+  EMPTY: "NO RECENT TRANSMISSIONS",
+  ERROR: "SIGNAL LOST"
+};
 
 export function useYouTubeData() {
   const [subscriberCount, setSubscriberCount] = useState('---');
-  const [latestMessage, setLatestMessage] = useState({ id: 'init', author: "", message: 'CONNECTING...'});
+  const [latestMessage, setLatestMessage] = useState({ id: 'init', author: "", message: STATUS.CONNECTING});
 
   useEffect(() => {
     let isMounted = true;
@@ -59,7 +65,7 @@ export function useYouTubeData() {
             const commentSnippet = commsData.items[0].snippet.topLevelComment.snippet;
             const author = commentSnippet.authorDisplayName;
             const textContent = commentSnippet.textDisplay;
-            const truncated = textContent.length > MAX_LENGTH ? `${textContent.slice(0, MAX_LENGTH)}…` : textContent;
+            const truncated = textContent.length > MAX_COMMENT_LENGTH ? `${textContent.slice(0, MAX_COMMENT_LENGTH)}…` : textContent;
 
             //Format to nicely readable string e.g. "1,250".
             setLatestMessage({
@@ -70,7 +76,7 @@ export function useYouTubeData() {
           }
           else if (isMounted)
           {
-            setLatestMessage({ id: 'empty', author: "", message: 'NO RECENT TRANSMISSIONS' });
+            setLatestMessage({ id: 'empty', author: "", message: STATUS.EMPTY });
           }
         }
       }
@@ -79,7 +85,7 @@ export function useYouTubeData() {
         console.error('Error fetching data from YouTube API:', error);
         if (isMounted)
         {
-          setLatestMessage({ id: 'error', author: "", message: 'SIGNAL LOST' });
+          setLatestMessage({ id: 'error', author: "", message: STATUS.ERROR });
         }
       }
     };
@@ -88,7 +94,7 @@ export function useYouTubeData() {
     fetchYouTubeMetrics();
 
     //Poll YouTube once every 2 minutes.
-    const pollInterval = setInterval(fetchYouTubeMetrics, 120000);
+    const pollInterval = setInterval(fetchYouTubeMetrics, POLL_INTERVAL_MS);
 
     return () => {
         isMounted = false;

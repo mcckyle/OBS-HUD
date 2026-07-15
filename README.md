@@ -1,6 +1,6 @@
 # OBS HUD
 
-A simple, modern, and lightweight browser-source HUD for OBS Studio inspired by the clean science-fiction interface of **Starfield**.
+A modern and lightweight browser-source HUD for OBS Studio inspired by the clean science-fiction interface of **Starfield**.
 
 Designed for livestreams, the overlay provides an elegant glass UI with a live session timer as well as a dynamically updating objective feed while remaining unobtrusive over gameplay.
 
@@ -73,14 +73,34 @@ OBS-HUD/
 ├── public/               # Static assets (served as-is).
 ├── src/                  # Application Source code.
 │   ├── components/       # Reusable React components.
+│   │   ├── HudHeader/
+│   │   │   ├── HudHeader.jsx
+│   │   │   └── HudHeader.css
+│   │   │
+│   │   ├── SessionTimer/
+│   │   │   ├── SessionTimer.jsx
+│   │   │   └── SessionTimer.css
+│   │   │
+│   │   ├── CrewPanel/
+│   │   │   ├── CrewPanel.jsx
+│   │   │   └── CrewPanel.css
+│   │   │
+│   │   ├── TransmissionPanel/
+│   │   │   ├── TransmissionPanel.jsx
+│   │   │   └── TransmissionPanel.css
+│   │   │
 │   │   └── HudSection/
-│   │       └── HudSection.jsx     
+│   │       ├── HudSection.jsx
+│   │       └── HudSection.css
 │   │
 │   ├── utils/
 │   │   └── time.js
 │   │
+│   │
 │   ├── hooks/            # Custom React hooks.
-│   │   └── useYouTubeData.jsx
+│   │   ├── useYouTubeData.jsx
+│   │   ├── useMissionClock.js
+│   │   └── useSessionTimer.js
 │   │
 │   ├── App.jsx           # Main React application component.
 │   ├── main.jsx          # React DOM entry point.
@@ -89,7 +109,7 @@ OBS-HUD/
 │
 ├── .gitignore            # Specifies intentionally untracked files and folders to ignore.
 ├── LICENSE               # Open source license for the project.
-├── README.md             # Project overview, instructions, and documentation.
+├── README.md             # Project overview / documentation.
 ├── eslint.config.js      # ESLint configuration.
 ├── index.html            # HTML entry point.
 ├── vite.config.js        # Vite config for build and development.
