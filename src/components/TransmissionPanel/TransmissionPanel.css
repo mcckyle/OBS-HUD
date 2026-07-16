@@ -3,36 +3,26 @@
 .hud-comms { min-height: 6rem; }
 .hud-author
 {
-  display: block;
-  margin-top: 0.45rem;
+  display: flex;
+  align-items: center;
   color: var(--hud-accent);
   font-size: 0.64rem;
   font-weight: 600;
   letter-spacing: 0.22em;
-  opacity: 0.90;
   text-transform: uppercase;
-}
-.hud-author::before
-{
-  content: "";
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  margin-right: 0.70rem;
-  margin-bottom: 0.08rem;
-  border-radius: 50%;
-  background: var(--hud-accent);
-  opacity: 0.80;
+  opacity: 0.90;
 }
 .hud-message
 {
   display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+  margin: var(--space-xs) 0 0;
+
   overflow: hidden;
-  margin: 0.45rem 0 0;
   color: var(--hud-text-main);
   font-size: 0.84rem;
-  line-height: 1.65;
+  line-height: 1.55;
   overflow-wrap: anywhere;
+
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }

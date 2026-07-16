@@ -2,7 +2,7 @@
 
 A modern and lightweight browser-source HUD for OBS Studio inspired by the clean science-fiction interface of **Starfield**.
 
-Designed for livestreams, the overlay provides an elegant glass UI with a live session timer as well as a dynamically updating objective feed while remaining unobtrusive over gameplay.
+Designed for livestreams, the overlay provides an elegant glass UI with a live session timer as well as a dynamically updating subscriber count and comment feed while remaining unobtrusive over gameplay.
 
 ---
 
@@ -103,8 +103,8 @@ OBS-HUD/
 │   │   └── useSessionTimer.js
 │   │
 │   ├── App.jsx           # Main React application component.
-│   ├── main.jsx          # React DOM entry point.
 │   ├── App.css           # Styles specific to App.jsx.
+│   ├── main.jsx          # React DOM entry point.
 │   └── index.css         # Global styles.
 │
 ├── .gitignore            # Specifies intentionally untracked files and folders to ignore.
@@ -128,7 +128,6 @@ You can easily modify:
 * Colors
 * Typography
 * Panel layout
-* Icons
 * Animation timing
 * Polling interval
 

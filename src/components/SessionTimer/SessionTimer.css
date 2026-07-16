@@ -3,13 +3,13 @@
 {
   display: block;
   font-size: clamp(2.8rem, 4vw, 3.6rem);
-  font-weight: 300;
-  letter-spacing: 0.12em;
+  font-weight: 250;
+  letter-spacing: 0.08em;
   line-height: 0.92;
   color: var(--hud-text-main);
   font-variant-numeric: tabular-nums lining-nums;
   font-feature-settings: "tnum" 1, "lnum" 1;
   white-space: nowrap;
 
-  text-shadow: 0 0 4px rgba(223, 170, 55, 0.08);
+  text-shadow: 0 0 10px rgba(223, 170, 55, 0.05);
 }
