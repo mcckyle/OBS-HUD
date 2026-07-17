@@ -1,6 +1,6 @@
 //Filename: HudHeader.jsx
 //Author: Kyle McColgan
-//Date: 14 July 2026
+//Date: 16 July 2026
 //Description: This file contains the HUD header component for the OBS HUD project.
 
 import { motion } from 'motion/react';
@@ -20,12 +20,11 @@ export default function HudHeader()
           <div className="hud-clock">
             <span className="hud-clock-sol">SOL {missionTime.sol}</span>
             <motion.time
-              key={missionTime.time}
               className="hud-clock-time"
               dateTime={missionTime.time}
               initial={{ opacity: 0.35, y: -2 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.18, ease: "easeOut" }}
+              animate={{ opacity: [0.75, 1], y: [-1, 0] }}
+              transition={{ duration: 0.16, ease: "easeOut" }}
             >
               {missionTime.time} UTC
             </motion.time>

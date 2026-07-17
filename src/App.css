@@ -3,40 +3,24 @@
 :root
 {
   /* Starfield NASA-punk Inspired Palette. */
-  --hud-bg: rgba(7, 10, 15, 0.85);
 
   /* ---------- Colors. ---------- */
   --hud-text-main: #edf8ff;
   --hud-text-muted: #9cb8c9;
 
   --hud-accent: #dfaa37;
-  --hud-accent-soft: rgba(223, 170, 55, 0.20);
-  --hud-accent-glow: rgba(223, 170, 55, 0.10);
-
-  --hud-surface-1: rgba(9, 13, 18, 0.34);
-  --hud-surface-2: rgba(9, 13, 18, 0.18);
+  --hud-accent-soft: rgb(223 170 55 / 0.18);
 
   /* ---------- Borders. ---------- */
-  --hud-border-subtle: rgba(255, 255, 255, 0.05);
-  --hud-border: rgba(255, 255, 255, 0.10);
-  --hud-border-strong: rgba(255, 255, 255, 0.18);
+  --hud-border-subtle: rgb(255 255 255 / 0.05);
+  --hud-divider: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.08), transparent);
 
   /* ---------- Shadows. ---------- */
-  --hud-shadow-soft: 0 6px 24px rgba(0, 0, 0, 0.22);
-  --hud-shadow-glow: 0 0 18px rgba(223, 170, 55, 0.10);
-
-  /* ---------- Radius. ---------- */
-  --radius-sm: 4px;
-  --radius-md: 8px;
+  --hud-shadow: 0 10px 36px rgb(0 0 0 / 0.30), inset 0 1px rgb(255 255 255 / 0.04);
 
   /* ---------- Layout. ---------- */
   --panel-width: 340px;
   --stage-padding: 40px;
-  --space-xs: 0.40rem;
-  --space-sm: 0.75rem;
-  --space-md: 1.5rem;
-  --space-lg: 2rem;
-  --hud-padding: 30px;
 }
 
 /* Positioning on the OBS 1080p canvas. Places overlay top-right. */
@@ -65,14 +49,15 @@
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1, "lnum" 1;
 
-  width: min(340px, 100%);
-  padding: 24px 0 18px;
+  width: clamp(300px, 24vw, 340px);
+  padding: 22px 18px 18px;
   color: var(--hud-text-main);
   background: linear-gradient(180deg, rgba(18, 24, 32, 0.42), rgba(8, 11, 15, 0.18));
   border: 1px solid var(--hud-border-subtle);
   border-radius: 2px;
-  backdrop-filter: blur(6px);
-  box-shadow: var(--hud-shadow-soft), var(--hud-shadow-glow);
+  backdrop-filter: blur(12px) saturate(120%);
+  box-shadow: var(--hud-shadow);
+  will-change: transform, opacity;
 }
 .hud-panel::before
 {
@@ -81,20 +66,21 @@
   left: 0;
   top: 18px;
   bottom: 18px;
-  width: 2px;
-  opacity: 0.5;
+  width: 1px;
+  opacity: 0.45;
   background: linear-gradient(180deg, transparent, rgba(223, 170, 55, 0.15), var(--hud-accent), rgba(223, 170, 55, 0.15), transparent);
-  box-shadow: 0 0 12px rgba(223, 170, 55, 0.22);
+  box-shadow: 0 0 8px rgb(223 170 55 / 0.18);
 }
 .hud-panel::after
 {
   content: "";
   position: absolute;
   inset: -25%;
-  background: radial-gradient(circle, rgba(223, 170, 55, 0.08), transparent 60%);
+  background: radial-gradient(circle, rgb(223 170 55 / 0.035), transparent 60%);
   pointer-events: none;
+  will-change: transform, opacity;
 
-  animation: ambientSweep 18s linear infinite;
+  animation: ambientSweep 34s ease-in-out alternate;
 }
 
 .hud-indicator

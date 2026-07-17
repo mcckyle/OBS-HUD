@@ -1,13 +1,10 @@
 /* Filename: src/components/HudSection/HudSection.css */
-
-/* Layout Grid for Row alignment Styles. */
 .hud-item
 {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 1.6rem var(--hud-padding);
-  position: relative;
+  gap: 0.65rem;
+  padding-block: 1.4rem;
 }
 .hud-item:not(:last-child)::after
 {
@@ -17,7 +14,7 @@
     right: var(--hud-padding);
     bottom: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+    background: var(--hud-divider);
 }
-.hud-item-primary { position: relative; padding: 0 var(--hud-padding) 2.25rem; margin-bottom: 0.25rem; padding-block: 0.25rem 2rem; }
+.hud-item-primary { padding: 0 var(--hud-padding) 2.25rem; margin-bottom: 0.25rem; padding-block: 0.25rem 2rem; }
 .hud-item > div { flex: 1; min-width: 0; }

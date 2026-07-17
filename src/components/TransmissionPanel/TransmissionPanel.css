@@ -1,14 +1,13 @@
 /* Filename: src/components/TransmissionPanel/TransmissionPanel.css */
 
-.hud-comms { min-height: 6rem; }
+.hud-comms { min-height: calc(3 * 1.45em); }
 .hud-author
 {
-  display: flex;
-  align-items: center;
+  display: block;
   color: var(--hud-accent);
   font-size: 0.64rem;
   font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   opacity: 0.90;
 }
@@ -19,8 +18,8 @@
 
   overflow: hidden;
   color: var(--hud-text-main);
-  font-size: 0.84rem;
-  line-height: 1.55;
+  font-size: 0.88rem;
+  line-height: 1.45;
   overflow-wrap: anywhere;
 
   -webkit-line-clamp: 3;
