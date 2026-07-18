@@ -22,9 +22,9 @@ export default function HudHeader()
             <motion.time
               className="hud-clock-time"
               dateTime={missionTime.time}
-              initial={{ opacity: 0.35, y: -2 }}
-              animate={{ opacity: [0.75, 1], y: [-1, 0] }}
-              transition={{ duration: 0.16, ease: "easeOut" }}
+              initial={{ opacity: 0.8, y: -1 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.14, ease: "easeOut" }}
             >
               {missionTime.time} UTC
             </motion.time>

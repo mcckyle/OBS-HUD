@@ -20,7 +20,7 @@ Designed for livestreams, the overlay provides an elegant glass UI with a live s
 
 ## Preview
 
-![Overlay Screenshot](./public/images/Screenshot_20260712_203358.png)
+![Overlay Screenshot](./public/images/Screenshot_20260717_200522.png)
 *A glimpse of the overlay, captured with a screenshot.*
 
 ---
@@ -99,6 +99,7 @@ OBS-HUD/
 │   │
 │   ├── hooks/            # Custom React hooks.
 │   │   ├── useYouTubeData.jsx
+│   │   ├── useInterval.js
 │   │   ├── useMissionClock.js
 │   │   └── useSessionTimer.js
 │   │

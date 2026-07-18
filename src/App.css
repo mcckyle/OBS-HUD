@@ -16,10 +16,9 @@
   --hud-divider: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.08), transparent);
 
   /* ---------- Shadows. ---------- */
-  --hud-shadow: 0 10px 36px rgb(0 0 0 / 0.30), inset 0 1px rgb(255 255 255 / 0.04);
+  --hud-shadow: 0 8px 28px rgb(0 0 0 / 0.22), inset 0 1px rgb(255 255 255 / 0.04);
 
   /* ---------- Layout. ---------- */
-  --panel-width: 340px;
   --stage-padding: 40px;
 }
 
@@ -44,19 +43,17 @@
 
   display: flex;
   flex-direction: column;
-  gap: 0;
-
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum" 1, "lnum" 1;
 
   width: clamp(300px, 24vw, 340px);
   padding: 22px 18px 18px;
   color: var(--hud-text-main);
-  background: linear-gradient(180deg, rgba(18, 24, 32, 0.42), rgba(8, 11, 15, 0.18));
+  background: linear-gradient(180deg, rgb(17 22 30 / 0.44), rgb(10 13 18 / 0.24));
   border: 1px solid var(--hud-border-subtle);
   border-radius: 2px;
   backdrop-filter: blur(12px) saturate(120%);
   box-shadow: var(--hud-shadow);
+
+  contain: layout paint;
   will-change: transform, opacity;
 }
 .hud-panel::before
@@ -67,16 +64,17 @@
   top: 18px;
   bottom: 18px;
   width: 1px;
-  opacity: 0.45;
+  opacity: 0.35;
   background: linear-gradient(180deg, transparent, rgba(223, 170, 55, 0.15), var(--hud-accent), rgba(223, 170, 55, 0.15), transparent);
-  box-shadow: 0 0 8px rgb(223 170 55 / 0.18);
+  box-shadow: 0 0 5px rgb(223 170 55 / 0.14);
 }
 .hud-panel::after
 {
   content: "";
   position: absolute;
-  inset: -25%;
+  inset: -15%;
   background: radial-gradient(circle, rgb(223 170 55 / 0.035), transparent 60%);
+  opacity: 0.80;
   pointer-events: none;
   will-change: transform, opacity;
 
@@ -98,4 +96,9 @@
 {
   from { transform: translateY(-12%) rotate(0deg); }
   to { transform: translateY(12%) rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce)
+{
+  .hud-panel::after { animation: none; }
 }

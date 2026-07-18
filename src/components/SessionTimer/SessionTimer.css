@@ -7,7 +7,5 @@
   letter-spacing: 0.04em;
   line-height: 0.92;
   color: var(--hud-text-main);
-  font-variant-numeric: tabular-nums lining-nums;
-  font-feature-settings: "tnum" 1, "lnum" 1;
   white-space: nowrap;
 }

@@ -1,10 +1,11 @@
 //Filename: useYouTubeData.jsx
 //Author: Kyle McColgan
-//Date: 14 July 2026
+//Date: 17 July 2026
 //Description: This file contains the YouTube API integration for the OBS HUD project.
 
 import React, { useState, useEffect } from 'react';
 
+const YOUTUBE_API = "https://www.googleapis.com/youtube/v3";
 const MAX_COMMENT_LENGTH = 72;
 const POLL_INTERVAL_MS = 120000;
 const STATUS = {
@@ -12,21 +13,39 @@ const STATUS = {
   EMPTY: "NO RECENT TRANSMISSIONS",
   ERROR: "SIGNAL LOST"
 };
+const DEFAULT_MESSAGES = {
+  connecting: {
+    id: "connecting",
+    author: "",
+    message: STATUS.CONNECTING
+  },
+  empty: {
+    id: "empty",
+    author: "",
+    message: STATUS.EMPTY
+  },
+  error: {
+    id: "error",
+    author: "",
+    message: STATUS.ERROR
+  }
+};
 
-export function useYouTubeData() {
+export function useYouTubeData()
+{
   const [subscriberCount, setSubscriberCount] = useState('---');
   const [latestMessage, setLatestMessage] = useState({ id: 'init', author: "", message: STATUS.CONNECTING});
 
-  useEffect(() => {
+  useEffect(() =>
+  {
     let isMounted = true;
 
     //Read secure keys straight from the local OBS browser souce URL string...
     const urlParams = new URLSearchParams(window.location.search);
     const apiKey = urlParams.get('key');
     const channelId = urlParams.get('channelId');
-    const API = "https://www.googleapis.com/youtube/v3";
-    const statsUrl = `${API}/channels?part=statistics&id=` + channelId + '&key=' + apiKey;
-    const commsUrl = `${API}/commentThreads?part=snippet&allThreadsRelatedToChannelId=` + channelId + '&maxResults=1&key=' + apiKey;
+    const statsUrl = `${YOUTUBE_API}/channels?part=statistics&id=` + channelId + '&key=' + apiKey;
+    const commsUrl = `${YOUTUBE_API}/commentThreads?part=snippet&allThreadsRelatedToChannelId=` + channelId + '&maxResults=1&key=' + apiKey;
 
     //If variables are truly missing, stop execution.
     if ((!apiKey) || (!channelId))
@@ -35,7 +54,8 @@ export function useYouTubeData() {
         return;
     }
 
-    const fetchYouTubeMetrics = async () => {
+    const fetchYouTubeMetrics = async () =>
+    {
       try
       {
         //1. Parse Subscriber Count.
@@ -52,7 +72,7 @@ export function useYouTubeData() {
           const count = statsData.items[0].statistics.subscriberCount;
 
           //Format to nicely readable string e.g. "1,250".
-          setSubscriberCount(parseInt(count).toLocaleString());
+          setSubscriberCount(Number(count).toLocaleString("en-US"));
         }
 
         //2. Parse Latest Video Comment.
@@ -65,7 +85,7 @@ export function useYouTubeData() {
             const commentSnippet = commsData.items[0].snippet.topLevelComment.snippet;
             const author = commentSnippet.authorDisplayName;
             const textContent = commentSnippet.textDisplay;
-            const truncated = textContent.length > MAX_COMMENT_LENGTH ? `${textContent.slice(0, MAX_COMMENT_LENGTH)}…` : textContent;
+            const truncated = textContent.length > MAX_COMMENT_LENGTH ? `${textContent.slice(0, MAX_COMMENT_LENGTH).trimEnd()}…` : textContent;
 
             //Format to nicely readable string e.g. "1,250".
             setLatestMessage({
@@ -76,7 +96,7 @@ export function useYouTubeData() {
           }
           else if (isMounted)
           {
-            setLatestMessage({ id: 'empty', author: "", message: STATUS.EMPTY });
+            setLatestMessage(DEFAULT_MESSAGES.empty);
           }
         }
       }
@@ -85,7 +105,7 @@ export function useYouTubeData() {
         console.error('Error fetching data from YouTube API:', error);
         if (isMounted)
         {
-          setLatestMessage({ id: 'error', author: "", message: STATUS.ERROR });
+          setLatestMessage(DEFAULT_MESSAGES.error);
         }
       }
     };
