@@ -1,4 +1,5 @@
 /* Filename: src/index.css */
+:root { color-scheme: dark; }
 html { box-sizing: border-box; }
 *, *::before, *::after { box-sizing: inherit; }
 html, body, #root { width: 100%; height: 100%; }
@@ -13,4 +14,8 @@ body
     font-feature-settings: "tnum" 1, "lnum" 1;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    user-select: none;
+    cursor: default;
+    isolation: isolate;
 }
+button, input, textarea { font: inherit; }

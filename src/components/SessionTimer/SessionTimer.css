@@ -3,9 +3,9 @@
 {
   display: block;
   font-size: clamp(3rem, 4.5vw, 3.9rem);
-  font-weight: 300;
-  letter-spacing: 0.04em;
-  line-height: 0.92;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1;
   color: var(--hud-text-main);
   white-space: nowrap;
 }

@@ -2,10 +2,10 @@
 .hud-crew-count
 {
     display: block;
-    font-size: clamp(1.9rem, 3vw, 2.2rem);
-    font-weight: 300;
-    letter-spacing: 0.03em;
-    line-height: 0.95;
+    font-size: clamp(1.85rem, 2.8vw, 2.15rem);
+    font-weight: 350;
+    letter-spacing: 0.02em;
+    line-height: 1;
     color: var(--hud-text-main);
     white-space: nowrap;
 }
