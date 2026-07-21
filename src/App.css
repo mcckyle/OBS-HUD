@@ -16,12 +16,11 @@
 
   /* ---------- Borders. ---------- */
   --hud-border: rgb(255 255 255 / 5%);
-  --hud-highlight: rgb(255 255 255 / 8%);
   --hud-divider: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.08), transparent);
 
   /* ---------- Layout. ---------- */
   --hud-radius: 2px;
-  --hud-width: clamp(300px, 24vw, 340px);
+  --hud-width: clamp(300px, 22vw, 360px);
   --hud-padding: 20px;
   --stage-padding: 40px;
 
@@ -35,6 +34,8 @@
 {
   display: grid;
   place-items: start end;
+  align-content: start;
+  justify-content: end;
 
   width: 100%;
   height: 100%;
@@ -53,18 +54,21 @@
   flex-direction: column;
   gap: 4px;
 
-  width: clamp(300px, 24vw, 340px);
-  padding: 20px;
+  width: var(--hud-width);
+  padding: var(--hud-padding);
   color: var(--hud-text-main);
-  background: linear-gradient(180deg, rgb(17 22 30 / 0.44), rgb(10 13 18 / 0.24));
-  border: 1px solid var(--hud-border-subtle);
-  border-radius: 2px;
+  background: var(--hud-surface);
+  border: 1px solid var(--hud-border);
+  border-radius: var(--hud-radius);
   backdrop-filter: blur(var(--hud-blur)) saturate(125%);
   box-shadow: var(--hud-shadow);
 
   contain: paint;
   will-change: transform, opacity;
   transform: translateZ(0); /* helps OBS Browser Source (Chromium) consistently composite the blurred panel. */
+  backface-visibility: hidden;
+  content-visibility: auto;
+  isolation: isolate;
 }
 .hud-panel::before
 {
@@ -84,22 +88,11 @@
   position: absolute;
   inset: -15%;
   background: linear-gradient(135deg, rgb(223 170 55 / 3%), transparent 70%);
-  opacity: 0.80;
+  opacity: 0.45;
   pointer-events: none;
   will-change: transform, opacity;
 
-  animation: ambientSweep 60s ease-in-out alternate;
-}
-
-.hud-indicator
-{
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  margin-right: 0.70rem;
-  border-radius: 50%;
-  background: var(--hud-accent);
-  box-shadow: 0 0 8px var(--hud-accent-soft);
+  animation: ambientSweep 90s ease-in-out alternate;
 }
 
 @keyframes ambientSweep

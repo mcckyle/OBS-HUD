@@ -2,9 +2,10 @@
 .hud-value
 {
   display: block;
-  font-size: clamp(3rem, 4.5vw, 3.9rem);
-  font-weight: 400;
-  letter-spacing: 0.02em;
+  font-size: clamp(3rem, 4.5vw, 4.25rem);
+  font-weight: 450;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;/* Self-contained components. */
   line-height: 1;
   color: var(--hud-text-main);
   white-space: nowrap;

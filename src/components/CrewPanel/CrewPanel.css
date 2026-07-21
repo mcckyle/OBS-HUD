@@ -3,8 +3,9 @@
 {
     display: block;
     font-size: clamp(1.85rem, 2.8vw, 2.15rem);
-    font-weight: 350;
-    letter-spacing: 0.02em;
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1, "lnum" 1;/* Self-contained components. */
     line-height: 1;
     color: var(--hud-text-main);
     white-space: nowrap;

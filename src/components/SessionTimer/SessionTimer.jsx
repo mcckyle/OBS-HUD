@@ -9,12 +9,12 @@ import "./SessionTimer.css";
 
 export default function SessionTimer()
 {
-    const seconds = useSessionTimer();
-    const value = formatTime(seconds);
+  const seconds = useSessionTimer();
+  const value = formatTime(seconds);
 
-    return (
-        <time className="hud-value" dateTime={`PT${seconds}S`}>
-          {value}
-        </time>
-    );
+  return (
+    <time className="hud-value" dateTime={`PT${seconds}S`}>
+      {value}
+    </time>
+  );
 }
