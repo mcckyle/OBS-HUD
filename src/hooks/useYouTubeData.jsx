@@ -1,6 +1,6 @@
 //Filename: useYouTubeData.jsx
 //Author: Kyle McColgan
-//Date: 20 July 2026
+//Date: 21 July 2026
 //Description: This file contains the YouTube API integration for the OBS HUD project.
 
 import React, { useState, useEffect } from 'react';
@@ -8,26 +8,21 @@ import React, { useState, useEffect } from 'react';
 const YOUTUBE_API = "https://www.googleapis.com/youtube/v3";
 const MAX_COMMENT_LENGTH = 72;
 const POLL_INTERVAL_MS = 120000;
-const STATUS = {
-  CONNECTING: "CONNECTING...",
-  EMPTY: "NO RECENT TRANSMISSIONS",
-  ERROR: "SIGNAL LOST"
-};
 const DEFAULT_MESSAGES = {
   connecting: {
     id: "connecting",
     author: "",
-    message: STATUS.CONNECTING
+    message: "CONNECTING..."
   },
   empty: {
     id: "empty",
     author: "",
-    message: STATUS.EMPTY
+    message: "NO RECENT TRANSMISSIONS"
   },
   error: {
     id: "error",
     author: "",
-    message: STATUS.ERROR
+    message: "SIGNAL LOST"
   }
 };
 
@@ -69,7 +64,7 @@ export function useYouTubeData()
         const statsData = await statsResponse.json();
         if ((statsData.items) && (statsData.items.length > 0) && (isMounted))
         {
-          const count = statsData.items[0].statistics.subscriberCount;
+          const count = statsData.items?.[0]?.statistics.subscriberCount;
 
           //Format to nicely readable string e.g. "1,250".
           setSubscriberCount(Number(count).toLocaleString("en-US"));
@@ -82,7 +77,7 @@ export function useYouTubeData()
 
           if ((commsData.items) && (commsData.items.length > 0) && (isMounted))
           {
-            const commentSnippet = commsData.items[0].snippet.topLevelComment.snippet;
+            const commentSnippet = commsData.items?.[0]?.snippet?.topLevelComment?.snippet;
             const author = commentSnippet.authorDisplayName;
             const textContent = commentSnippet.textDisplay;
             const truncated = textContent.length > MAX_COMMENT_LENGTH ? `${textContent.slice(0, MAX_COMMENT_LENGTH).trimEnd()}…` : textContent;

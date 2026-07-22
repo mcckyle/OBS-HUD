@@ -2,8 +2,8 @@
 .hud-crew-count
 {
     display: block;
-    font-size: clamp(1.85rem, 2.8vw, 2.15rem);
-    font-weight: 400;
+    font-size: clamp(1.9rem, 2.9vw, 2.25rem);
+    font-weight: 500;
     font-variant-numeric: tabular-nums;
     font-feature-settings: "tnum" 1, "lnum" 1;/* Self-contained components. */
     line-height: 1;

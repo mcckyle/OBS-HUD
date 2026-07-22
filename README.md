@@ -1,27 +1,28 @@
-# OBS HUD
+# OBS-HUD
 
-A modern and lightweight browser-source HUD for OBS Studio inspired by the clean science-fiction interface of **Starfield**.
+A lightweight, NASA-punk inspired browser-source overlay for OBS Studio, designed for immersive **Starfield** livestreams.
 
-Designed for livestreams, the overlay provides an elegant glass UI with a live session timer as well as a dynamically updating subscriber count and comment feed while remaining unobtrusive over gameplay.
-
----
-
-## Features
-
-* Minimal, distraction-free interface
-* Lightweight React + Vite application
-* Glassmorphism-inspired design
-* Live session timer
-* Smooth Motion animations
-* Fully transparent browser source for OBS Studio
-* Easy to customize and extend
+OBS-HUD presents live stream telemetry in a clean, unobtrusive interface that complements gameplay instead of competing with it. Built with React and Vite, it delivers transparent rendering and live YouTube integration while remaining fast and easy to customize.
 
 ---
 
 ## Preview
 
-![Overlay Screenshot](./public/images/Screenshot_20260717_200522.png)
-*A glimpse of the overlay, captured with a screenshot.*
+![Overlay Screenshot](./public/images/Screenshot_20260721_203234.png)
+*A minimal telemetry overlay designed to blend naturally with Starfield's visual language.*
+
+---
+
+## Features
+
+* NASA-punk inspired interface
+* Transparent browser source for OBS studio
+* Live session timer
+* Live YouTube subscriber count
+* Recent YouTube comment feed
+* Smooth Motion-powered animations
+* Lightweight React architecture
+* Easily customizable styling and layout
 
 ---
 
@@ -54,13 +55,27 @@ npm run build
 
 ---
 
-## Using with OBS Studio
+## OBS Studio Setup
 
-1. Build the project.
-2. Add a **Browser Source** in OBS Studio.
-3. Point the source to the generated application or your local development server.
-4. Set the browser background to transparent.
-5. Position the overlay wherever you prefer.
+1. Build the project or run the local development server.
+2. Create a **Browser Source** in OBS Studio.
+3. Point the Browser Source to the built application or development URL.
+4. Enable a transparent background.
+5. Position the overlay wherever you'd like within your scene.
+
+---
+
+## YouTube Configuration
+
+The overlay reads its YouTube credentials directly from the Browser Source URL.
+
+Example:
+
+```bash
+http://localhost:5173/OBS-HUD/?channelId=YOUR_CHANNEL_ID&key=YOUR_API_KEY
+```
+
+This approach keeps configuration separate from the source code and avoids embedding credentials directly in the project.
 
 ---
 
@@ -121,15 +136,14 @@ OBS-HUD/
 
 ## Customization
 
-The HUD is intentionally easy to customize.
-
-You can easily modify:
+OBS-HUD is intentionally modular. Common customizations include:
 
 * Colors
 * Typography
-* Panel layout
+* Layout
 * Animation timing
-* Polling interval
+* YouTube polling interval
+* HUD modules
 
 ---
 

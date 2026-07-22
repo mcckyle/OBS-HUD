@@ -9,12 +9,13 @@ body
     overflow: hidden;
     background: transparent;
     color: var(--hud-text-main);
-    font-family: Inter, system-ui, sans-serif;
+    font-family: Inter, "Segoe UI", system-ui, sans-serif;
     font-variant-numeric: tabular-nums;
     font-feature-settings: "tnum" 1, "lnum" 1;
     line-height: 1.5;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
     user-select: none;
     cursor: default;
     isolation: isolate;

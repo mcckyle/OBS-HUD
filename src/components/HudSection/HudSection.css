@@ -4,8 +4,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding-block: 1.50rem;
+  gap: 1.15rem;
+  padding-block: 1.35rem;
 }
 .hud-item:not(:last-child)::after
 {
@@ -17,5 +17,4 @@
     height: 1px;
     background: var(--hud-divider);
 }
-.hud-item-primary { padding-top: 1rem; }
-.hud-section-label { display: block; color: var(--hud-text-muted); font-size: 0.56rem; letter-spacing: 0.24em; opacity: 0.70; text-transform: uppercase; }
+.hud-section-label { display: block; color: var(--hud-text-muted); font-size: 0.56rem; letter-spacing: 0.18em; opacity: 0.70; text-transform: uppercase; }

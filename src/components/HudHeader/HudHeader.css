@@ -6,7 +6,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding-bottom: 1.75rem;
+  padding-bottom: 1.5rem;
 }
 .hud-header::after
 {
@@ -18,8 +18,8 @@
   height: 1px;
   background: var(--hud-divider);
 }
-.hud-title { color: var(--hud-text-main); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.28em; line-height: 1; text-transform: uppercase; white-space: nowrap; }
-.hud-title::before
+.hud-title { color: var(--hud-text-main); font-size: 0.78rem; font-weight: 550; letter-spacing: 0.22em; line-height: 1; text-transform: uppercase; white-space: nowrap; }
+/*.hud-title::before
 {
   content: "";
   display: inline-block;
@@ -30,9 +30,9 @@
   border-radius: 999px;
   background: var(--hud-accent);
   opacity: 0.75;
-}
-.hud-system { display: flex; flex-direction: column; gap: 0.45rem; max-width: 65%; }
+}*/
+.hud-system { display: flex; flex-direction: column; gap: 0.50rem; max-width: 65%; }
 .hud-system-id { color: var(--hud-text-muted); font-size: 0.56rem; letter-spacing: 0.12em; opacity: 0.55; }
 .hud-clock { display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem; text-align: right; }
 .hud-clock-sol { color: var(--hud-accent); font-size: 0.56rem; font-weight: 600; letter-spacing: 0.26em; opacity: 0.90; text-transform: uppercase; }
-.hud-clock-time { font-size: 0.88rem; font-weight: 450; color: var(--hud-text-main); white-space: nowrap; letter-spacing: 0.12em; opacity: 0.90; }
+.hud-clock-time { font-size: 0.88rem; font-weight: 450; color: var(--hud-text-main); white-space: nowrap; letter-spacing: 0.08em; opacity: 0.90; }

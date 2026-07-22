@@ -1,6 +1,6 @@
 //Filename: App.jsx
 //Author: Kyle McColgan
-//Date: 20 July 2026
+//Date: 21 July 2026
 //Description: This file contains the App component for the OBS HUD project.
 
 import { motion } from 'motion/react';
@@ -22,7 +22,7 @@ export default function App()
   //Transparent wrapper that spans the OBS canvas...
   return (
     <main className="hud-stage">
-      <motion.section
+      <motion.aside
           className="hud-panel"
           initial="hidden"
           animate="show"
@@ -49,7 +49,7 @@ export default function App()
         <HudSection label="TRANSMISSION" ariaLabel="Latest transmission">
           <TransmissionPanel />
         </HudSection>
-      </motion.section>
+      </motion.aside>
     </main>
   );
 };

@@ -2,8 +2,8 @@
 .hud-value
 {
   display: block;
-  font-size: clamp(3rem, 4.5vw, 4.25rem);
-  font-weight: 450;
+  font-size: clamp(3.15rem, 4.8vw, 4.5rem);
+  font-weight: 500;
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1, "lnum" 1;/* Self-contained components. */
   line-height: 1;

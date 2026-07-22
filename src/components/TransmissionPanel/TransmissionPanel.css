@@ -8,12 +8,12 @@
   gap: 0.50rem;
 
   color: var(--hud-accent);
-  font-size: 0.62rem;
+  font-size: 0.66rem;
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
-.hud-author-rule
+/*.hud-author-rule
 {
   width: 18px;
   height: 1px;
@@ -22,7 +22,7 @@
 
   background: currentColor;
   opacity: 0.75;
-}
+}*/
 .hud-message
 {
   display: -webkit-box;
@@ -30,10 +30,9 @@
 
   overflow: hidden;
   color: var(--hud-text-main);
-  font-size: 0.90rem;
-  line-height: 1.5;
-  overflow-wrap: break-word;
-  word-break: normal;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
 
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
