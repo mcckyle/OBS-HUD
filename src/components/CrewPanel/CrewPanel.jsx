@@ -1,7 +1,7 @@
 //Filename: CrewPanel.jsx
 //Author: Kyle McColgan
-//Date: 21 July 2026
-//Description: This file contains the HUD Transmission Panel component for the OBS HUD project.
+//Date: 22 July 2026
+//Description: This file contains the HUD crew panel component for the OBS HUD project.
 
 import React from 'react';
 import { motion } from 'motion/react';
@@ -11,8 +11,8 @@ import "./CrewPanel.css";
 const crewCountVariants = {
     initial: { opacity: 0.9, y: -2 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.18, ease: "easeOut" },
 };
+const crewCountTransition = { duration: 0.18, ease: "easeOut" };
 
 export default function CrewPanel()
 {
@@ -24,6 +24,7 @@ export default function CrewPanel()
               variants={crewCountVariants}
               initial="initial"
               animate="animate"
+              transition={crewCountTransition}
             >
                 {subscriberCount}
             </motion.span>

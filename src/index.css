@@ -12,6 +12,7 @@ body
     font-family: Inter, "Segoe UI", system-ui, sans-serif;
     font-variant-numeric: tabular-nums;
     font-feature-settings: "tnum" 1, "lnum" 1;
+    font-synthesis: none;
     line-height: 1.5;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;

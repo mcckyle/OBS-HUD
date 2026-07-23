@@ -1,6 +1,6 @@
 //Filename: HudSection.jsx
 //Author: Kyle McColgan
-//Date: 21 July 2026
+//Date: 22 July 2026
 //Description: This file contains the HUD section component for the OBS HUD project.
 
 import { motion } from 'motion/react';
@@ -11,15 +11,11 @@ const sectionVariants = {
   show: { opacity: 1, y: 0 }
 };
 
-export default function HudSection({
-  label,
-  children,
-  primary = false,
-  ariaLabel
-}) {
+export default function HudSection({ label, children, ariaLabel})
+{
   return (
     <motion.section
-      className={primary ? "hud-item hud-item-primary" : "hud-item"}
+      className="hud-item"
       aria-label={ariaLabel}
       variants={sectionVariants}
     >

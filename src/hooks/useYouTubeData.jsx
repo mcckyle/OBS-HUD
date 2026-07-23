@@ -1,14 +1,14 @@
 //Filename: useYouTubeData.jsx
 //Author: Kyle McColgan
-//Date: 21 July 2026
+//Date: 22 July 2026
 //Description: This file contains the YouTube API integration for the OBS HUD project.
 
 import React, { useState, useEffect } from 'react';
 
 const YOUTUBE_API = "https://www.googleapis.com/youtube/v3";
 const MAX_COMMENT_LENGTH = 72;
-const POLL_INTERVAL_MS = 120000;
-const DEFAULT_MESSAGES = {
+const POLL_INTERVAL_MS = 2 * 60 * 1000;
+const DEFAULT_MESSAGES = Object.freeze({
   connecting: {
     id: "connecting",
     author: "",
@@ -23,19 +23,27 @@ const DEFAULT_MESSAGES = {
     id: "error",
     author: "",
     message: "SIGNAL LOST"
-  }
-};
+  },
+  config: {
+    id: "config",
+    author: "",
+    message: "MISSING CONFIGURATION"
+  },
+});
 
 export function useYouTubeData()
 {
-  const [subscriberCount, setSubscriberCount] = useState('---');
+  const [subscriberCount, setSubscriberCount] = useState("---");
   const [latestMessage, setLatestMessage] = useState(DEFAULT_MESSAGES.connecting);
 
   useEffect(() =>
   {
-    let isMounted = true;
+    const controller = new AbortController();
+    const requestOptions = {
+      signal: controller.signal,
+    };
 
-    //Read secure keys straight from the local OBS browser souce URL string...
+    //Read API credentials from the Browser Souce URL.
     const urlParams = new URLSearchParams(window.location.search);
     const apiKey = urlParams.get('key');
     const channelId = urlParams.get('channelId');
@@ -46,6 +54,7 @@ export function useYouTubeData()
     if ((!apiKey) || (!channelId))
     {
         console.warn('Missing YouTube configuration keys in URL parameters.');
+        setLatestMessage(DEFAULT_MESSAGES.config);
         return;
     }
 
@@ -53,8 +62,8 @@ export function useYouTubeData()
     {
       try
       {
-        //1. Parse Subscriber Count.
-        const [statsResponse, commsResponse] = await Promise.all([fetch(statsUrl), fetch(commsUrl)]);
+        //1. Fetch subscriber statistics.
+        const [statsResponse, commsResponse] = await Promise.all([fetch(statsUrl, requestOptions), fetch(commsUrl, requestOptions)]);
 
         if (!statsResponse.ok)
         {
@@ -62,34 +71,33 @@ export function useYouTubeData()
         }
 
         const statsData = await statsResponse.json();
-        if ((statsData.items) && (statsData.items.length > 0) && (isMounted))
-        {
-          const count = statsData.items?.[0]?.statistics.subscriberCount;
+        const subscriberCount = statsData.items?.[0]?.statistics?.subscriberCount;
 
+        if (subscriberCount)
+        {
           //Format to nicely readable string e.g. "1,250".
-          setSubscriberCount(Number(count).toLocaleString("en-US"));
+          setSubscriberCount(Number(subscriberCount).toLocaleString("en-US"));
         }
 
-        //2. Parse Latest Video Comment.
+        //2. Fetch latest channel comment.
         if (commsResponse.ok)
         {
           const commsData = await commsResponse.json();
+          const comment = commsData.items?.[0]?.snippet?.topLevelComment?.snippet;
 
-          if ((commsData.items) && (commsData.items.length > 0) && (isMounted))
+          if (comment)
           {
-            const commentSnippet = commsData.items?.[0]?.snippet?.topLevelComment?.snippet;
-            const author = commentSnippet.authorDisplayName;
-            const textContent = commentSnippet.textDisplay;
-            const truncated = textContent.length > MAX_COMMENT_LENGTH ? `${textContent.slice(0, MAX_COMMENT_LENGTH).trimEnd()}…` : textContent;
+            const { authorDisplayName, textDisplay } = comment;
+            const truncated = textDisplay.length > MAX_COMMENT_LENGTH ? `${textDisplay.slice(0, MAX_COMMENT_LENGTH).trimEnd()}…` : textDisplay;
 
             //Format to nicely readable string e.g. "1,250".
             setLatestMessage({
               id: commsData.items[0].id,
-              author: author,
+              author: authorDisplayName,
               message: truncated
             });
           }
-          else if (isMounted)
+          else
           {
             setLatestMessage(DEFAULT_MESSAGES.empty);
           }
@@ -97,22 +105,25 @@ export function useYouTubeData()
       }
       catch (error)
       {
-        console.error('Error fetching data from YouTube API:', error);
-        if (isMounted)
+        if (error.name === "AbortError")
         {
-          setLatestMessage(DEFAULT_MESSAGES.error);
+          return;
         }
+
+        console.error('Error fetching data from YouTube API:', error);
+        setLatestMessage(DEFAULT_MESSAGES.error);
       }
     };
 
-    //Initial load when stream starts...
+    //Initial fetch.
     fetchYouTubeMetrics();
 
     //Poll YouTube once every 2 minutes.
     const pollInterval = setInterval(fetchYouTubeMetrics, POLL_INTERVAL_MS);
 
-    return () => {
-        isMounted = false;
+    return () =>
+    {
+        controller.abort();
         clearInterval(pollInterval);
     };
   }, []);

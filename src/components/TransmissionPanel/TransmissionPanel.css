@@ -3,35 +3,22 @@
 .hud-comms { min-block-size: calc(3 * 1.5em + 1.5rem); /* Scales w/ font-size. */ }
 .hud-author
 {
-  display: flex;
-  align-items: center;
-  gap: 0.50rem;
-
+  display: block;
   color: var(--hud-accent);
   font-size: 0.66rem;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
-/*.hud-author-rule
-{
-  width: 18px;
-  height: 1px;
-  flex-shrink: 0;
-  border-radius: 999px;
-
-  background: currentColor;
-  opacity: 0.75;
-}*/
 .hud-message
 {
   display: -webkit-box;
-  margin-top: 0.50rem;
+  margin-block-start: 0.50rem;
 
   overflow: hidden;
   color: var(--hud-text-main);
   font-size: 0.95rem;
-  line-height: 1.55;
+  line-height: 1.60;
   overflow-wrap: anywhere;
 
   -webkit-line-clamp: 3;

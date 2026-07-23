@@ -1,6 +1,6 @@
 //Filename: TransmissionPanel.jsx
 //Author: Kyle McColgan
-//Date: 21 July 2026
+//Date: 22 July 2026
 //Description: This file contains the HUD Transmission Panel component for the OBS HUD project.
 
 import React from 'react';
@@ -18,11 +18,12 @@ const transmissionTransition = { duration: 0.40, ease: "easeOut" };
 export default function TransmissionPanel()
 {
     const { latestMessage } = useYouTubeData();
+    const { id, author, message } = latestMessage;
 
     return (
         <AnimatePresence mode="wait">
             <motion.article
-                key={latestMessage.id}
+                key={id}
                 className="hud-comms"
                 variants={transmissionVariants}
                 initial="initial"
@@ -31,10 +32,10 @@ export default function TransmissionPanel()
                 transition={transmissionTransition}
             >
                 <h3 className="hud-author">
-                  {latestMessage.author}
+                  {author}
                 </h3>
                 <p className="hud-message">
-                  {latestMessage.message}
+                  {message}
                 </p>
             </motion.article>
         </AnimatePresence>
