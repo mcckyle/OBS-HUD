@@ -2,12 +2,15 @@
 .hud-crew-count
 {
     display: block;
-    font-size: clamp(1.9rem, 2.9vw, 2.25rem);
+    font-size: clamp(2rem, 3vw, 2.5rem);
     font-weight: 500;
     font-variant-numeric: tabular-nums;
     line-height: 1;
+    letter-spacing: -0.015em;
     color: var(--hud-text-main);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    text-shadow: 0 0 10px rgb(var(--hud-accent-rgb) / 0.04);
 }

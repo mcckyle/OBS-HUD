@@ -2,11 +2,14 @@
 .hud-value
 {
   display: block;
-  font-size: clamp(3.15rem, 4.8vw, 4.5rem);
-  font-weight: 500;
+  font-size: clamp(3.4rem, 5vw, 4.75rem);
+  font-weight: 460;
   font-variant-numeric: tabular-nums;
   line-height: 1;
-  letter-spacing: 0.015em;
+  letter-spacing: -0.01em;
   color: var(--hud-text-main);
   white-space: nowrap;
+
+  text-shadow: 0 0 14px rgb(255 255 255 / 0.025),
+               0 0 30px rgb(var(--hud-accent-rgb) / 0.05);
 }

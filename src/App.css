@@ -5,27 +5,45 @@
   /* Starfield NASA-punk Inspired Palette. */
 
   /* ---------- Colors. ---------- */
+  --hud-bg: #020617;
   --hud-text-main: #edf8ff;
+  --hud-text-secondary: #c5d7e2;
   --hud-text-muted: #97b0bf;
 
   --hud-accent: #dfaa37;
+  --hud-accent-rgb: 223 170 55;
   --hud-accent-glow: rgb(223 170 55 / 42%);
 
-  --hud-surface: linear-gradient(180deg, rgb(14 20 28 / 54%), rgb(7 10 16 / 34%));
+  --hud-surface: linear-gradient(180deg, rgb(18 25 34 / 0.62), rgb(11 16 24 / 0.46), rgb(5 8 12 / 0.32));
 
   /* ---------- Borders. ---------- */
-  --hud-border: rgb(255 255 255 / 5%);
+  --hud-border: rgb(255 255 255 / 0.05);
+  --hud-border-soft: rgb(255 255 255 / 0.05);
   --hud-divider: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.08), transparent);
 
   /* ---------- Layout. ---------- */
   --hud-radius: 2px;
-  --hud-width: clamp(320px, 23vw, 380px);
+  --hud-width: clamp(320px, 22vw, 400px);
   --hud-padding: 20px;
   --stage-padding: 40px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
 
   /* ---------- Effects. ---------- */
   --hud-blur: 10px;
   --hud-shadow: 0 8px 24px rgb(0 0 0 / 28%), inset 0 1px rgb(255 255 255 / 4%);
+  --hud-shadow-1: 0 4px 12px rgb(0 0 0 / 0.18);
+  --hud-shadow-2: 0 10px 28px rgb(0 0 0 / 0.28);
+  --hud-shadow-3: 0 18px 40px rgb(0 0 0 / 0.40);
+  --hud-shadow-inner: inset 0 1px rgb(255 255 255 / 0.05);
+  --hud-glow: rgb(var(--hud-accent-rgb) / 0.42);
 }
 
 /* Positioning on the OBS 1080p canvas. Places overlay top-right. */
@@ -52,10 +70,10 @@
 
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
 
   width: var(--hud-width);
-  padding: var(--hud-padding);
+  padding: 22px;
   color: var(--hud-text-main);
   background: var(--hud-surface);
   border: 1px solid var(--hud-border);
@@ -71,22 +89,23 @@
 }
 .hud-panel::before
 {
+  /* Accent Strip Styles. */
   content: "";
   position: absolute;
   left: 0;
   top: 18px;
   bottom: 18px;
-  width: 2px;
+  width: 1px;
   opacity: 0.22;
-  background: linear-gradient(180deg, transparent, var(--hud-accent), transparent);
-  box-shadow: 0 0 5px var(--hud-accent-glow);
+  background: linear-gradient(180deg, transparent, rgb(var(--hud-accent-rgb) / 0.95), transparent);
+  filter: drop-shadow(0 0 5px rgb(var(--hud-accent-rgb) / 0.50));
 }
 .hud-panel::after
 {
   content: "";
   position: absolute;
   inset: -15%;
-  background: linear-gradient(135deg, rgb(223 170 55 / 2%), transparent 70%);
+  background: linear-gradient(135deg, rgb(var(--hud-accent-rgb) / 2%), transparent 70%);
   opacity: 0.45;
   pointer-events: none;
   will-change: transform, opacity;
