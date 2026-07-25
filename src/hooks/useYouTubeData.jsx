@@ -1,40 +1,51 @@
 //Filename: useYouTubeData.jsx
 //Author: Kyle McColgan
-//Date: 22 July 2026
+//Date: 24 July 2026
 //Description: This file contains the YouTube API integration for the OBS HUD project.
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 const YOUTUBE_API = "https://www.googleapis.com/youtube/v3";
 const MAX_COMMENT_LENGTH = 72;
 const POLL_INTERVAL_MS = 2 * 60 * 1000;
 const DEFAULT_MESSAGES = Object.freeze({
-  connecting: {
+  connecting: Object.freeze({
     id: "connecting",
     author: "",
     message: "CONNECTING..."
-  },
-  empty: {
+  }),
+  empty: Object.freeze({
     id: "empty",
     author: "",
     message: "NO RECENT TRANSMISSIONS"
-  },
-  error: {
+  }),
+  error: Object.freeze({
     id: "error",
     author: "",
     message: "SIGNAL LOST"
-  },
-  config: {
+  }),
+  config: Object.freeze({
     id: "config",
     author: "",
     message: "MISSING CONFIGURATION"
-  },
+  }),
 });
 
 export function useYouTubeData()
 {
   const [subscriberCount, setSubscriberCount] = useState("---");
   const [latestMessage, setLatestMessage] = useState(DEFAULT_MESSAGES.connecting);
+
+  //Read API credentials from the Browser Souce URL.
+  const { apiKey, channelId } = useMemo(() =>
+  {
+    const params = new URLSearchParams(window.location.search);
+
+    return {
+      apiKey: params.get("key"),
+      channelId: params.get("channelId"),
+    };
+  }, []);
 
   useEffect(() =>
   {
@@ -43,10 +54,6 @@ export function useYouTubeData()
       signal: controller.signal,
     };
 
-    //Read API credentials from the Browser Souce URL.
-    const urlParams = new URLSearchParams(window.location.search);
-    const apiKey = urlParams.get('key');
-    const channelId = urlParams.get('channelId');
     const statsUrl = `${YOUTUBE_API}/channels?part=statistics&id=` + channelId + '&key=' + apiKey;
     const commsUrl = `${YOUTUBE_API}/commentThreads?part=snippet&allThreadsRelatedToChannelId=` + channelId + '&maxResults=1&key=' + apiKey;
 
@@ -64,16 +71,19 @@ export function useYouTubeData()
       {
         //1. Fetch subscriber statistics.
         const [statsResponse, commsResponse] = await Promise.all([fetch(statsUrl, requestOptions), fetch(commsUrl, requestOptions)]);
+        const [statsData, commsData] = await Promise.all([
+          statsResponse.json(),
+          commsResponse.json(),
+        ]);
 
         if (!statsResponse.ok)
         {
             throw new Error(`Stats HTTP error! status: ${statsResponse.status}`);
         }
 
-        const statsData = await statsResponse.json();
         const subscriberCount = statsData.items?.[0]?.statistics?.subscriberCount;
 
-        if (subscriberCount)
+        if (subscriberCount != null)
         {
           //Format to nicely readable string e.g. "1,250".
           setSubscriberCount(Number(subscriberCount).toLocaleString("en-US"));
@@ -82,7 +92,6 @@ export function useYouTubeData()
         //2. Fetch latest channel comment.
         if (commsResponse.ok)
         {
-          const commsData = await commsResponse.json();
           const comment = commsData.items?.[0]?.snippet?.topLevelComment?.snippet;
 
           if (comment)

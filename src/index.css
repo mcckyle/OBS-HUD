@@ -3,6 +3,7 @@
 html { box-sizing: border-box; }
 *, *::before, *::after { box-sizing: inherit; }
 html, body, #root { width: 100%; height: 100%; }
+#root { background: transparent; }
 body
 {
     margin: 0;
@@ -12,7 +13,9 @@ body
     font-family: Inter, "Segoe UI", system-ui, sans-serif;
     font-variant-numeric: tabular-nums;
     font-feature-settings: "tnum" 1, "lnum" 1;
+    font-kerning: normal;
     font-synthesis: none;
+    interpolate-size: allow-keywords;
     line-height: 1.5;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -21,4 +24,4 @@ body
     cursor: default;
     isolation: isolate;
 }
-button, input, textarea { font: inherit; }
+button, input, textarea, select { font: inherit; color: inherit; }

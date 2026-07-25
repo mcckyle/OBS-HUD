@@ -1,6 +1,6 @@
 //Filename: SessionTimer.jsx
 //Author: Kyle McColgan
-//Date: 23 July 2026
+//Date: 24 July 2026
 //Description: This file contains the session timer component for the OBS HUD project.
 
 import { formatTime } from "../../utils/time";
@@ -10,11 +10,11 @@ import "./SessionTimer.css";
 export default function SessionTimer()
 {
   const seconds = useSessionTimer();
-  const value = formatTime(seconds);
+  const formattedTime = formatTime(seconds);
 
   return (
     <time className="hud-value" dateTime={`PT${seconds}S`} aria-live="off">
-      {value}
+      {formattedTime}
     </time>
   );
 }

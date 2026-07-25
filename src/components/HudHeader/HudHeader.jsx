@@ -1,6 +1,6 @@
 //Filename: HudHeader.jsx
 //Author: Kyle McColgan
-//Date: 23 July 2026
+//Date: 24 July 2026
 //Description: This file contains the HUD header component for the OBS HUD project.
 
 import { useMissionClock } from "../../hooks/useMissionClock";
@@ -16,8 +16,10 @@ export default function HudHeader()
         <h1 id="hud-title" className="hud-title">STARFIELD LIVE</h1>
         <span className="hud-system-id">CONSTELLATION NETWORK</span>
       </section>
-      <section className="hud-clock" aria-label="Mission time">
-        <span className="hud-clock-sol">SOL {missionTime.sol}</span>
+      <section className="hud-clock" aria-labelledby="hud-clock-label">
+        <span id="hud-clock-label" className="hud-clock-sol">
+          SOL {missionTime.sol}
+        </span>
         <time className="hud-clock-time" dateTime={missionTime.time}>
           {missionTime.time} UTC
         </time>

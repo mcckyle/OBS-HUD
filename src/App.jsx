@@ -1,6 +1,6 @@
 //Filename: App.jsx
 //Author: Kyle McColgan
-//Date: 22 July 2026
+//Date: 24 July 2026
 //Description: This file contains the App component for the OBS HUD project.
 
 import { motion } from 'motion/react';
@@ -13,8 +13,8 @@ import SessionTimer from "./components/SessionTimer/SessionTimer.jsx";
 import './App.css';
 
 const panelVariants = {
-  hidden: { opacity: 0, y: 14, scale: 0.985, },
-  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1], }, },
+  initial: { opacity: 0, y: 14, scale: 0.985, },
+  enter: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1], }, },
 };
 
 export default function App()
@@ -24,14 +24,14 @@ export default function App()
     <main className="hud-stage">
       <motion.aside
           className="hud-panel"
-          initial="hidden"
-          animate="show"
+          initial="initial"
+          animate="enter"
           variants={panelVariants}
         >
-        {/* Header / System Status. */}
+        {/* System Header. */}
         <HudHeader />
 
-        {/* Section 1: Elapsed Timer Module. */}
+        {/* Session. */}
         <HudSection label="ELAPSED TIME" ariaLabel="Session timer">
           <SessionTimer />
         </HudSection>

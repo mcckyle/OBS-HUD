@@ -14,16 +14,15 @@
   --hud-accent-rgb: 223 170 55;
   --hud-accent-glow: rgb(223 170 55 / 42%);
 
-  --hud-surface: linear-gradient(180deg, rgb(18 25 34 / 0.62), rgb(11 16 24 / 0.46), rgb(5 8 12 / 0.32));
+  --hud-surface: linear-gradient(180deg, rgb(16 23 32 / 0.58), rgb(10 15 22 / 0.48));
 
   /* ---------- Borders. ---------- */
   --hud-border: rgb(255 255 255 / 0.05);
-  --hud-border-soft: rgb(255 255 255 / 0.05);
   --hud-divider: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.08), transparent);
 
   /* ---------- Layout. ---------- */
   --hud-radius: 2px;
-  --hud-width: clamp(320px, 22vw, 400px);
+  --hud-width: clamp(320px, 21vw, 420px);
   --hud-padding: 20px;
   --stage-padding: 40px;
 
@@ -37,12 +36,9 @@
   --space-10: 40px;
 
   /* ---------- Effects. ---------- */
-  --hud-blur: 10px;
-  --hud-shadow: 0 8px 24px rgb(0 0 0 / 28%), inset 0 1px rgb(255 255 255 / 4%);
-  --hud-shadow-1: 0 4px 12px rgb(0 0 0 / 0.18);
-  --hud-shadow-2: 0 10px 28px rgb(0 0 0 / 0.28);
-  --hud-shadow-3: 0 18px 40px rgb(0 0 0 / 0.40);
-  --hud-shadow-inner: inset 0 1px rgb(255 255 255 / 0.05);
+  --hud-blur: 14px;
+  --hud-shadow: 0 10px 28px rgb(0 0 0 / 0.28);
+  --hud-inner-highlight: inset 0 1px rgb(255 255 255 / 0.04);
   --hud-glow: rgb(var(--hud-accent-rgb) / 0.42);
 }
 
@@ -70,10 +66,10 @@
 
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: var(--space-3);
 
   width: var(--hud-width);
-  padding: 22px;
+  padding: var(--space-5) calc(var(--space-5) + 2px);
   color: var(--hud-text-main);
   background: var(--hud-surface);
   border: 1px solid var(--hud-border);
@@ -84,6 +80,7 @@
 
   contain: content;
   transform: translateZ(0); /* helps OBS Browser Source (Chromium) consistently composite the blurred panel. */
+  will-change: transform, opacity;
   backface-visibility: hidden;
   isolation: isolate;
 }
@@ -96,9 +93,8 @@
   top: 18px;
   bottom: 18px;
   width: 1px;
-  opacity: 0.22;
+  opacity: 0.45;
   background: linear-gradient(180deg, transparent, rgb(var(--hud-accent-rgb) / 0.95), transparent);
-  filter: drop-shadow(0 0 5px rgb(var(--hud-accent-rgb) / 0.50));
 }
 .hud-panel::after
 {
@@ -106,7 +102,7 @@
   position: absolute;
   inset: -15%;
   background: linear-gradient(135deg, rgb(var(--hud-accent-rgb) / 2%), transparent 70%);
-  opacity: 0.45;
+  opacity: 0.18;
   pointer-events: none;
   will-change: transform, opacity;
 
