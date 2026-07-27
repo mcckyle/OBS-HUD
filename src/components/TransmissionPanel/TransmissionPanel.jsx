@@ -1,6 +1,6 @@
 //Filename: TransmissionPanel.jsx
 //Author: Kyle McColgan
-//Date: 24 July 2026
+//Date: 26 July 2026
 //Description: This file contains the HUD Transmission Panel component for the OBS HUD project.
 
 import { motion, AnimatePresence } from 'motion/react';
@@ -9,8 +9,8 @@ import { formatTime, formatMissionTime } from "../../utils/time.js";
 
 const transmissionVariants = {
     initial: { opacity: 0, y: 4 },
-    enter: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1], }, },
-    exit: { opacity: 0, y: -4, transition: { duration: 0.20 }, },
+    enter: { opacity: 1, y: 0, transition: { duration: 0.30, ease: [0.22, 1, 0.36, 1], }, },
+    exit: { opacity: 0, y: -3, transition: { duration: 0.18, ease: "easeOut", }, },
 };
 
 export default function TransmissionPanel()
@@ -23,6 +23,7 @@ export default function TransmissionPanel()
             <motion.article
                 key={id}
                 className="hud-comms"
+                aria-label="Latest transmission"
                 variants={transmissionVariants}
                 initial="initial"
                 animate="enter"

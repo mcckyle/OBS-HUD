@@ -2,13 +2,13 @@
 .hud-value
 {
   display: block;
-  font-size: clamp(3.4rem, 5vw, 4.75rem);
+  font-size: clamp(3.35rem, 5vw, 4.65rem);
   font-weight: 450;
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1, "lnum" 1; /* Makes timer independent. */
-  line-height: 1;
-  letter-spacing: -0.01em;
-  color: var(--hud-text-main);
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+  color: var(--hud-text);
   white-space: nowrap;
   overflow: visible;
 }

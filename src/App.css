@@ -1,47 +1,5 @@
 /* Filename: src/App.css */
 
-:root
-{
-  /* Starfield NASA-punk Inspired Palette. */
-
-  /* ---------- Colors. ---------- */
-  --hud-bg: #020617;
-  --hud-text-main: #edf8ff;
-  --hud-text-secondary: #c5d7e2;
-  --hud-text-muted: #97b0bf;
-
-  --hud-accent: #dfaa37;
-  --hud-accent-rgb: 223 170 55;
-  --hud-accent-glow: rgb(223 170 55 / 42%);
-
-  --hud-surface: linear-gradient(180deg, rgb(16 23 32 / 0.58), rgb(10 15 22 / 0.48));
-
-  /* ---------- Borders. ---------- */
-  --hud-border: rgb(255 255 255 / 0.05);
-  --hud-divider: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.08), transparent);
-
-  /* ---------- Layout. ---------- */
-  --hud-radius: 2px;
-  --hud-width: clamp(320px, 21vw, 420px);
-  --hud-padding: 20px;
-  --stage-padding: 40px;
-
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 20px;
-  --space-6: 24px;
-  --space-8: 32px;
-  --space-10: 40px;
-
-  /* ---------- Effects. ---------- */
-  --hud-blur: 14px;
-  --hud-shadow: 0 10px 28px rgb(0 0 0 / 0.28);
-  --hud-inner-highlight: inset 0 1px rgb(255 255 255 / 0.04);
-  --hud-glow: rgb(var(--hud-accent-rgb) / 0.42);
-}
-
 /* Positioning on the OBS 1080p canvas. Places overlay top-right. */
 .hud-stage
 {
@@ -50,11 +8,9 @@
 
   inline-size: 100%;
   block-size: 100%;
+  min-block-size: 0;
 
-  /* Prevent unrestrained growth (long subscriber names, etc...). */
-  max-height: calc(100vh - (2 * var(--stage-padding)));
-
-  padding: var(--stage-padding);
+  padding: var(--hud-stage-padding);
   pointer-events: none;
 }
 
@@ -62,60 +18,61 @@
 .hud-panel
 {
   position: relative;
+  isolation: isolate;
   overflow: hidden;
 
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--hud-section-gap);
 
-  width: var(--hud-width);
-  padding: var(--space-5) calc(var(--space-5) + 2px);
-  color: var(--hud-text-main);
+  inline-size: min(var(--hud-width), calc(100vw - (2 * var(--hud-stage-padding))));
+  max-block-size: calc(100vh - (2 * var(--hud-stage-padding)));
+  padding: var(--hud-panel-padding);
+  color: var(--hud-text);
   background: var(--hud-surface);
   border: 1px solid var(--hud-border);
-  outline: 1px solid rgb(255 255 255 / 0.025);
   border-radius: var(--hud-radius);
   backdrop-filter: blur(var(--hud-blur)) saturate(115%);
-  box-shadow: var(--hud-shadow);
+  box-shadow: var(--hud-shadow), inset 0 1px rgb(255 255 255 / 0.035);
 
-  contain: content;
-  transform: translateZ(0); /* helps OBS Browser Source (Chromium) consistently composite the blurred panel. */
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-  isolation: isolate;
+  contain: layout paint;
 }
 .hud-panel::before
 {
-  /* Accent Strip Styles. */
+  /* Instrument Accent Styles. */
   content: "";
   position: absolute;
-  left: 0;
-  top: 18px;
-  bottom: 18px;
-  width: 1px;
-  opacity: 0.45;
-  background: linear-gradient(180deg, transparent, rgb(var(--hud-accent-rgb) / 0.95), transparent);
+  inset-block: 16px;
+  inset-inline-start: 0;
+  inline-size: 1px;
+  opacity: 0.70;
+  background: linear-gradient(to bottom, transparent, rgb(var(--hud-accent-rgb) / 0.85) 24%, rgb(var(--hud-accent-rgb) / 0.85) 76%, transparent);
+  pointer-events: none;
 }
 .hud-panel::after
 {
   content: "";
-  position: absolute;
-  inset: -15%;
-  background: linear-gradient(135deg, rgb(var(--hud-accent-rgb) / 2%), transparent 70%);
-  opacity: 0.18;
-  pointer-events: none;
-  will-change: transform, opacity;
 
-  animation: ambientSweep 90s ease-in-out alternate;
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: radial-gradient(circle at 100% 0%, rgb(var(--hud-accent-rgb) / 0.055), transparent 52%);
+  pointer-events: none;
 }
 
-@keyframes ambientSweep
+/*@keyframes ambientSweep
 {
   from { transform: translateY(-8%); }
   to { transform: translateY(8%); }
-}
+}*/
 
 @media (prefers-reduced-motion: reduce)
 {
-  .hud-panel::after { animation: none; }
+  .hud-panel { transition: none; }
+}
+
+@media (max-width: 480px)
+{
+  .hud-stage { padding: var(--hud-stage-padding-compact); }
+  .hud-panel { inline-size: min(var(--hud-width-compact), calc(100vw - (2 * var(--hud-stage-padding-compact)))); padding: var(--hud-panel-padding-compact); }
 }

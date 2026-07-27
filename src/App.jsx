@@ -1,6 +1,6 @@
 //Filename: App.jsx
 //Author: Kyle McColgan
-//Date: 24 July 2026
+//Date: 26 July 2026
 //Description: This file contains the App component for the OBS HUD project.
 
 import { motion } from 'motion/react';
@@ -13,8 +13,8 @@ import SessionTimer from "./components/SessionTimer/SessionTimer.jsx";
 import './App.css';
 
 const panelVariants = {
-  initial: { opacity: 0, y: 14, scale: 0.985, },
-  enter: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1], }, },
+  initial: { opacity: 0, y: 6, },
+  enter: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1], }, },
 };
 
 export default function App()
@@ -27,6 +27,7 @@ export default function App()
           initial="initial"
           animate="enter"
           variants={panelVariants}
+          aria-label="Starfield livestream HUD"
         >
         {/* System Header. */}
         <HudHeader />
