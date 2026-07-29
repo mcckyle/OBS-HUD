@@ -5,55 +5,46 @@
     color-scheme: dark;
 
     /* ---------- Colors. ---------- */
-    --hud-bg: #020617;
-    --hud-text: #edf8ff;
-    --hud-text-secondary: #c5d7e2;
-    --hud-text-muted: #97b0bf;
+    --hud-text: #edf7fb;
+    --hud-text-secondary: #bfd0d9;
+    --hud-text-muted: #8299a5;
 
     --hud-accent: #dfaa37;
     --hud-accent-rgb: 223 170 55;
 
-    --hud-surface: linear-gradient(180deg, rgb(16 23 32 / 0.58), rgb(10 15 22 / 0.48));
+    --hud-surface: linear-gradient(180deg, rgb(17 24 33 / 0.72), rgb(8 13 19 / 0.64));
 
     /* ---------- Borders. ---------- */
-    --hud-border: rgb(255 255 255 / 0.055);
-    --hud-divider: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.08), transparent);
+    --hud-border: rgb(255 255 255 / 0.075);
+    --hud-divider: rgb(255 255 255 / 0.075);
 
     /* ---------- Layout. ---------- */
-    --hud-width: clamp(320px, 21vw, 420px);
+    --hud-width: clamp(300px, 20vw, 400px);
     --hud-width-compact: 340px;
 
     --hud-stage-padding: 32px;
     --hud-stage-padding-compact: 20px;
 
-    --hud-panel-padding: 20px;
-    --hud-panel-padding-compact: 16px;
-    --hud-section-gap: 12px;
+    --hud-panel-padding: 18px;
+    --hud-panel-padding-compact: 15px;
+    --hud-section-gap: 10px;
     --hud-radius: 3px;
 
-    --space-1: 4px;
-    --space-2: 8px;
-    --space-3: 12px;
-    --space-4: 16px;
-    --space-5: 20px;
-    --space-6: 24px;
-    --space-8: 32px;
-    --space-10: 40px;
-
     /* ---------- Effects. ---------- */
-    --hud-blur: 14px;
-    --hud-shadow: 0 12px 32px rgb(0 0 0 / 0.30);
+    --hud-blur: 16px;
+    --hud-shadow: 0 18px 44px rgb(0 0 0 / 0.34), 0 2px 8px rgb(0 0 0 / 0.18);
 
     --font-ui: Inter, "Segoe UI", system-ui, sans-serif;
 }
-html { box-sizing: border-box; }
+html { box-sizing: border-box; inline-size: 100%; block-size: 100%; overflow: hidden; }
 *, *::before, *::after { box-sizing: inherit; }
-html, body, #root { inline-size: 100%; block-size: 100%; }
-html { overflow: hidden; }
-#root { background: transparent; }
+#root { inline-size: 100%; block-size: 100%; background: transparent; }
 body
 {
     margin: 0;
+
+    inline-size: 100%;
+    block-size: 100%;
     overflow: hidden;
 
     background: transparent;

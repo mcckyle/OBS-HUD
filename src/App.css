@@ -14,7 +14,7 @@
   pointer-events: none;
 }
 
-/* Main glass flight console layout styles. */
+/* HUD Console Styles. */
 .hud-panel
 {
   position: relative;
@@ -32,39 +32,32 @@
   background: var(--hud-surface);
   border: 1px solid var(--hud-border);
   border-radius: var(--hud-radius);
-  backdrop-filter: blur(var(--hud-blur)) saturate(115%);
+  backdrop-filter: blur(var(--hud-blur)) saturate(120%);
   box-shadow: var(--hud-shadow), inset 0 1px rgb(255 255 255 / 0.035);
-
-  contain: layout paint;
 }
 .hud-panel::before
 {
-  /* Instrument Accent Styles. */
+  /* Instrument Spine Styles. */
   content: "";
   position: absolute;
-  inset-block: 16px;
+  inset-block: 14px;
   inset-inline-start: 0;
   inline-size: 1px;
-  opacity: 0.70;
-  background: linear-gradient(to bottom, transparent, rgb(var(--hud-accent-rgb) / 0.85) 24%, rgb(var(--hud-accent-rgb) / 0.85) 76%, transparent);
+  opacity: 0.72;
+  background: linear-gradient(to bottom, transparent, rgb(var(--hud-accent-rgb) / 0.78) 22%, rgb(var(--hud-accent-rgb) / 0.78) 78%, transparent);
   pointer-events: none;
 }
 .hud-panel::after
 {
+  /* Atmospheric Console Glow Styles. */
   content: "";
 
   position: absolute;
   z-index: -1;
   inset: 0;
-  background: radial-gradient(circle at 100% 0%, rgb(var(--hud-accent-rgb) / 0.055), transparent 52%);
+  background: radial-gradient(circle at 100% 0%, rgb(var(--hud-accent-rgb) / 0.045), transparent 54%);
   pointer-events: none;
 }
-
-/*@keyframes ambientSweep
-{
-  from { transform: translateY(-8%); }
-  to { transform: translateY(8%); }
-}*/
 
 @media (prefers-reduced-motion: reduce)
 {

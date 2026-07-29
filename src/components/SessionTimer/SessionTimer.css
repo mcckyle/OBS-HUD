@@ -1,14 +1,13 @@
 /* Filename: src/components/SessionTimer/SessionTimer.css */
-.hud-value
+.session-timer
 {
   display: block;
-  font-size: clamp(3.35rem, 5vw, 4.65rem);
+  font-size: clamp(3.25rem, 5vw, 4.5rem);
   font-weight: 450;
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1, "lnum" 1; /* Makes timer independent. */
-  line-height: 0.92;
-  letter-spacing: -0.025em;
+  line-height: 0.90;
+  letter-spacing: -0.035em;
   color: var(--hud-text);
   white-space: nowrap;
-  overflow: visible;
 }

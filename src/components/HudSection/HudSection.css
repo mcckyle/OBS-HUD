@@ -1,22 +1,12 @@
 /* Filename: src/components/HudSection/HudSection.css */
 .hud-item
 {
-  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding-block: 20px;
+  gap: 12px;
+  padding-block: 16px;
+  border-block-end: 1px solid var(--hud-divider);
 }
-.hud-item:first-of-type { padding-block-start: 0; }
-.hud-item:last-of-type { padding-block-end: 0; }
-.hud-item:not(:last-child)::after
-{
-    content: "";
-    position: absolute;
-    inset-inline: 0;
-    inset-block-end: 0;
-    block-size: 1px;
-    background: rgb(255 255 255 / 0.065);
-    pointer-events: none;
-}
-.hud-section-label { margin: 0; color: var(--hud-text-muted); font-size: 0.58rem; font-weight: 600; line-height: 1; letter-spacing: 0.20em; text-transform: uppercase; opacity: 0.72; }
+.hud-item { padding-block-start: 0; }
+.hud-item { padding-block-end: 0; border-block-end: 0; }
+.hud-section-label { margin: 0; color: var(--hud-text-muted); font-size: 0.56rem; font-weight: 600; line-height: 1; letter-spacing: 0.20em; text-transform: uppercase; opacity: 0.70; }
