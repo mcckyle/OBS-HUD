@@ -1,12 +1,12 @@
+[![Deploy to GitHub Pages](https://github.com/mcckyle/OBS-HUD/actions/workflows/deploy.yml/badge.svg)](https://github.com/mcckyle/OBS-HUD/actions/workflows/deploy.yml)
+
 # OBS-HUD
 
-A lightweight, NASA-punk inspired browser-source overlay for OBS Studio, designed for immersive **Starfield** livestreams.
-
-OBS-HUD presents live stream telemetry in a clean, unobtrusive interface that complements gameplay instead of competing with it. Built with React and Vite, it delivers transparent rendering and live YouTube integration while remaining fast and easy to customize.
+**OBS-HUD** is a lightweight browser-source overlay for OBS Studio that brings a clean, NASA-punk inspired telemetry interface to **Starfield** livestreams. Designed to complement gameplay rather than distract from it, the overlay combines live YouTube data with a transparent, high-performance React interface.
 
 ---
 
-## Preview
+## Screenshot
 
 ![Overlay Screenshot](./public/images/Screenshot_20260721_203234.png)
 *A minimal telemetry overlay designed to blend naturally with Starfield's visual language.*
@@ -15,14 +15,20 @@ OBS-HUD presents live stream telemetry in a clean, unobtrusive interface that co
 
 ## Features
 
-* NASA-punk inspired interface
-* Transparent browser source for OBS studio
-* Live session timer
-* Live YouTube subscriber count
-* Recent YouTube comment feed
-* Smooth Motion-powered animations
-* Lightweight React architecture
-* Easily customizable styling and layout
+Live Telemetry
+* Session timer
+* Subscriber count
+* Recent transmission feed
+
+Visual Design
+* NASA-punk inspired HUD
+* Transparent browser source
+* Smooth Motion animations
+
+Developer Experience
+* React + Vite
+* Modular components
+* Easy customization
 
 ---
 
@@ -152,6 +158,8 @@ OBS-HUD is intentionally modular. Common customizations include:
 * React
 * Vite
 * Motion
+* YouTube Data API v3
+* OBS Studio Browser Source
 
 ---
 

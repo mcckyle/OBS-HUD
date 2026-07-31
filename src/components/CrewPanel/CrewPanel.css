@@ -2,12 +2,16 @@
 .hud-crew-count
 {
     display: block;
+    font-family: var(--font-display);
     font-size: clamp(2.05rem, 3vw, 2.6rem);
-    font-weight: 500;
+    font-weight: var(--font-weight-value);
     font-variant-numeric: tabular-nums;
     font-feature-settings: "tnum" 1, "lnum" 1; /* Self-contained components. */
-    line-height: 0.95;
+    font-kerning: none;
+    line-height: 0.98;
     letter-spacing: -0.025em;
     color: var(--hud-text);
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
 }

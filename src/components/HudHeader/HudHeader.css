@@ -6,23 +6,23 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  gap: 20px;
-  padding-block-end: 18px;
+  gap: var(--hud-space-lg);
+  padding-block-end: var(--hud-space-xl);
 }
 .hud-system
 {
   display: flex;
   flex-direction: column;
   min-inline-size: 0;
-  gap: 6px;
+  gap: var(--hud-space-xs);
 }
 .hud-title
 {
   margin: 0;
   color: var(--hud-text);
   font-size: clamp(0.78rem, 0.72rem + 0.22vw, 0.92rem);
-  font-weight: 600;
-  letter-spacing: 0.19em;
+  font-weight: 700;
+  letter-spacing: 0.17em;
   line-height: 1;
   text-transform: uppercase;
   white-space: nowrap;
@@ -30,10 +30,10 @@
 .hud-system-id
 {
   color: var(--hud-text-muted);
-  font-size: 0.58rem;
-  font-weight: 500;
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-label);
   line-height: 1;
-  letter-spacing: 0.14em;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   opacity: 0.68;
 }
@@ -41,7 +41,7 @@
 {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  justify-content: center;
   flex: 0 0 auto;
   gap: 5px;
   text-align: end;

@@ -2,12 +2,15 @@
 .session-timer
 {
   display: block;
-  font-size: clamp(3.25rem, 5vw, 4.5rem);
-  font-weight: 450;
+  font-size: clamp(3rem, 4vw, 4.15rem);
+  font-family: var(--font-display);
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1, "lnum" 1; /* Makes timer independent. */
-  line-height: 0.90;
-  letter-spacing: -0.035em;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
   color: var(--hud-text);
   white-space: nowrap;
+  overflow-wrap: normal;
+  overflow: hidden;
+  text-overflow: clip;
 }
