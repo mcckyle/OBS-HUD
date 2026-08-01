@@ -13,7 +13,7 @@
     --hud-accent-rgb: 223 170 55;
     --hud-accent-glow: rgb(var(--hud-accent-rgb) / 0.28);
 
-    --hud-surface: linear-gradient(180deg, rgb(18 25 35 / 0.74), rgb(8 13 19 / 0.66));
+    --hud-surface: linear-gradient(180deg, rgb(20 28 30 / 0.82), rgb(12 18 26 / 0.72));
     --hud-surface-solid: rgb(12 17 24);
 
     /* ---------- Borders. ---------- */
@@ -22,7 +22,7 @@
 
     /* ---------- Layout. ---------- */
     --hud-transmission-height: 4.70rem;
-    --hud-width: clamp(300px, 20vw, 400px);
+    --hud-width: clamp(330px, 22vw, 430px);
     --hud-width-compact: 340px;
 
     --hud-stage-padding: 32px;
@@ -43,11 +43,13 @@
     /* ---------- Effects. ---------- */
     --hud-blur: 16px;
     --hud-shadow-sm: 0 8px 20px rgb(0 0 0 / 0.18);
-    --hud-shadow: 0 20px 48px rgb(0 0 0 / 0.34), 0 2px 10px rgb(0 0 0 / 0.16);
+    --hud-shadow: 0 30px 70px rgb(0 0 0 / 0.32),
+                  0 8px 20px rgb(0 0 0 / 0.18),
+                  0 0 40px rgb(var(--hud-accent-rgb) / 0.040);
 
     --font-ui: Inter, "Segoe UI", system-ui, sans-serif;
     --font-display: "JetBrains Mono", "IBM Plex Mono", monospace;
-    --font-size-label: 0.69rem;
+    --font-size-label: 0.66rem;
     --font-size-body: 0.875rem;
     --font-size-value: 1rem;
     --font-weight-label: 600;
