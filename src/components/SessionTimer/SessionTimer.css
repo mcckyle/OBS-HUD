@@ -2,10 +2,10 @@
 .session-timer
 {
   display: block;
-  font-size: clamp(3rem, 4vw, 4.15rem);
+  font-size: var(--font-size-timer);
   font-family: var(--font-display);
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum" 1, "lnum" 1; /* Makes timer independent. */
+  text-rendering: geometricPrecision;
+  font-synthesis: none;
   line-height: 0.95;
   letter-spacing: -0.025em;
   color: var(--hud-text);
@@ -13,4 +13,8 @@
   overflow-wrap: normal;
   overflow: hidden;
   text-overflow: clip;
+  inline-size: max-content;
+  max-inline-size: 100%;
+
+  text-shadow: 0 0 14px rgb(var(--hud-accent-rgb) / 0.08);
 }

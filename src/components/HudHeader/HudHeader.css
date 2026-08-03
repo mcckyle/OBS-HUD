@@ -7,7 +7,7 @@
   justify-content: space-between;
   align-items: flex-end;
   gap: var(--hud-space-lg);
-  padding-block-end: var(--hud-space-xl);
+  padding-block-end: var(--hud-space-xl) - var(--hud-space-xs);
 }
 .hud-system
 {
@@ -35,13 +35,13 @@
   line-height: 1;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  opacity: 0.68;
 }
 .hud-clock
 {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: flex-end;
+  justify-content: flex-end;
   flex: 0 0 auto;
   gap: 5px;
   text-align: end;
@@ -59,11 +59,10 @@
 {
   font-size: 0.82rem;
   font-weight: 500;
-  color: var(--hud-text);
+  color: var(--hud-text-secondary);
   white-space: nowrap;
   line-height: 1;
   letter-spacing: 0.065em;
-  opacity: 0.88;
 }
 
 @media (max-width: 480px)

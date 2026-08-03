@@ -115,7 +115,8 @@ OBS-HUD/
 │   │       └── HudSection.css
 │   │
 │   ├── utils/
-│   │   └── time.js
+│   │   ├── time.js
+│   │   └── motion.js
 │   │
 │   ├── hooks/            # Custom React hooks.
 │   │   ├── useYouTubeData.jsx

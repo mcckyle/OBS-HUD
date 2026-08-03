@@ -12,6 +12,10 @@
     --hud-accent: #dfaa37;
     --hud-accent-rgb: 223 170 55;
     --hud-accent-glow: rgb(var(--hud-accent-rgb) / 0.28);
+    --hud-panel-border: rgb(255 255 255 / 0.055);
+    --hud-panel-radius: 8px;
+    --hud-panel-backdrop: blur(22px) saturate(150%) brightness(1.04);
+    --hud-panel-highlight: inset 0 1px rgb(255 255 255 / 0.06);
 
     --hud-surface: linear-gradient(180deg, rgb(20 28 30 / 0.82), rgb(12 18 26 / 0.72));
     --hud-surface-solid: rgb(12 17 24);
@@ -23,6 +27,7 @@
     /* ---------- Layout. ---------- */
     --hud-transmission-height: 4.70rem;
     --hud-width: clamp(330px, 22vw, 430px);
+    --hud-max-width: clamp(330px, 22vw, 430px);
     --hud-width-compact: 340px;
 
     --hud-stage-padding: 32px;
@@ -55,6 +60,8 @@
     --font-weight-label: 600;
     --font-weight-value: 500;
     --tracking-label: 0.16em;
+    --font-size-timer: clamp(3rem, 4vw, 4.15rem);
+    --font-size-stat: clamp(2.05rem, 3vw, 2.6rem);
 
     --transition-fast: 160ms;
     --transition-base: 260ms;

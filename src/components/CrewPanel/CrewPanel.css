@@ -3,10 +3,8 @@
 {
     display: block;
     font-family: var(--font-display);
-    font-size: clamp(2.05rem, 3vw, 2.6rem);
+    font-size: var(--font-size-stat);
     font-weight: var(--font-weight-value);
-    font-variant-numeric: tabular-nums;
-    font-feature-settings: "tnum" 1, "lnum" 1; /* Self-contained components. */
     font-kerning: none;
     line-height: 0.98;
     letter-spacing: -0.025em;
@@ -14,4 +12,8 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: clip;
+    inline-size: max-content;
+    min-inline-size: 5ch;
+
+    text-shadow: 0 0 12px rgb(var(--hud-accent-rgb) / 0.08);
 }
