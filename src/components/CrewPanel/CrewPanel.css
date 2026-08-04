@@ -6,14 +6,12 @@
     font-size: var(--font-size-stat);
     font-weight: var(--font-weight-value);
     font-kerning: none;
-    line-height: 0.98;
+    line-height: 0.95;
     letter-spacing: -0.025em;
     color: var(--hud-text);
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: clip;
-    inline-size: max-content;
     min-inline-size: 5ch;
 
-    text-shadow: 0 0 12px rgb(var(--hud-accent-rgb) / 0.08);
+    text-shadow: 0 0 8px rgb(var(--hud-accent-rgb) / 0.060);
 }

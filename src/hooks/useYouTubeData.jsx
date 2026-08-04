@@ -42,10 +42,10 @@ function getYouTubeConfig()
   //Read API credentials from the Browser Souce URL.
   const params = new URLSearchParams(window.location.search ?? "");
 
-  return Object.freeze({
+  return {
     apiKey: params.get("key")?.trim(),
     channelId: params.get("channelId")?.trim(),
-  });
+  };
 }
 
 function createYouTubeUrl(endpoint, params)
@@ -60,16 +60,16 @@ function truncateComment(text)
 
   if (normalized.length <= MAX_COMMENT_LENGTH)
   {
-    return text;
+    return normalized;
   }
 
   return `${normalized.slice(0, MAX_COMMENT_LENGTH).trimEnd()}…`;
 }
 
+const SUBSCRIBER_FORMATTER = new Intl.NumberFormat("en-US");
 function formatSubscriberCount(count)
 {
-  const subscriberFormatter = new Intl.NumberFormat("en-US");
-  return subscriberFormatter.format(Number(count));
+  return SUBSCRIBER_FORMATTER.format(Number(count));
 }
 
 export function useYouTubeData()
@@ -81,6 +81,8 @@ export function useYouTubeData()
     getYouTubeConfig,
     []
   );
+  const CHANNELS_ENDPOINT = "channels";
+  const COMMENTS_ENDPOINT = "commentThreads"
 
   useEffect(() =>
   {
@@ -102,13 +104,13 @@ export function useYouTubeData()
       const fetchOptions = { signal: controller.signal, };
       requestControllerRef.current = controller;
 
-      const statsUrl = createYouTubeUrl("channels", {
+      const statsUrl = createYouTubeUrl(CHANNELS_ENDPOINT, {
         part: "statistics",
         id: channelId,
         key: apiKey,
       });
 
-      const commsUrl = createYouTubeUrl("commentThreads", {
+      const commsUrl = createYouTubeUrl(COMMENTS_ENDPOINT, {
         part: "snippet",
         allThreadsRelatedToChannelId: channelId,
         maxResults: "1",
@@ -190,9 +192,11 @@ export function useYouTubeData()
     return () =>
     {
         disposed = true;
-        clearInterval(pollInterval);
+
         requestControllerRef.current?.abort();
         requestControllerRef.current = null;
+
+        clearInterval(pollInterval);
     };
   }, [apiKey, channelId]);
 

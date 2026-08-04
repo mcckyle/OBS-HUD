@@ -7,14 +7,10 @@
   text-rendering: geometricPrecision;
   font-synthesis: none;
   line-height: 0.95;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.020em;
   color: var(--hud-text);
   white-space: nowrap;
-  overflow-wrap: normal;
-  overflow: hidden;
-  text-overflow: clip;
-  inline-size: max-content;
   max-inline-size: 100%;
 
-  text-shadow: 0 0 14px rgb(var(--hud-accent-rgb) / 0.08);
+  text-shadow: 0 0 10px rgb(var(--hud-accent-rgb) / 0.060);
 }

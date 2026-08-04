@@ -13,11 +13,10 @@
     --hud-accent-rgb: 223 170 55;
     --hud-accent-glow: rgb(var(--hud-accent-rgb) / 0.28);
     --hud-panel-border: rgb(255 255 255 / 0.055);
-    --hud-panel-radius: 8px;
     --hud-panel-backdrop: blur(22px) saturate(150%) brightness(1.04);
     --hud-panel-highlight: inset 0 1px rgb(255 255 255 / 0.06);
 
-    --hud-surface: linear-gradient(180deg, rgb(20 28 30 / 0.82), rgb(12 18 26 / 0.72));
+    --hud-surface: linear-gradient(180deg, rgb(21 30 33 / 0.84), rgb(10 16 22 / 0.76));
     --hud-surface-solid: rgb(12 17 24);
 
     /* ---------- Borders. ---------- */
@@ -27,7 +26,6 @@
     /* ---------- Layout. ---------- */
     --hud-transmission-height: 4.70rem;
     --hud-width: clamp(330px, 22vw, 430px);
-    --hud-max-width: clamp(330px, 22vw, 430px);
     --hud-width-compact: 340px;
 
     --hud-stage-padding: 32px;
@@ -36,9 +34,8 @@
     --hud-panel-padding: 18px;
     --hud-panel-padding-compact: 15px;
     --hud-section-gap: 10px;
-    --hud-radius: 6px;
+    --hud-radius: 10px;
 
-    --hud-space-2xs: 4px;
     --hud-space-xs: 6px;
     --hud-space-sm: 10px;
     --hud-space-md: 12px;
@@ -48,9 +45,9 @@
     /* ---------- Effects. ---------- */
     --hud-blur: 16px;
     --hud-shadow-sm: 0 8px 20px rgb(0 0 0 / 0.18);
-    --hud-shadow: 0 30px 70px rgb(0 0 0 / 0.32),
-                  0 8px 20px rgb(0 0 0 / 0.18),
-                  0 0 40px rgb(var(--hud-accent-rgb) / 0.040);
+    --hud-shadow: 0 24px 48px rgb(0 0 0 / 0.34),
+                  0 8px 18px rgb(0 0 0 / 0.20),
+                  0 0 28px rgb(var(--hud-accent-rgb) / 0.045);
 
     --font-ui: Inter, "Segoe UI", system-ui, sans-serif;
     --font-display: "JetBrains Mono", "IBM Plex Mono", monospace;
@@ -83,11 +80,12 @@ body
     color: var(--hud-text);
     font-family: var(--font-ui);
     font-size: 14px;
-    line-height: 1.5;
+    line-height: 1.45;
     font-variant-numeric: tabular-nums;
     font-feature-settings: "tnum" 1, "lnum" 1;
     font-kerning: normal;
     font-synthesis: none;
+    font-optical-sizing: auto;
 
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
