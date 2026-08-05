@@ -19,7 +19,7 @@
 .hud-message
 {
   display: -webkit-box;
-  margin-block-start: var(--hud-space-xs);
+  margin-block-start: var(--space-1);
 
   overflow: hidden;
   color: var(--hud-text-secondary);
