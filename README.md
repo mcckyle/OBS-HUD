@@ -1,4 +1,5 @@
 [![Deploy to GitHub Pages](https://github.com/mcckyle/OBS-HUD/actions/workflows/deploy.yml/badge.svg)](https://github.com/mcckyle/OBS-HUD/actions/workflows/deploy.yml)
+![License](https://img.shields.io/badge/License-MIT-blue)
 
 # OBS-HUD
 
