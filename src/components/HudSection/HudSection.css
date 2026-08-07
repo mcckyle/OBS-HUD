@@ -6,4 +6,13 @@
   gap: var(--space-3);
   min-inline-size: 0;
 }
-.hud-section-label { margin: 0; color: var(--hud-text-muted); font-size: var(--font-size-label); font-weight: var(--font-weight-label); line-height: 1; letter-spacing: var(--tracking-label); text-transform: uppercase; }
+.hud-section-label
+{
+  margin: 0;
+  color: var(--hud-text-muted);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-label);
+  line-height: 1;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}

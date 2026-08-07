@@ -1,15 +1,14 @@
 /* Filename: src/components/TransmissionPanel/TransmissionPanel.css */
 
-.hud-comms { display: flex; flex-direction: column; min-block-size: var(--hud-transmission-height); }
+.hud-comms { display: flex; flex-direction: column; justify-content: flex-start; min-block-size: var(--hud-transmission-height); gap: var(--space-1); }
 .hud-author
 {
   margin: 0;
-
   color: rgb(var(--hud-accent-rgb) / 0.88);
   font-size: var(--font-size-label);
   font-weight: var(--font-weight-label);
   line-height: 1.2;
-  letter-spacing: var(--tracking-label);
+  letter-spacing: calc(var(--tracking-label) + 0.02em);
   text-transform: uppercase;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -18,14 +17,13 @@
 }
 .hud-message
 {
+  margin: 0;
   display: -webkit-box;
-  margin-block-start: var(--space-1);
-
   overflow: hidden;
   color: var(--hud-text-secondary);
   font-size: var(--font-size-body);
   font-weight: 400;
-  line-height: 1.45;
+  line-height: 1.4;
   overflow-wrap: anywhere;
   word-break: break-word;
   hyphens: auto;

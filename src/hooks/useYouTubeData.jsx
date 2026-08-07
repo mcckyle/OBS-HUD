@@ -1,12 +1,14 @@
 //Filename: useYouTubeData.jsx
 //Author: Kyle McColgan
-//Date: 30 July 2026
+//Date: 6 August 2026
 //Description: This file contains the YouTube API integration for the OBS HUD project.
 
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 
 //API.
 const YOUTUBE_API = "https://www.googleapis.com/youtube/v3";
+const CHANNELS_ENDPOINT = "channels";
+const COMMENT_THREADS_ENDPOINT = "commentThreads"
 
 //Polling.
 const POLL_INTERVAL_MS = 2 * 60 * 1000;
@@ -63,13 +65,18 @@ function truncateComment(text)
     return normalized;
   }
 
-  return `${normalized.slice(0, MAX_COMMENT_LENGTH).trimEnd()}…`;
+  const truncated = normalized.slice(0, MAX_COMMENT_LENGTH);
+
+  return `${truncated.replace(/\s+\S*$/, "").trimEnd()}…`;
 }
 
 const SUBSCRIBER_FORMATTER = new Intl.NumberFormat("en-US");
 function formatSubscriberCount(count)
 {
-  return SUBSCRIBER_FORMATTER.format(Number(count));
+  const value = Number(count);
+  return Number.isFinite(value)
+    ? SUBSCRIBER_FORMATTER.format(value)
+    : INITIAL_SUBSCRIBER_COUNT;
 }
 
 export function useYouTubeData()
@@ -81,8 +88,6 @@ export function useYouTubeData()
     getYouTubeConfig,
     []
   );
-  const CHANNELS_ENDPOINT = "channels";
-  const COMMENTS_ENDPOINT = "commentThreads"
 
   useEffect(() =>
   {
@@ -110,7 +115,7 @@ export function useYouTubeData()
         key: apiKey,
       });
 
-      const commsUrl = createYouTubeUrl(COMMENTS_ENDPOINT, {
+      const commsUrl = createYouTubeUrl(COMMENT_THREADS_ENDPOINT, {
         part: "snippet",
         allThreadsRelatedToChannelId: channelId,
         maxResults: "1",

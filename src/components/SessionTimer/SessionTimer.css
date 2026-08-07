@@ -9,9 +9,9 @@
   font-weight: 500;
   font-variant-numeric: tabular-nums;
   text-rendering: geometricPrecision;
-  line-height: 0.92;
-  letter-spacing: -0.025em;
+  line-height: 0.90;
+  letter-spacing: var(--tracking-display);
   white-space: nowrap;
 
-  text-shadow: 0 0 18px rgb(var(--hud-accent-rgb) / 0.080);
+  text-shadow: var(--hud-glow-soft);
 }

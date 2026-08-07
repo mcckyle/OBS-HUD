@@ -1,26 +1,25 @@
 //Filename: TransmissionPanel.jsx
 //Author: Kyle McColgan
-//Date: 3 August 2026
+//Date: 6 August 2026
 //Description: This file contains the HUD Transmission Panel component for the OBS HUD project.
 
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { STANDARD_TRANSITION } from "../../utils/motion";
 import { useYouTubeData } from "../../hooks/useYouTubeData";
 import { formatTime, formatMissionTime } from "../../utils/time.js";
 
-const ENTER_DURATION = 0.28;
-const EXIT_DURATION = 0.16;
 const transmissionTransition = {
-    ease: STANDARD_TRANSITION.ease,
+  ...STANDARD_TRANSITION,
 };
 const transmissionVariants = {
     initial: { opacity: 0, y: 3, },
-    enter: { opacity: 1, y: 0, transition: { ...transmissionTransition, duration: ENTER_DURATION, }, },
-    exit: { opacity: 0, y: -1, transition: { ...transmissionTransition, duration: EXIT_DURATION, }, },
+    enter: { opacity: 1, y: 0, transition: { ...transmissionTransition, duration: 0.28, }, },
+    exit: { opacity: 0, y: -1, transition: { ...transmissionTransition, duration: 0.16, }, },
 };
 
 export default function TransmissionPanel()
 {
+    const reduceMotion = useReducedMotion();
     const { latestMessage } = useYouTubeData();
     const { id, author, message } = latestMessage;
 
@@ -33,10 +32,10 @@ export default function TransmissionPanel()
                 aria-label="Latest transmission"
                 aria-live="polite"
                 aria-atomic="true"
-                variants={transmissionVariants}
-                initial="initial"
+                variants={reduceMotion ? undefined : transmissionVariants}
+                initial={reduceMotion ? false : "initial"}
                 animate="enter"
-                exit="exit"
+                exit={reduceMotion ? false : "exit"}
             >
               <p className="hud-author">{author}</p>
               <p className="hud-message">{message}</p>

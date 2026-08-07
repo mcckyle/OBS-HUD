@@ -9,7 +9,7 @@
 
 ## Screenshot
 
-![Overlay Screenshot](./public/images/Screenshot_20260721_203234.png)
+![Overlay Screenshot](./public/images/obs-hud-08062026.png)
 *A minimal telemetry overlay designed to blend naturally with Starfield's visual language.*
 
 ---

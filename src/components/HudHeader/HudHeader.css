@@ -22,7 +22,7 @@
   color: var(--hud-text);
   font-size: clamp(0.80rem, 0.75rem + 0.20vw, 0.95rem);
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: var(--tracking-title);
   line-height: 1;
   text-transform: uppercase;
   white-space: nowrap;
@@ -48,7 +48,7 @@
 .hud-clock-sol
 {
   color: var(--hud-accent);
-  font-size: 0.58rem;
+  font-size: var(--font-size-meta);
   font-weight: 600;
   line-height: 1;
   letter-spacing: 0.20em;
@@ -57,7 +57,7 @@
 .hud-clock-time
 {
   font-family: var(--font-display);
-  font-size: 0.82rem;
+  font-size: var(--font-size-clock);
   font-weight: 500;
   color: var(--hud-text-secondary);
   white-space: nowrap;
@@ -69,5 +69,5 @@
 {
   .hud-header { gap: var(--space-4); padding-block-end: var(--space-4); }
   .hud-title { letter-spacing: 0.16em; }
-  .hud-clock-time { font-size: 0.78rem; }
+  .hud-clock-time { font-size: var(--font-size-clock-compact); }
 }

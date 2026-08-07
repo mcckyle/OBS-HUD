@@ -1,6 +1,6 @@
 //Filename: SessionTimer.jsx
 //Author: Kyle McColgan
-//Date: 4 August 2026
+//Date: 6 August 2026
 //Description: This file contains the session timer component for the OBS HUD project.
 
 import { formatTime } from "../../utils/time";
@@ -18,7 +18,6 @@ export default function SessionTimer()
       role="timer"
       dateTime={`PT${seconds}S`}
       aria-label={`Session elapsed time: ${formattedTime}`}
-      aria-live="off"
     >
       {formattedTime}
     </time>

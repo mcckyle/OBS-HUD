@@ -7,11 +7,12 @@
     font-weight: var(--font-weight-value);
     font-kerning: none;
     line-height: 0.95;
-    letter-spacing: -0.025em;
+    letter-spacing: var(--tracking-display);
     color: var(--hud-text);
     overflow: hidden;
     text-overflow: clip;
     min-inline-size: 5ch;
+    white-space: nowrap; /* Prevent wrapping if we ever localize the number formatting. */
 
-    text-shadow: 0 0 8px rgb(var(--hud-accent-rgb) / 0.060);
+    text-shadow: var(--hud-glow-soft);
 }

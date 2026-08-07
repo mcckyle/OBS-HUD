@@ -4,6 +4,7 @@
 //Description: This file contains the App component for the OBS HUD project.
 
 import { motion, useReducedMotion } from 'motion/react';
+import { STANDARD_TRANSITION } from "./utils/motion";
 import HudHeader from "./components/HudHeader/HudHeader.jsx";
 import HudSection from "./components/HudSection/HudSection.jsx";
 import CrewPanel from "./components/CrewPanel/CrewPanel.jsx";
@@ -13,8 +14,8 @@ import SessionTimer from "./components/SessionTimer/SessionTimer.jsx";
 import './App.css';
 
 const PANEL_TRANSITION = {
+  ...STANDARD_TRANSITION,
   duration: 0.55,
-  ease: [0.22, 1, 0.36, 1],
 };
 const hudPanelVariants = {
   hidden: { opacity: 0, y: 12, scale: 0.985, },
