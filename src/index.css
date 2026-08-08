@@ -72,8 +72,8 @@
     --transition-slow: 420ms;
     --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
 }
-html { box-sizing: border-box; inline-size: 100%; block-size: 100%; overflow: hidden; }
-*, *::before, *::after { box-sizing: inherit; }
+*, *::before, *::after { box-sizing: border-box; }
+html { inline-size: 100%; block-size: 100%; overflow: hidden; }
 #root { inline-size: 100%; block-size: 100%; background: transparent; }
 body
 {
@@ -102,7 +102,7 @@ body
     isolation: isolate;
 }
 button, input, textarea, select { font: inherit; color: inherit; }
-:focus-visible { outline: none; }
+:focus-visible { outline: 2px solid var(--hud-accent); outline-offset: 3px; }
 
 @media (prefers-reduced-motion: reduce)
 {

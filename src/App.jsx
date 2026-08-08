@@ -1,6 +1,6 @@
 //Filename: App.jsx
 //Author: Kyle McColgan
-//Date: 4 August 2026
+//Date: 7 August 2026
 //Description: This file contains the App component for the OBS HUD project.
 
 import { motion, useReducedMotion } from 'motion/react';
@@ -39,20 +39,22 @@ export default function App()
         {/* System Header. */}
         <HudHeader />
 
-        {/* Session. */}
-        <HudSection label="ELAPSED TIME" ariaLabel="Session timer">
-          <SessionTimer />
-        </HudSection>
+        <div className="hud-sections">
+          {/* Session. */}
+          <HudSection label="ELAPSED TIME" ariaLabel="Session timer">
+            <SessionTimer />
+          </HudSection>
 
-        {/* Section 2: Live Subscriber Count. */}
-        <HudSection label="CREW SIZE" ariaLabel="Subscriber count">
-          <CrewPanel />
-        </HudSection>
+          {/* Section 2: Live Subscriber Count. */}
+          <HudSection label="CREW SIZE" ariaLabel="Subscriber count">
+            <CrewPanel />
+          </HudSection>
 
-        {/* Section 3: Comms. */}
-        <HudSection label="TRANSMISSION" ariaLabel="Latest transmission">
-          <TransmissionPanel />
-        </HudSection>
+          {/* Section 3: Comms. */}
+          <HudSection label="TRANSMISSION" ariaLabel="Latest transmission">
+            <TransmissionPanel />
+          </HudSection>
+        </div>
       </motion.aside>
     </main>
   );
