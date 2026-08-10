@@ -4,10 +4,12 @@
 .hud-header
 {
   display: flex;
-  justify-content: space-between;
   align-items: flex-end;
+  justify-content: space-between;
+
   gap: var(--space-5);
   padding-block-end: var(--space-5);
+  border-block-end: 1px solid var(--hud-divider);
 }
 .hud-system
 {
@@ -22,8 +24,9 @@
   color: var(--hud-text);
   font-size: clamp(0.80rem, 0.75rem + 0.20vw, 0.95rem);
   font-weight: 700;
-  letter-spacing: var(--tracking-title);
   line-height: 1;
+  letter-spacing: var(--tracking-title);
+
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -35,6 +38,7 @@
   letter-spacing: var(--tracking-label);
   line-height: 1;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 .hud-clock
 {
@@ -53,6 +57,7 @@
   line-height: 1;
   letter-spacing: 0.20em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 .hud-clock-time
 {

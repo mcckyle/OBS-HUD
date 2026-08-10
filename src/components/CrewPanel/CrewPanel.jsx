@@ -9,8 +9,8 @@ import { STANDARD_TRANSITION } from "../../utils/motion";
 import "./CrewPanel.css";
 
 const crewCountVariants = {
-    initial: { opacity: 0.72, y: -2, scale: 0.99, },
-    enter: { opacity: 1, y: 0, scale: 1, transition: { ...STANDARD_TRANSITION, duration: 0.20, }, },
+    initial: { opacity: 0.72, y: -2, },
+    enter: { opacity: 1, y: 0, transition: { ...STANDARD_TRANSITION, duration: 0.20, }, },
 };
 
 export default function CrewPanel()

@@ -2,17 +2,22 @@
 .hud-crew-count
 {
     display: block;
+    min-inline-size: 5ch;
+    overflow: hidden;
+    color: var(--hud-text);
+
     font-family: var(--font-display);
     font-size: var(--font-size-stat);
     font-weight: var(--font-weight-value);
-    font-kerning: none;
     line-height: 0.95;
     letter-spacing: var(--tracking-display);
-    color: var(--hud-text);
-    overflow: hidden;
-    text-overflow: clip;
-    min-inline-size: 5ch;
     white-space: nowrap; /* Prevent wrapping if we ever localize the number formatting. */
+}
+.hud-crew-value
+{
+    display: inline-block;
+    font-kerning: none;
+    font-variant-numeric: tabular-nums;
 
-    text-shadow: var(--hud-glow-soft);
+    text-shadow: 0 0 18px rgb(var(--hud-accent-rgb) / 0.08);
 }

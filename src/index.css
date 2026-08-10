@@ -12,21 +12,18 @@
     --hud-accent: #dfaa37;
     --hud-accent-rgb: 223 170 55;
     --hud-accent-glow: rgb(var(--hud-accent-rgb) / 0.20);
-    --hud-panel-border: rgb(255 255 255 / 0.055);
-    --hud-panel-backdrop: blur(22px) saturate(150%) brightness(1.04);
-    --hud-panel-highlight: inset 0 1px rgb(255 255 255 / 0.06);
-    --hud-glow-soft: 0 0 18px rgb(var(--hud-accent-rgb) / 0.080);
 
     --hud-surface: linear-gradient(180deg, rgb(25 36 40 / 0.86), rgb(12 18 24 / 0.78));
-    --hud-surface-solid: rgb(12 17 24);
+     --hud-surface-solid: rgb(12 17 24);
 
-    /* ---------- Borders. ---------- */
-    --hud-border: rgb(255 255 255 / 0.075);
-    --hud-divider: rgb(255 255 255 / 0.075);
+     /* ---------- Borders. ---------- */
+     --hud-border: rgb(255 255 255 / 0.075);
+     --hud-divider: rgb(255 255 255 / 0.075);
 
-    /* ---------- Layout. ---------- */
-    --hud-transmission-height: 4.70rem;
-    --hud-width: clamp(330px, 22vw, 430px);
+     --hud-panel-backdrop: blur(22px) saturate(150%) brightness(1.04);
+
+     /* ---------- Layout. ---------- */
+     --hud-width: clamp(330px, 22vw, 430px);
     --hud-width-compact: 340px;
 
     --hud-stage-padding: var(--space-6);
@@ -35,6 +32,8 @@
     --hud-panel-padding: var(--space-5);
     --hud-panel-padding-compact: 15px;
     --hud-section-gap: var(--space-3);
+
+    --hud-transmission-height: 4.70rem;
     --hud-radius: 12px;
 
     --space-1: 0.25rem;
@@ -44,13 +43,6 @@
     --space-5: 1.5rem;
     --space-6: 2rem;
 
-    /* ---------- Effects. ---------- */
-    --hud-blur: 16px;
-    --hud-shadow-sm: 0 8px 20px rgb(0 0 0 / 0.18);
-    --hud-shadow: 0 32px 72px rgb(0 0 0 / 0.34),
-                  0 10px 22px rgb(0 0 0 / 0.18),
-                  0 0 34px rgb(var(--hud-accent-rgb) / 0.05);
-
     --font-ui: Inter, "Segoe UI", system-ui, sans-serif;
     --font-display: "JetBrains Mono", "IBM Plex Mono", monospace;
     --font-size-label: 0.66rem;
@@ -59,13 +51,23 @@
     --font-size-meta: 0.58rem;
     --font-size-clock: 0.82rem;
     --font-size-clock-compact: 0.79rem;
+
+    --font-size-timer: clamp(3rem, 4vw, 4.15rem);
+    --font-size-stat: clamp(2.05rem, 3vw, 2.6rem);
+
     --font-weight-label: 600;
     --font-weight-value: 500;
+
     --tracking-label: 0.13em;
     --tracking-display: -0.025em;
     --tracking-title: 0.15em;
-    --font-size-timer: clamp(3rem, 4vw, 4.15rem);
-    --font-size-stat: clamp(2.05rem, 3vw, 2.6rem);
+
+    /* ---------- Effects. ---------- */
+    --hud-blur: 16px;
+    --hud-shadow-sm: 0 8px 20px rgb(0 0 0 / 0.18);
+    --hud-shadow: 0 32px 72px rgb(0 0 0 / 0.34),
+                  0 10px 22px rgb(0 0 0 / 0.18),
+                  0 0 34px rgb(var(--hud-accent-rgb) / 0.05);
 
     --transition-fast: 160ms;
     --transition-base: 260ms;

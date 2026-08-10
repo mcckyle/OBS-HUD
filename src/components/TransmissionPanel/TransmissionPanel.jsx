@@ -8,13 +8,10 @@ import { STANDARD_TRANSITION } from "../../utils/motion";
 import { useYouTubeData } from "../../hooks/useYouTubeData";
 import { formatTime, formatMissionTime } from "../../utils/time.js";
 
-const transmissionTransition = {
-  ...STANDARD_TRANSITION,
-};
 const transmissionVariants = {
     initial: { opacity: 0, y: 3, },
-    enter: { opacity: 1, y: 0, transition: { ...transmissionTransition, duration: 0.28, }, },
-    exit: { opacity: 0, y: -1, transition: { ...transmissionTransition, duration: 0.16, }, },
+    enter: { opacity: 1, y: 0, transition: { ...STANDARD_TRANSITION, duration: 0.28, }, },
+    exit: { opacity: 0, y: -1, transition: { ...STANDARD_TRANSITION, duration: 0.16, }, },
 };
 
 export default function TransmissionPanel()
@@ -24,18 +21,17 @@ export default function TransmissionPanel()
     const { id, author, message } = latestMessage;
 
     return (
-        <AnimatePresence initial={false}>
+        <AnimatePresence initial={false} mode="wait">
             <motion.article
                 key={id}
-                layout
                 className="hud-comms"
                 aria-label="Latest transmission"
                 aria-live="polite"
                 aria-atomic="true"
-                variants={reduceMotion ? undefined : transmissionVariants}
                 initial={reduceMotion ? false : "initial"}
                 animate="enter"
                 exit={reduceMotion ? false : "exit"}
+                variants={reduceMotion ? undefined : transmissionVariants}
             >
               <p className="hud-author">{author}</p>
               <p className="hud-message">{message}</p>

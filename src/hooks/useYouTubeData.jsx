@@ -1,6 +1,6 @@
 //Filename: useYouTubeData.jsx
 //Author: Kyle McColgan
-//Date: 6 August 2026
+//Date: 9 August 2026
 //Description: This file contains the YouTube API integration for the OBS HUD project.
 
 import React, { useState, useEffect, useRef, useMemo } from 'react';
@@ -45,15 +45,15 @@ function getYouTubeConfig()
   const params = new URLSearchParams(window.location.search ?? "");
 
   return {
-    apiKey: params.get("key")?.trim(),
-    channelId: params.get("channelId")?.trim(),
+    apiKey: params.get("key")?.trim() ?? "",
+    channelId: params.get("channelId")?.trim() ?? "",
   };
 }
 
 function createYouTubeUrl(endpoint, params)
 {
   const searchParams = new URLSearchParams(params);
-  return `${YOUTUBE_API}/${endpoint}?${searchParams}`;
+  return `${YOUTUBE_API}/${endpoint}?${searchParams.toString()}`;
 }
 
 function truncateComment(text)
@@ -66,8 +66,9 @@ function truncateComment(text)
   }
 
   const truncated = normalized.slice(0, MAX_COMMENT_LENGTH);
+  const clean = truncated.replace(/\s+\S*$/, "").trimEnd();
 
-  return `${truncated.replace(/\s+\S*$/, "").trimEnd()}…`;
+  return `${clean}…`;
 }
 
 const SUBSCRIBER_FORMATTER = new Intl.NumberFormat("en-US");
@@ -86,7 +87,7 @@ export function useYouTubeData()
   const requestControllerRef = useRef(null);
   const { apiKey, channelId } = useMemo(
     getYouTubeConfig,
-    []
+    [],
   );
 
   useEffect(() =>
@@ -94,7 +95,7 @@ export function useYouTubeData()
     //If variables are truly missing, stop execution.
     if ((!apiKey) || (!channelId))
     {
-      console.warn("Missing YouTube configuration keys in Browser Source URL.");
+      console.warn("Missing YouTube configuration in Browser Source URL.");
       setLatestMessage(DEFAULT_MESSAGES.config);
       return;
     }
@@ -127,25 +128,25 @@ export function useYouTubeData()
         //1. Fetch subscriber statistics.
         const [statsResponse, commsResponse] = await Promise.all([fetch(statsUrl, fetchOptions), fetch(commsUrl, fetchOptions),]);
 
-        if (!statsResponse.ok)
-        {
-            throw new Error(`YouTube statistics request failed: ${statsResponse.status}`);
-        }
-
-        const statsData = await statsResponse.json();
-        const commsData = commsResponse.ok ? await commsResponse.json() : null;
-
         if (disposed)
         {
           return;
         }
 
-        const count = statsData.items?.[0]?.statistics?.subscriberCount;
-
-        if (count != null)
+        if (statsResponse.ok)
         {
-          //Format to nicely readable string e.g. "1,250".
-          setSubscriberCount(formatSubscriberCount(count));
+            const statsData = await statsResponse.json();
+            const count = statsData.items?.[0]?.statistics?.subscriberCount;
+
+            if (count != null)
+            {
+              //Format to nicely readable string e.g. "1,250".
+              setSubscriberCount(formatSubscriberCount(count));
+            }
+        }
+        else
+        {
+          console.warn(`YouTube statistics request failed: ${statsResponse.status}`);
         }
 
         if (!commsResponse.ok)
@@ -153,6 +154,8 @@ export function useYouTubeData()
           setLatestMessage(DEFAULT_MESSAGES.error);
           return;
         }
+
+        const commsData = await commsResponse.json();
 
         //2. Fetch latest channel comment.
         const comment = commsData?.items?.[0]?.snippet?.topLevelComment?.snippet;
@@ -165,7 +168,7 @@ export function useYouTubeData()
 
         setLatestMessage({
             id: commsData.items[0].id,
-            author: comment.authorDisplayName,
+            author: comment.authorDisplayName?.trim() || 'UNKNOWN',
             message: truncateComment(comment.textDisplay),
         });
       }
