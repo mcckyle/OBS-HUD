@@ -1,6 +1,6 @@
 //Filename: useYouTubeData.jsx
 //Author: Kyle McColgan
-//Date: 9 August 2026
+//Date: 10 August 2026
 //Description: This file contains the YouTube API integration for the OBS HUD project.
 
 import React, { useState, useEffect, useRef, useMemo } from 'react';
@@ -42,7 +42,7 @@ const DEFAULT_MESSAGES = Object.freeze({
 function getYouTubeConfig()
 {
   //Read API credentials from the Browser Souce URL.
-  const params = new URLSearchParams(window.location.search ?? "");
+  const params = new URLSearchParams(window.location.search);
 
   return {
     apiKey: params.get("key")?.trim() ?? "",
@@ -107,7 +107,6 @@ export function useYouTubeData()
       requestControllerRef.current?.abort();
 
       const controller = new AbortController();
-      const fetchOptions = { signal: controller.signal, };
       requestControllerRef.current = controller;
 
       const statsUrl = createYouTubeUrl(CHANNELS_ENDPOINT, {
@@ -120,13 +119,21 @@ export function useYouTubeData()
         part: "snippet",
         allThreadsRelatedToChannelId: channelId,
         maxResults: "1",
+        order: "time",
         key: apiKey,
       });
 
       try
       {
         //1. Fetch subscriber statistics.
-        const [statsResponse, commsResponse] = await Promise.all([fetch(statsUrl, fetchOptions), fetch(commsUrl, fetchOptions),]);
+        const [statsResponse, commsResponse] = await Promise.all([
+          fetch(statsUrl, {
+            signal: controller.signal,
+          }),
+          fetch(commsUrl, {
+            signal: controller.signal,
+          }),
+        ]);
 
         if (disposed)
         {
@@ -151,6 +158,7 @@ export function useYouTubeData()
 
         if (!commsResponse.ok)
         {
+          console.warn(`YouTube comments request failed: ${commsResponse.status}`);
           setLatestMessage(DEFAULT_MESSAGES.error);
           return;
         }
@@ -158,17 +166,18 @@ export function useYouTubeData()
         const commsData = await commsResponse.json();
 
         //2. Fetch latest channel comment.
-        const comment = commsData?.items?.[0]?.snippet?.topLevelComment?.snippet;
+        const latestThread = commsData.items?.[0];
+        const comment = latestThread?.snippet?.topLevelComment?.snippet;
 
-        if (!comment)
+        if ((!latestThread) || (!comment))
         {
           setLatestMessage(DEFAULT_MESSAGES.empty);
           return;
         }
 
         setLatestMessage({
-            id: commsData.items[0].id,
-            author: comment.authorDisplayName?.trim() || 'UNKNOWN',
+            id: latestThread.id,
+            author: comment.authorDisplayName?.trim() || "UNKNOWN",
             message: truncateComment(comment.textDisplay),
         });
       }

@@ -10,14 +10,14 @@
     font-size: var(--font-size-stat);
     font-weight: var(--font-weight-value);
     line-height: 0.95;
+
+    font-variant-numeric: tabular-nums;
     letter-spacing: var(--tracking-display);
     white-space: nowrap; /* Prevent wrapping if we ever localize the number formatting. */
+    text-shadow: 0 0 18px rgb(var(--hud-accent-rgb) / 0.08);
 }
 .hud-crew-value
 {
     display: inline-block;
-    font-kerning: none;
     font-variant-numeric: tabular-nums;
-
-    text-shadow: 0 0 18px rgb(var(--hud-accent-rgb) / 0.08);
 }

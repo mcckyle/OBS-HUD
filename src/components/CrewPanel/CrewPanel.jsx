@@ -1,6 +1,6 @@
 //Filename: CrewPanel.jsx
 //Author: Kyle McColgan
-//Date: 6 August 2026
+//Date: 10 August 2026
 //Description: This file contains the HUD crew panel component for the OBS HUD project.
 
 import { motion, useReducedMotion } from 'motion/react';

@@ -16,3 +16,4 @@
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
 }
+.hud-section-content { min-inline-size: 0; }
