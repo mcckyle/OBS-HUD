@@ -1,6 +1,6 @@
 //Filename: App.jsx
 //Author: Kyle McColgan
-//Date: 10 August 2026
+//Date: 11 August 2026
 //Description: This file contains the App component for the OBS HUD project.
 
 import { motion, useReducedMotion } from 'motion/react';
@@ -17,8 +17,8 @@ const PANEL_TRANSITION = {
   ...STANDARD_TRANSITION,
   duration: 0.55,
 };
-const hudPanelVariants = {
-  hidden: { opacity: 0, y: 10, scale: 0.99, },
+const PANEL_VARIANTS = {
+  hidden: { opacity: 0, y: 8, scale: 0.995, },
   visible: { opacity: 1, y: 0, scale: 1, transition: PANEL_TRANSITION, },
 };
 
@@ -33,7 +33,7 @@ export default function App()
           className="hud-panel"
           initial={reduceMotion ? false : "hidden"}
           animate="visible"
-          variants={reduceMotion ? undefined : hudPanelVariants}
+          variants={reduceMotion ? undefined : PANEL_VARIANTS}
           aria-label="Starfield livestream HUD"
         >
         {/* System Header. */}

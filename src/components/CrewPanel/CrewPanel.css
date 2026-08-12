@@ -3,6 +3,7 @@
 {
     display: block;
     min-inline-size: 5ch;
+    max-inline-size: 100%;
     overflow: hidden;
     color: var(--hud-text);
 
@@ -16,8 +17,4 @@
     white-space: nowrap; /* Prevent wrapping if we ever localize the number formatting. */
     text-shadow: 0 0 18px rgb(var(--hud-accent-rgb) / 0.08);
 }
-.hud-crew-value
-{
-    display: inline-block;
-    font-variant-numeric: tabular-nums;
-}
+.hud-crew-value { display: inline-block; }
