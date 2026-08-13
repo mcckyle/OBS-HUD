@@ -4,15 +4,13 @@
     display: block;
     min-inline-size: 5ch;
     max-inline-size: 100%;
-    overflow: hidden;
+
     color: var(--hud-text);
 
     font-family: var(--font-display);
     font-size: var(--font-size-stat);
     font-weight: var(--font-weight-value);
     line-height: 0.95;
-
-    font-variant-numeric: tabular-nums;
     letter-spacing: var(--tracking-display);
     white-space: nowrap; /* Prevent wrapping if we ever localize the number formatting. */
     text-shadow: 0 0 18px rgb(var(--hud-accent-rgb) / 0.08);

@@ -25,8 +25,6 @@
   font-weight: 400;
   line-height: 1.4;
   overflow-wrap: anywhere;
-  word-break: break-word;
-  hyphens: auto;
 
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3; /* Three line messages MAX. */

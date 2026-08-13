@@ -8,10 +8,8 @@
   font-size: var(--font-size-timer);
   font-weight: 500;
   line-height: 0.90;
-  font-variant-numeric: tabular-nums;
   letter-spacing: var(--tracking-display);
   white-space: nowrap;
-  text-rendering: geometricPrecision;
 
   text-shadow: 0 0 18px rgb(var(--hud-accent-rgb) / 0.08);
 }

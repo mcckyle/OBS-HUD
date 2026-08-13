@@ -97,5 +97,5 @@ button, input, textarea, select { font: inherit; color: inherit; }
 
 @media (prefers-reduced-motion: reduce)
 {
-    *, *::before, *::after { scroll-behavior: auto !important; }
+    *, *::before { scroll-behavior: auto !important; }
 }
