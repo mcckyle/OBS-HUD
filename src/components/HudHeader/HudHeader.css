@@ -6,10 +6,10 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: var(--space-5);
 
   min-inline-size: 0;
-  padding-block-end: 1rem;
+  padding-block-end: var(--space-4);
 
   border-block-end: 1px solid var(--hud-divider);
 }
@@ -17,7 +17,7 @@
 {
   display: flex;
   flex-direction: column;
-  gap: 0.40rem;
+  gap: var(--space-2);
   min-inline-size: 0;
 }
 .hud-title
@@ -49,7 +49,7 @@
   flex: 0 0 auto;
   flex-direction: column;
   align-items: flex-end;
-  gap: 0.30rem;
+  gap: var(--space-1);
 
   text-align: end;
 }
@@ -57,7 +57,7 @@
 {
   color: var(--hud-accent);
   font-size: var(--font-size-meta);
-  font-weight: 600;
+  font-weight: var(--font-size-label);
   line-height: 1;
   letter-spacing: 0.20em;
   text-transform: uppercase;
@@ -67,10 +67,10 @@
 {
   color: var(--hud-text-secondary);
   font-family: var(--font-display);
-  font-size: 0.82rem;
-  font-weight: 500;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-value);
 
-  white-space: nowrap;
   line-height: 1;
   letter-spacing: 0.06em;
+  white-space: nowrap;
 }
