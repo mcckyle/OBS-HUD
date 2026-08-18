@@ -57,7 +57,7 @@
 {
   color: var(--hud-accent);
   font-size: var(--font-size-meta);
-  font-weight: var(--font-size-label);
+  font-weight: var(--font-weight-label);
   line-height: 1;
   letter-spacing: 0.20em;
   text-transform: uppercase;

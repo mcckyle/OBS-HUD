@@ -6,7 +6,7 @@
   max-inline-size: 100%;
   margin: 0;
   overflow: hidden;
-  color: rgb(var(--hud-accent-rgb) / 0.88);
+  color: rgb(var(--hud-accent-rgb) / 0.84);
   font-size: var(--font-size-label);
   font-weight: var(--font-weight-label);
   line-height: 1.2;

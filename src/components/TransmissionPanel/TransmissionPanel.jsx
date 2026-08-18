@@ -1,6 +1,6 @@
 //Filename: TransmissionPanel.jsx
 //Author: Kyle McColgan
-//Date: 12 August 2026
+//Date: 17 August 2026
 //Description: This file contains the HUD Transmission Panel component for the OBS HUD project.
 
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
@@ -29,8 +29,8 @@ export default function TransmissionPanel()
                 aria-live="polite"
                 aria-atomic="true"
                 initial={reduceMotion ? false : "initial"}
-                animate={reduceMotion ? false : "enter"}
-                exit={reduceMotion ? false : "exit"}
+                animate={reduceMotion ? undefined : "enter"}
+                exit={reduceMotion ? undefined : "exit"}
                 variants={reduceMotion ? undefined : transmissionVariants}
             >
               <p className="hud-author">{author}</p>
