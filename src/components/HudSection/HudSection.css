@@ -1,8 +1,7 @@
 /* Filename: src/components/HudSection/HudSection.css */
 .hud-item
 {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: var(--space-3);
   min-inline-size: 0;
 }

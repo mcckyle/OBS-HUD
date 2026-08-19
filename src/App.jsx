@@ -1,6 +1,6 @@
 //Filename: App.jsx
 //Author: Kyle McColgan
-//Date: 17 August 2026
+//Date: 18 August 2026
 //Description: This file contains the App component for the OBS HUD project.
 
 import { motion, useReducedMotion } from 'motion/react';
@@ -13,8 +13,8 @@ import SessionTimer from "./components/SessionTimer/SessionTimer.jsx";
 import './App.css';
 
 const PANEL_VARIANTS = {
-  hidden: { opacity: 0, y: 6, },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.48, ease: [0.22, 1, 0.36, 1], }, },
+  hidden: { opacity: 0, y: 8, scale: 0.985, },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.52, ease: [0.22, 1, 0.36, 1], }, },
 };
 
 export default function App()

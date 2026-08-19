@@ -12,7 +12,7 @@
     --hud-accent: #dfaa37;
     --hud-accent-rgb: 223 170 55;
 
-    --hud-surface: linear-gradient(180deg, rgb(25 36 40 / 0.86), rgb(12 18 24 / 0.78));
+    --hud-surface: linear-gradient(180deg, rgb(25 36 40 / 0.88), rgb(12 18 24 / 0.82));
 
     /* ---------- Borders. ---------- */
      --hud-border: rgb(255 255 255 / 0.075);
@@ -22,8 +22,8 @@
      --hud-width: clamp(330px, 22vw, 430px);
      --hud-width-compact: 340px;
 
-    --hud-stage-padding: 2rem;
-    --hud-stage-padding-compact: 1.25rem;
+    --hud-gutter: 2rem;
+    --hud-gutter-compact: 1.25rem;
 
     --hud-panel-padding: 1.5rem;
     --hud-panel-padding-compact: 0.9375rem;
@@ -56,10 +56,10 @@
     --tracking-title: 0.15em;
 
     /* ---------- Effects. ---------- */
-    --hud-panel-backdrop: blur(22px) saturate(150%) brightness(1.04);
-    --hud-shadow: 0 32px 72px rgb(0 0 0 / 0.34),
-                  0 10px 22px rgb(0 0 0 / 0.18),
-                  0 0 34px rgb(var(--hud-accent-rgb) / 0.05);
+    --hud-panel-backdrop: blur(20px) saturate(145%) brightness(1.04);
+    --hud-shadow: 0 28px 64px rgb(0 0 0 / 0.32),
+                  0 8px 20px rgb(0 0 0 / 0.16),
+                  0 0 32px rgb(var(--hud-accent-rgb) / 0.045);
 
     --transition-fast: 160ms;
     --transition-base: 260ms;
