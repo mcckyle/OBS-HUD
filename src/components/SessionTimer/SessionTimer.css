@@ -7,7 +7,6 @@
   font-family: var(--font-display);
   font-size: var(--font-size-timer);
   font-weight: var(--font-weight-value);
-  font-variant-numeric: tabular-nums;
   line-height: 0.90;
   letter-spacing: var(--tracking-display);
   white-space: nowrap;

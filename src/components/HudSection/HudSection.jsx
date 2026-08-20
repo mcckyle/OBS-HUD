@@ -1,6 +1,6 @@
 //Filename: HudSection.jsx
 //Author: Kyle McColgan
-//Date: 17 August 2026
+//Date: 19 August 2026
 //Description: This file contains the HUD section component for the OBS HUD project.
 
 import { useId } from "react";
@@ -13,9 +13,7 @@ export default function HudSection({ label, children })
   return (
     <section className="hud-item" aria-labelledby={headingId}>
       <h2 id={headingId} className="hud-section-label">{label}</h2>
-      <div className="hud-section-content">
-        {children}
-      </div>
+      {children}
     </section>
   );
 }

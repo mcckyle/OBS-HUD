@@ -20,25 +20,12 @@
 
      /* ---------- Layout. ---------- */
      --hud-width: clamp(330px, 22vw, 430px);
-     --hud-width-compact: 340px;
+     --hud-gutter: 2rem;
+     --hud-panel-padding: 1.5rem;
+     --hud-section-gap: 0.75rem;
+     --hud-radius: 12px;
 
-    --hud-gutter: 2rem;
-    --hud-gutter-compact: 1.25rem;
-
-    --hud-panel-padding: 1.5rem;
-    --hud-panel-padding-compact: 0.9375rem;
-
-    --hud-section-gap: 0.75rem;
-    --hud-radius: 12px;
-
-    --space-1: 0.25rem;
-    --space-2: 0.50rem;
-    --space-3: 0.75rem;
-    --space-4: 1rem;
-    --space-5: 1.5rem;
-    --space-6: 2rem;
-
-    --font-ui: Inter, "Segoe UI", system-ui, sans-serif;
+     --font-ui: Inter, "Segoe UI", system-ui, sans-serif;
     --font-display: "JetBrains Mono", "IBM Plex Mono", monospace;
     --font-size-label: 0.66rem;
     --font-size-body: 0.875rem;
@@ -60,42 +47,35 @@
     --hud-shadow: 0 28px 64px rgb(0 0 0 / 0.32),
                   0 8px 20px rgb(0 0 0 / 0.16),
                   0 0 32px rgb(var(--hud-accent-rgb) / 0.045);
-
-    --transition-fast: 160ms;
-    --transition-base: 260ms;
-    --transition-slow: 420ms;
     --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
 }
 *, *::before, *::after { box-sizing: border-box; }
 html, body, #root { inline-size: 100%; block-size: 100%; }
-html { overflow: hidden; }
+html, body { overflow: hidden; }
 body
 {
     margin: 0;
-    overflow: hidden;
 
     background: transparent;
     color: var(--hud-text);
+
     font-family: var(--font-ui);
     font-size: 14px;
     line-height: 1.45;
     font-variant-numeric: tabular-nums;
     font-feature-settings: "tnum" 1, "lnum" 1;
-    font-kerning: normal;
     font-synthesis: none;
-    font-optical-sizing: auto;
 
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -webkit-text-size-adjust: 100%;
     user-select: none;
     cursor: default;
-    isolation: isolate;
 }
 button, input, textarea, select { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--hud-accent); outline-offset: 3px; }
 
 @media (prefers-reduced-motion: reduce)
 {
-    *, *::before { scroll-behavior: auto !important; }
+    *, *::before, *::after { scroll-behavior: auto !important; }
 }

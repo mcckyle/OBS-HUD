@@ -8,11 +8,8 @@
 
   inline-size: 100%;
   block-size: 100%;
+  padding: var(--hud-gutter);
 
-  padding: max(var(--hud-gutter), env(safe-area-inset-top))
-           max(var(--hud-gutter), env(safe-area-inset-right))
-           max(var(--hud-gutter), env(safe-area-inset-bottom))
-           max(var(--hud-gutter), env(safe-area-inset-left));
   pointer-events: none;
 }
 
@@ -27,7 +24,6 @@
   flex-direction: column;
   gap: var(--hud-section-gap);
   inline-size: min(var(--hud-width), calc(100vw - (2 * var(--hud-gutter))));
-  max-block-size: calc(100vh - (2 * var(--hud-gutter)));
   padding: var(--hud-panel-padding);
   color: var(--hud-text);
   background: var(--hud-surface);
@@ -46,7 +42,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: radial-gradient(circle at 112% -8%, rgb(var(--hud-accent-rgb) / 0.10), transparent 42%), linear-gradient(180deg, rgb(255 255 255 / 0.035), transparent 36%);
+  background: radial-gradient(circle at 115% -10%, rgb(var(--hud-accent-rgb) / 0.11), transparent 42%), linear-gradient(180deg, rgb(255 255 255 / 0.035), transparent 38%);
   pointer-events: none;
 }
 .hud-panel::after
@@ -56,15 +52,15 @@
 
   position: absolute;
   inset-block-start: 0;
-  inset-inline: 10%;
+  inset-inline: 12%;
   block-size: 1px;
-  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.16), transparent);
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.18), transparent);
   pointer-events: none;
 }
 .hud-sections { display: flex; flex-direction: column; gap: var(--hud-section-gap); min-block-size: 0; }
 
 @media (max-width: 480px)
 {
-  .hud-stage { --hud-gutter: var(--hud-gutter-compact); }
-  .hud-panel { --hud-width: var(--hud-width-compact); --hud-panel-padding: var(--hud-panel-padding-compact); }
+  .hud-stage { --hud-gutter: 1.25rem; }
+  .hud-panel { --hud-panel-padding: 1rem; }
 }

@@ -1,6 +1,6 @@
 /* Filename: src/components/TransmissionPanel/TransmissionPanel.css */
 
-.hud-comms { display: flex; flex-direction: column; gap: var(--space-1); min-block-size: 4.5rem; }
+.hud-comms { display: flex; flex-direction: column; gap: 0.375rem; min-block-size: 4.5rem; }
 .hud-author
 {
   max-inline-size: 100%;

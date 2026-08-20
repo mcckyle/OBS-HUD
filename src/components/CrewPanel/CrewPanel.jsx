@@ -1,6 +1,6 @@
 //Filename: CrewPanel.jsx
 //Author: Kyle McColgan
-//Date: 12 August 2026
+//Date: 19 August 2026
 //Description: This file contains the HUD crew panel component for the OBS HUD project.
 
 import { motion, useReducedMotion } from 'motion/react';
@@ -9,8 +9,8 @@ import { useYouTubeData } from "../../hooks/useYouTubeData";
 
 import "./CrewPanel.css";
 
-const crewCountVariants = {
-    initial: { opacity: 0.65, y: -1, },
+const CREW_COUNT_VARIANTS = {
+    initial: { opacity: 0.60, y: -1, },
     enter: { opacity: 1, y: 0, transition: { ...STANDARD_TRANSITION, duration: 0.20, }, },
 };
 
@@ -31,7 +31,7 @@ export default function CrewPanel()
               className="hud-crew-value"
               initial={reduceMotion ? false : "initial"}
               animate={reduceMotion ? undefined : "enter"}
-              variants={reduceMotion ? undefined : crewCountVariants}
+              variants={reduceMotion ? undefined : CREW_COUNT_VARIANTS}
             >
                 {subscriberCount}
             </motion.span>

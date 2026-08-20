@@ -2,7 +2,7 @@
 .hud-item
 {
   display: grid;
-  gap: var(--space-3);
+  gap: 0.625rem;
   min-inline-size: 0;
 }
 .hud-section-label
@@ -15,4 +15,3 @@
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
 }
-.hud-section-content { min-inline-size: 0; }
