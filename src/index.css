@@ -12,20 +12,18 @@
     --hud-accent: #dfaa37;
     --hud-accent-rgb: 223 170 55;
 
-    --hud-surface: linear-gradient(180deg, rgb(25 36 40 / 0.88), rgb(12 18 24 / 0.82));
+    --hud-border: rgb(255 255 255 / 0.075);
+    --hud-divider: rgb(255 255 255 / 0.065);
 
-    /* ---------- Borders. ---------- */
-     --hud-border: rgb(255 255 255 / 0.075);
-     --hud-divider: rgb(255 255 255 / 0.075);
+    /* ---------- Layout. ---------- */
+    --hud-width: clamp(340px, 24vw, 430px);
+    --hud-gutter: 2rem;
+    --hud-panel-padding: 1.375rem;
+    --hud-section-gap: 0.75rem;
+    --hud-radius: 12px;
 
-     /* ---------- Layout. ---------- */
-     --hud-width: clamp(330px, 22vw, 430px);
-     --hud-gutter: 2rem;
-     --hud-panel-padding: 1.5rem;
-     --hud-section-gap: 0.75rem;
-     --hud-radius: 12px;
-
-     --font-ui: Inter, "Segoe UI", system-ui, sans-serif;
+    /* ---------- Fonts. ---------- */
+    --font-ui: Inter, "Segoe UI", system-ui, sans-serif;
     --font-display: "JetBrains Mono", "IBM Plex Mono", monospace;
     --font-size-label: 0.66rem;
     --font-size-body: 0.875rem;
@@ -43,10 +41,10 @@
     --tracking-title: 0.15em;
 
     /* ---------- Effects. ---------- */
-    --hud-panel-backdrop: blur(20px) saturate(145%) brightness(1.04);
-    --hud-shadow: 0 28px 64px rgb(0 0 0 / 0.32),
-                  0 8px 20px rgb(0 0 0 / 0.16),
-                  0 0 32px rgb(var(--hud-accent-rgb) / 0.045);
+    --hud-backdrop: blur(20px) saturate(145%) brightness(1.04);
+    --hud-shadow: 0 24px 56px rgb(0 0 0 / 0.30),
+                  0 8px 18px rgb(0 0 0 / 0.14),
+                  0 0 28px rgb(var(--hud-accent-rgb) / 0.04);
     --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
 }
 *, *::before, *::after { box-sizing: border-box; }

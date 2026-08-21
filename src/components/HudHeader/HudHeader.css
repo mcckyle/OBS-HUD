@@ -33,7 +33,6 @@
 }
 .hud-system-id
 {
-  margin: 0;
   color: var(--hud-text-muted);
   font-size: var(--font-size-label);
   font-weight: var(--font-weight-label);
@@ -46,7 +45,7 @@
 {
   display: grid;
   justify-items: end;
-  gap: 0.25rem;
+  gap: 0.30rem;
   flex: 0 0 auto;
 
   text-align: end;
@@ -71,4 +70,11 @@
   line-height: 1;
   letter-spacing: 0.050em;
   white-space: nowrap;
+}
+
+@media (max-width: 380px)
+{
+  .hud-header { gap: 1rem; }
+  .hud-title { letter-spacing: 0.12em; }
+  .hud-clock-time { font-size: 0.80rem; }
 }

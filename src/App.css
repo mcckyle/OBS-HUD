@@ -18,21 +18,21 @@
 {
   position: relative;
   isolation: isolate;
-  overflow: hidden;
 
   display: flex;
   flex-direction: column;
   gap: var(--hud-section-gap);
+
   inline-size: min(var(--hud-width), calc(100vw - (2 * var(--hud-gutter))));
   padding: var(--hud-panel-padding);
   color: var(--hud-text);
-  background: var(--hud-surface);
+  background: linear-gradient(180deg, rgb(27 39 43 / 0.88), rgb(10 16 21 / 0.84));
   border: 1px solid var(--hud-border);
   border-radius: var(--hud-radius);
   box-shadow: var(--hud-shadow);
 
-  backdrop-filter: var(--hud-panel-backdrop);
-  -webkit-backdrop-filter: var(--hud-panel-backdrop);
+  backdrop-filter: var(--hud-backdrop);
+  -webkit-backdrop-filter: var(--hud-backdrop);
 }
 .hud-panel::before
 {
@@ -42,7 +42,8 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: radial-gradient(circle at 115% -10%, rgb(var(--hud-accent-rgb) / 0.11), transparent 42%), linear-gradient(180deg, rgb(255 255 255 / 0.035), transparent 38%);
+  border-radius: inherit;
+  background: radial-gradient(circle at 100% 0%, rgb(var(--hud-accent-rgb) / 0.09), transparent 42%);
   pointer-events: none;
 }
 .hud-panel::after
@@ -52,15 +53,20 @@
 
   position: absolute;
   inset-block-start: 0;
-  inset-inline: 12%;
+  inset-inline: 16%;
   block-size: 1px;
-  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.18), transparent);
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.16), transparent);
   pointer-events: none;
 }
 .hud-sections { display: flex; flex-direction: column; gap: var(--hud-section-gap); min-block-size: 0; }
 
+@media (prefers-reduced-transparency: reduce)
+{
+  .hud-panel { background: rgb(12 18 24 / 0.96); backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
+
 @media (max-width: 480px)
 {
-  .hud-stage { --hud-gutter: 1.25rem; }
-  .hud-panel { --hud-panel-padding: 1rem; }
+  .hud-stage { --hud-gutter: 1rem; }
+  .hud-panel { --hud-panel-padding: 1.125rem; }
 }
