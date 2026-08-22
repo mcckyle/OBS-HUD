@@ -27,7 +27,7 @@ export default function App()
       <motion.section
           className="hud-panel"
           initial={reduceMotion ? false : "hidden"}
-          animate="visible"
+          animate={reduceMotion ? undefined : "visible"}
           variants={reduceMotion ? undefined : PANEL_VARIANTS}
           aria-label="Starfield livestream HUD"
         >

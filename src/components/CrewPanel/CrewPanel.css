@@ -2,7 +2,6 @@
 .hud-crew-count
 {
     display: block;
-    max-inline-size: 100%;
 
     color: var(--hud-text);
     font-family: var(--font-display);

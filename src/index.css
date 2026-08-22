@@ -43,8 +43,7 @@
     /* ---------- Effects. ---------- */
     --hud-backdrop: blur(20px) saturate(145%) brightness(1.04);
     --hud-shadow: 0 24px 56px rgb(0 0 0 / 0.30),
-                  0 8px 18px rgb(0 0 0 / 0.14),
-                  0 0 28px rgb(var(--hud-accent-rgb) / 0.04);
+                  0 8px 18px rgb(0 0 0 / 0.14);
     --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
 }
 *, *::before, *::after { box-sizing: border-box; }

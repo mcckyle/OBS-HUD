@@ -16,14 +16,13 @@
 /* HUD Console Styles. */
 .hud-panel
 {
-  position: relative;
-  isolation: isolate;
+  inline-size: min(var(--hud-width), calc(100vw - (2 * var(--hud-gutter))));
+  overflow: hidden;
 
   display: flex;
   flex-direction: column;
   gap: var(--hud-section-gap);
 
-  inline-size: min(var(--hud-width), calc(100vw - (2 * var(--hud-gutter))));
   padding: var(--hud-panel-padding);
   color: var(--hud-text);
   background: linear-gradient(180deg, rgb(27 39 43 / 0.88), rgb(10 16 21 / 0.84));
@@ -33,30 +32,6 @@
 
   backdrop-filter: var(--hud-backdrop);
   -webkit-backdrop-filter: var(--hud-backdrop);
-}
-.hud-panel::before
-{
-  /* Console Edge Highlight Styles. */
-  content: "";
-
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border-radius: inherit;
-  background: radial-gradient(circle at 100% 0%, rgb(var(--hud-accent-rgb) / 0.09), transparent 42%);
-  pointer-events: none;
-}
-.hud-panel::after
-{
-  /* Console Edge Highlight Styles. */
-  content: "";
-
-  position: absolute;
-  inset-block-start: 0;
-  inset-inline: 16%;
-  block-size: 1px;
-  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.16), transparent);
-  pointer-events: none;
 }
 .hud-sections { display: flex; flex-direction: column; gap: var(--hud-section-gap); min-block-size: 0; }
 
