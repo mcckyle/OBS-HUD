@@ -1,6 +1,6 @@
 //Filename: useSessionTimer.js
 //Author: Kyle McColgan
-//Date: 17 July 2026
+//Date: 23 August 2026
 //Description: This file contains a timer hook for the OBS HUD project.
 
 import { useState } from 'react';
@@ -15,7 +15,7 @@ export function useSessionTimer()
     useInterval(() =>
     {
         setSeconds(previous => previous + 1);
-    }, [ONE_SECOND_MS]);
+    }, ONE_SECOND_MS);
 
     return seconds;
 }

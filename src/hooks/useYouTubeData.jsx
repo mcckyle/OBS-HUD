@@ -1,6 +1,6 @@
 //Filename: useYouTubeData.jsx
 //Author: Kyle McColgan
-//Date: 10 August 2026
+//Date: 23 August 2026
 //Description: This file contains the YouTube API integration for the OBS HUD project.
 
 import React, { useState, useEffect, useRef, useMemo } from 'react';
@@ -8,7 +8,7 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 //API.
 const YOUTUBE_API = "https://www.googleapis.com/youtube/v3";
 const CHANNELS_ENDPOINT = "channels";
-const COMMENT_THREADS_ENDPOINT = "commentThreads"
+const COMMENT_THREADS_ENDPOINT = "commentThreads";
 
 //Polling.
 const POLL_INTERVAL_MS = 2 * 60 * 1000;
@@ -109,6 +109,8 @@ export function useYouTubeData()
       const controller = new AbortController();
       requestControllerRef.current = controller;
 
+      const requestOptions = { signal: controller.signal, };
+
       const statsUrl = createYouTubeUrl(CHANNELS_ENDPOINT, {
         part: "statistics",
         id: channelId,
@@ -127,12 +129,8 @@ export function useYouTubeData()
       {
         //1. Fetch subscriber statistics.
         const [statsResponse, commsResponse] = await Promise.all([
-          fetch(statsUrl, {
-            signal: controller.signal,
-          }),
-          fetch(commsUrl, {
-            signal: controller.signal,
-          }),
+          fetch(statsUrl, requestOptions),
+          fetch(commsUrl, requestOptions),
         ]);
 
         if (disposed)

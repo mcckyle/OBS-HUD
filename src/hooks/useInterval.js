@@ -1,6 +1,6 @@
 //Filename: useInterval.js
 //Author: Kyle McColgan
-//Date: 17 July 2026
+//Date: 23 August 2026
 //Description: This file contains an abstract shared interval hook for the OBS HUD project.
 
 import { useEffect, useRef } from 'react';
@@ -21,11 +21,11 @@ export function useInterval(callback, delay)
             return;
         }
 
-        const id = setInterval(() =>
+        const intervalId = setInterval(() =>
         {
             callbackRef.current();
         }, delay);
 
-        return () => clearInterval(id);
+        return () => clearInterval(intervalId);
     }, [delay]);
 }
