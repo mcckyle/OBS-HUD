@@ -26,7 +26,7 @@
 
   padding: var(--hud-panel-padding);
   color: var(--hud-text);
-  background: linear-gradient(180deg, rgb(28 41 46 / 0.86), rgb(9 15 20 / 0.88));
+  background: linear-gradient(180deg, rgb(24 35 40 / 0.90), rgb(8 14 19 / 0.94));
   border: 1px solid var(--hud-border);
   border-radius: var(--hud-radius);
   box-shadow: var(--hud-shadow);
@@ -36,18 +36,19 @@
 }
 .hud-panel::before
 {
+  /* App Single Illuminated Console Edge Styles. */
   content: "";
   position: absolute;
-  inset: 0 0 auto;
+  inset: 0 12% auto;
   block-size: 1px;
-  background: linear-gradient(90deg, transparent, rgb(var(--hud-accent-rgb) / 0.55), transparent);
-  opacity: 0.75;
+  background: linear-gradient(90deg, transparent, rgb(var(--hud-accent-rgb) / 0.65), transparent);
+  opacity: 0.80;
 }
 .hud-sections { display: flex; flex-direction: column; gap: var(--hud-section-gap); min-block-size: 0; }
 
 @media (prefers-reduced-transparency: reduce)
 {
-  .hud-panel { background: rgb(10 16 21 / 0.96); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .hud-panel { background: rgb(9 15 20 / 0.97); backdrop-filter: none; -webkit-backdrop-filter: none; }
 }
 
 @media (max-width: 480px)

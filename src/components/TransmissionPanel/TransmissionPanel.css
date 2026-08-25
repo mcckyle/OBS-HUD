@@ -1,16 +1,16 @@
 /* Filename: src/components/TransmissionPanel/TransmissionPanel.css */
 
-.hud-comms { display: flex; flex-direction: column; gap: 0.375rem; min-block-size: 4.5rem; }
+.hud-comms { display: flex; flex-direction: column; gap: 0.40rem; min-block-size: 4.5rem; }
 .hud-author
 {
   max-inline-size: 100%;
   margin: 0;
   overflow: hidden;
-  color: rgb(var(--hud-accent-rgb) / 0.84);
+  color: rgb(var(--hud-accent-rgb) / 0.82);
   font-size: var(--font-size-label);
   font-weight: var(--font-weight-label);
   line-height: 1.2;
-  letter-spacing: calc(var(--tracking-label) + 0.02em);
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   text-overflow: ellipsis;
   white-space: nowrap;
