@@ -17,6 +17,7 @@
 .hud-panel
 {
   position: relative;
+  isolation: isolate;
   inline-size: min(var(--hud-width), calc(100vw - (2 * var(--hud-gutter))));
   overflow: hidden;
 
@@ -26,7 +27,7 @@
 
   padding: var(--hud-panel-padding);
   color: var(--hud-text);
-  background: linear-gradient(180deg, rgb(24 35 40 / 0.90), rgb(8 14 19 / 0.94));
+  background: linear-gradient(180deg, rgb(24 35 40 / 0.90), rgb(8 14 19 / 0.95));
   border: 1px solid var(--hud-border);
   border-radius: var(--hud-radius);
   box-shadow: var(--hud-shadow);
@@ -41,10 +42,11 @@
   position: absolute;
   inset: 0 12% auto;
   block-size: 1px;
-  background: linear-gradient(90deg, transparent, rgb(var(--hud-accent-rgb) / 0.65), transparent);
-  opacity: 0.80;
+  background: linear-gradient(90deg, transparent, rgb(var(--hud-accent-rgb) / 0.70), transparent);
+  opacity: 0.75;
+  pointer-events: none;
 }
-.hud-sections { display: flex; flex-direction: column; gap: var(--hud-section-gap); min-block-size: 0; }
+.hud-sections { display: grid; gap: var(--hud-section-gap); min-inline-size: 0; min-block-size: 0; }
 
 @media (prefers-reduced-transparency: reduce)
 {
