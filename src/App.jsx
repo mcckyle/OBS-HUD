@@ -1,10 +1,10 @@
 //Filename: App.jsx
 //Author: Kyle McColgan
-//Date: 23 August 2026
+//Date: 26 August 2026
 //Description: This file contains the App component for the OBS HUD project.
 
 import { motion, useReducedMotion } from 'motion/react';
-
+import { useYouTubeData } from "./hooks/useYouTubeData";
 import HudHeader from "./components/HudHeader/HudHeader.jsx";
 import HudSection from "./components/HudSection/HudSection.jsx";
 import SessionTimer from "./components/SessionTimer/SessionTimer.jsx";
@@ -21,6 +21,7 @@ const PANEL_VARIANTS = {
 export default function App()
 {
   const reduceMotion = useReducedMotion();
+  const { subscriberCount, latestMessage } = useYouTubeData();
 
   //Transparent wrapper that spans the OBS canvas...
   return (
@@ -43,12 +44,12 @@ export default function App()
 
           {/* Section 2: Live Subscriber Count. */}
           <HudSection label="CREW SIZE">
-            <CrewPanel />
+            <CrewPanel subscriberCount={subscriberCount} />
           </HudSection>
 
           {/* Section 3: Comms. */}
           <HudSection label="TRANSMISSION">
-            <TransmissionPanel />
+            <TransmissionPanel message={latestMessage} />
           </HudSection>
         </div>
       </motion.section>

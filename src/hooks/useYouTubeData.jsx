@@ -1,9 +1,9 @@
 //Filename: useYouTubeData.jsx
 //Author: Kyle McColgan
-//Date: 23 August 2026
+//Date: 26 August 2026
 //Description: This file contains the YouTube API integration for the OBS HUD project.
 
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 //API.
 const YOUTUBE_API = "https://www.googleapis.com/youtube/v3";
@@ -85,10 +85,7 @@ export function useYouTubeData()
   const [subscriberCount, setSubscriberCount] = useState(INITIAL_SUBSCRIBER_COUNT);
   const [latestMessage, setLatestMessage] = useState(DEFAULT_MESSAGES.connecting);
   const requestControllerRef = useRef(null);
-  const { apiKey, channelId } = useMemo(
-    getYouTubeConfig,
-    [],
-  );
+  const { apiKey, channelId } = getYouTubeConfig();
 
   useEffect(() =>
   {
