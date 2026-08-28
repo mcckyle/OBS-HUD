@@ -21,13 +21,13 @@
   inline-size: min(var(--hud-width), calc(100vw - (2 * var(--hud-gutter))));
   overflow: hidden;
 
-  display: flex;
-  flex-direction: column;
-  gap: var(--hud-section-gap);
-
+  display: grid;
+  gap: var(--hud-gap);
   padding: var(--hud-panel-padding);
+
+  background: linear-gradient(180deg, rgb(24 35 40 / 0.88), rgb(8 14 19 / 0.95));
   color: var(--hud-text);
-  background: linear-gradient(180deg, rgb(24 35 40 / 0.90), rgb(8 14 19 / 0.95));
+
   border: 1px solid var(--hud-border);
   border-radius: var(--hud-radius);
   box-shadow: var(--hud-shadow);
@@ -40,13 +40,12 @@
   /* App Single Illuminated Console Edge Styles. */
   content: "";
   position: absolute;
-  inset: 0 12% auto;
+  inset: 0 14% auto;
   block-size: 1px;
-  background: linear-gradient(90deg, transparent, rgb(var(--hud-accent-rgb) / 0.70), transparent);
-  opacity: 0.75;
+  background: linear-gradient(90deg, transparent, rgb(var(--hud-accent-rgb) / 0.68), transparent);
   pointer-events: none;
 }
-.hud-sections { display: grid; gap: var(--hud-section-gap); min-inline-size: 0; min-block-size: 0; }
+.hud-sections { display: grid; gap: var(--hud-gap); min-inline-size: 0; }
 
 @media (prefers-reduced-transparency: reduce)
 {

@@ -1,5 +1,4 @@
 /* Filename: src/components/TransmissionPanel/TransmissionPanel.css */
-
 .hud-comms { display: flex; flex-direction: column; gap: 0.40rem; min-block-size: 4.5rem; }
 .hud-author
 {
@@ -22,7 +21,6 @@
   overflow: hidden;
   color: var(--hud-text-secondary);
   font-size: var(--font-size-body);
-  font-weight: 400;
   line-height: 1.4;
   overflow-wrap: anywhere;
 
