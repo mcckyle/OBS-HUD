@@ -9,7 +9,7 @@
   gap: 1.5rem;
 
   min-inline-size: 0;
-  padding-block-end: 1rem;
+  padding-block-end: 0.95rem;
 
   border-block-end: 1px solid var(--hud-divider);
 }

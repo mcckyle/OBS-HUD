@@ -6,32 +6,31 @@
 
     /* ---------- Colors. ---------- */
     --hud-text: #edf7fb;
-    --hud-text-secondary: #bfd0d9;
-    --hud-text-muted: #8299a5;
+    --hud-text-secondary: #b9cbd4;
+    --hud-text-muted: #7f969f;
 
     --hud-accent: #dfaa37;
     --hud-accent-rgb: 223 170 55;
 
-    --hud-border: rgb(255 255 255 / 0.075);
+    --hud-border: rgb(255 255 255 / 0.08);
     --hud-divider: rgb(255 255 255 / 0.065);
 
     /* ---------- Layout. ---------- */
     --hud-width: clamp(340px, 24vw, 430px);
     --hud-gutter: 2rem;
-
-    --hud-panel-padding: 1.375rem;
-    --hud-gap: 0.90rem;
+    --hud-panel-padding: 1.35rem;
+    --hud-gap: 1rem;
     --hud-radius: 12px;
 
     /* ---------- Fonts. ---------- */
     --font-ui: Inter, "Segoe UI", system-ui, sans-serif;
     --font-display: "JetBrains Mono", "IBM Plex Mono", monospace;
-    --font-size-label: 0.66rem;
+    --font-size-label: 0.65rem;
     --font-size-body: 0.875rem;
     --font-size-meta: 0.58rem;
 
     --font-size-timer: clamp(3rem, 4vw, 4.15rem);
-    --font-size-stat: clamp(2.05rem, 3vw, 2.6rem);
+    --font-size-stat: clamp(2rem, 3vw, 2.6rem);
 
     --font-weight-label: 600;
     --font-weight-value: 500;
@@ -41,7 +40,7 @@
     --tracking-title: 0.15em;
 
     /* ---------- Effects. ---------- */
-    --hud-backdrop: blur(20px) saturate(145%) brightness(1.04);
+    --hud-backdrop: blur(20px) saturate(140%) brightness(1.03);
     --hud-shadow: 0 24px 56px rgb(0 0 0 / 0.30),
                   0 8px 18px rgb(0 0 0 / 0.14);
 }
