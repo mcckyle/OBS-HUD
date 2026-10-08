@@ -18,8 +18,8 @@
     /* ---------- Layout. ---------- */
     --hud-width: clamp(340px, 24vw, 430px);
     --hud-gutter: 2rem;
-    --hud-panel-padding: 1.35rem;
-    --hud-gap: 1rem;
+    --hud-panel-padding: 1.3rem;
+    --hud-gap: 0.90rem;
     --hud-radius: 12px;
 
     /* ---------- Fonts. ---------- */
