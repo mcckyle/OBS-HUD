@@ -18,14 +18,16 @@
 {
   position: relative;
   isolation: isolate;
-  inline-size: min(var(--hud-width), calc(100vw - (2 * var(--hud-gutter))));
-  overflow: hidden;
 
   display: grid;
   gap: var(--hud-gap);
-  padding: var(--hud-panel-padding);
 
-  background: linear-gradient(180deg, rgb(24 35 40 / 0.84), rgb(8 14 19 / 0.94));
+  inline-size: min(var(--hud-width), calc(100vw - 2 * var(--hud-gutter)));
+  min-inline-size: 0;
+  padding: var(--hud-panel-padding);
+  overflow: hidden;
+
+  background: linear-gradient(155deg, rgb(29 42 48 / 95%) 0%, var(--hud-surface) 48%, var(--hud-surface-deep) 100%);
   color: var(--hud-text);
 
   border: 1px solid var(--hud-border);
@@ -42,18 +44,12 @@
   position: absolute;
   inset: 0 12% auto;
   block-size: 1px;
-  background: linear-gradient(90deg, transparent, rgb(var(--hud-accent-rgb) / 0.65), transparent);
+  background: linear-gradient(90deg, transparent, rgb(var(--hud-accent-rgb) / 45%), transparent);
   pointer-events: none;
 }
 .hud-sections { display: grid; gap: var(--hud-gap); min-inline-size: 0; }
 
-@media (prefers-reduced-transparency: reduce)
-{
-  .hud-panel { background: rgb(9 15 20 / 0.97); backdrop-filter: none; -webkit-backdrop-filter: none; }
-}
-
 @media (max-width: 480px)
 {
-  .hud-stage { --hud-gutter: 1rem; }
-  .hud-panel { --hud-panel-padding: 1.125rem; }
+  :root { --hud-gutter: 16px; --hud-panel-padding: 17px; --hud-gap: 14px; }
 }

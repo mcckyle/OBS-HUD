@@ -6,24 +6,24 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 20px;
 
   min-inline-size: 0;
-  padding-block-end: 0.90rem;
+  padding-block-end: 13px;
 
   border-block-end: 1px solid var(--hud-divider);
 }
 .hud-system
 {
   display: grid;
-  gap: 0.40rem;
+  gap: 6px;
   min-inline-size: 0;
 }
 .hud-title
 {
   margin: 0;
   color: var(--hud-text);
-  font-size: clamp(0.80rem, 0.75rem + 0.20vw, 0.95rem);
+  font-size: 0.875rem;
   font-weight: 700;
   line-height: 1;
   letter-spacing: var(--tracking-title);
@@ -45,7 +45,7 @@
 {
   display: grid;
   justify-items: end;
-  gap: 0.30rem;
+  gap: 4px;
   flex: 0 0 auto;
 
   text-align: end;
@@ -56,7 +56,7 @@
   font-size: var(--font-size-meta);
   font-weight: var(--font-weight-label);
   line-height: 1;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -64,16 +64,17 @@
 {
   color: var(--hud-text-secondary);
   font-family: var(--font-display);
-  font-size: var(--font-size-body);
+  font-size: 0.75rem;
   font-weight: var(--font-weight-value);
 
   line-height: 1;
-  letter-spacing: 0.050em;
+  letter-spacing: 0.025em;
   white-space: nowrap;
 }
 
 @media (max-width: 380px)
 {
-  .hud-header { gap: 1rem; }
-  .hud-clock-time { font-size: 0.80rem; }
+  .hud-header { gap: 12px; }
+  .hud-title { font-size: 0.75rem; letter-spacing: 0.12em; }
+  .hud-clock-time { font-size: 0.6875rem; }
 }
