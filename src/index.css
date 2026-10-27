@@ -1,86 +1,114 @@
 /* Filename: src/index.css */
-:root
-{
-    /* Starfield NASA-punk Inspired Palette. */
-    color-scheme: dark;
+:root {
+  /* Starfield NASA-punk Inspired Palette. */
+  color-scheme: dark;
 
-    /* Instrument Surfaces. */
-    --hud-surface: #18242b;
-    --hud-surface-deep: #0c1419;
-    --hud-texture: #25343b;
+  /* Instrument Surfaces. */
+  --hud-surface: #18242b;
+  --hud-surface-deep: #0c1419;
+  --hud-texture: #25343b;
 
-    /* Flat, unobtrusive overlay surfaces. */
-    --hud-border: transparent;
-    --hud-radius: 0px;
+  /* Flat, unobtrusive overlay surfaces. */
+  --hud-border: transparent;
+  --hud-radius: 0px;
+  --hud-backdrop: none;
+  --hud-shadow: none;
+
+  /* Telemetry */
+  --hud-text: #edf4f6;
+  --hud-text-secondary: #c0cdd1;
+  --hud-text-muted: #91a3a9;
+
+  /* Atmospheric Sunlight. */
+  --hud-accent: #f2c66d;
+  --hud-accent-rgb: 242 198 109;
+  --hud-accent-orange: #d97745;
+  --hud-accent-red: #c85b4a;
+
+  /* Structural Details. */
+  --hud-divider: rgb(211 225 230 / 13%);
+
+  /* ---------- Layout. ---------- */
+  --hud-width: 420px;
+  --hud-gutter: 28px;
+  --hud-panel-padding: 20px;
+  --hud-gap: 16px;
+
+  /* ---------- Fonts. ---------- */
+  --font-ui: Inter, "Segoe UI", system-ui, sans-serif;
+  --font-display: "JetBrains Mono", "IBM Plex Mono", monospace;
+  --font-size-label: 0.625rem;
+  --font-size-body: 0.8125rem;
+  --font-size-meta: 0.5625rem;
+
+  --font-size-timer: clamp(2.65rem, 3.6vw, 3.8rem);
+  --font-size-stat: clamp(1.8rem, 2.6vw, 2.25rem);
+
+  --font-weight-label: 650;
+  --font-weight-value: 500;
+
+  --tracking-label: 0.14em;
+  --tracking-display: -0.045em;
+  --tracking-title: 0.16em;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  inline-size: 100%;
+  block-size: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: transparent;
+}
+html,
+body {
+  overflow: hidden;
+}
+body {
+  color: var(--hud-text);
+
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings:
+    "tnum" 1,
+    "lnum" 1;
+  font-synthesis: none;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  user-select: none;
+  cursor: default;
+}
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+:focus-visible {
+  outline: 2px solid var(--hud-accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :root {
     --hud-backdrop: none;
-    --hud-shadow: none;
-
-    /* Telemetry */
-    --hud-text: #edf4f6;
-    --hud-text-secondary: #c0cdd1;
-    --hud-text-muted: #91a3a9;
-
-    /* Atmospheric Sunlight. */
-    --hud-accent: #f2c66d;
-    --hud-accent-rgb: 242 198 109;
-    --hud-accent-orange: #d97745;
-    --hud-accent-red: #c85b4a;
-
-    /* Structural Details. */
-    --hud-divider: rgb(211 225 230 / 13%);
-
-    /* ---------- Layout. ---------- */
-    --hud-width: 420px;
-    --hud-gutter: 28px;
-    --hud-panel-padding: 20px;
-    --hud-gap: 16px;
-
-    /* ---------- Fonts. ---------- */
-    --font-ui: Inter, "Segoe UI", system-ui, sans-serif;
-    --font-display: "JetBrains Mono", "IBM Plex Mono", monospace;
-    --font-size-label: 0.625rem;
-    --font-size-body: 0.8125rem;
-    --font-size-meta: 0.5625rem;
-
-    --font-size-timer: clamp(2.65rem, 3.6vw, 3.8rem);
-    --font-size-stat: clamp(1.8rem, 2.6vw, 2.25rem);
-
-    --font-weight-label: 650;
-    --font-weight-value: 500;
-
-    --tracking-label: 0.14em;
-    --tracking-display: -0.045em;
-    --tracking-title: 0.16em;
-}
-*, *::before, *::after { box-sizing: border-box; }
-html, body, #root { inline-size: 100%; block-size: 100%; margin: 0; overflow: hidden; background: transparent; }
-html, body { overflow: hidden; }
-body
-{
-    color: var(--hud-text);
-
-    font-family: var(--font-ui);
-    font-size: 14px;
-    line-height: 1.45;
-    font-variant-numeric: tabular-nums;
-    font-feature-settings: "tnum" 1, "lnum" 1;
-    font-synthesis: none;
-
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-size-adjust: 100%;
-    user-select: none;
-    cursor: default;
-}
-button, input, textarea, select { font: inherit; color: inherit; }
-:focus-visible { outline: 2px solid var(--hud-accent); outline-offset: 3px; }
-
-@media (prefers-reduced-motion: reduce)
-{
-    *, *::before, *::after { scroll-behavior: auto !important; }
-}
-
-@media (prefers-reduced-transparency: reduce)
-{
-    :root { --hud-backdrop: none; }
+  }
 }

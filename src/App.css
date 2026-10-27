@@ -1,8 +1,7 @@
 /* Filename: src/App.css */
 
 /* Positioning on the OBS 1080p canvas. Places overlay top-right. */
-.hud-stage
-{
+.hud-stage {
   display: grid;
   place-items: start end;
 
@@ -15,8 +14,7 @@
 }
 
 /* Translucent Shipboard Console Styles. */
-.hud-panel
-{
+.hud-panel {
   display: grid;
   gap: var(--hud-gap);
 
@@ -46,9 +44,16 @@
   background: linear-gradient(90deg, transparent, rgb(var(--hud-accent-rgb) / 45%), transparent);
   pointer-events: none;
 }*/
-.hud-sections { display: grid; gap: var(--hud-gap); min-inline-size: 0; }
+.hud-sections {
+  display: grid;
+  gap: var(--hud-gap);
+  min-inline-size: 0;
+}
 
-@media (max-width: 480px)
-{
-  :root { --hud-gutter: 16px; --hud-panel-padding: 17px; --hud-gap: 14px; }
+@media (max-width: 480px) {
+  :root {
+    --hud-gutter: 16px;
+    --hud-panel-padding: 17px;
+    --hud-gap: 14px;
+  }
 }

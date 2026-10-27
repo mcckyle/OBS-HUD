@@ -1,14 +1,16 @@
 /* Filename: src/components/CrewPanel/CrewPanel.css */
-.hud-crew-count
-{
-    display: block;
+.hud-crew-count {
+  display: block;
 
-    color: var(--hud-text);
-    font-family: var(--font-display);
-    font-size: var(--font-size-stat);
-    font-weight: var(--font-weight-value);
-    line-height: 1;
-    letter-spacing: var(--tracking-display);
-    white-space: nowrap; /* Prevent wrapping if we ever localize the number formatting. */
+  color: var(--hud-text);
+  font-family: var(--font-display);
+  font-size: var(--font-size-stat);
+  font-weight: var(--font-weight-value);
+  line-height: 1;
+  letter-spacing: var(--tracking-display);
+  white-space: nowrap; /* Prevent wrapping if we ever localize the number formatting. */
 }
-.hud-crew-value { display: inline-block; min-inline-size: 5ch; }
+.hud-crew-value {
+  display: inline-block;
+  min-inline-size: 5ch;
+}

@@ -1,7 +1,12 @@
 /* Filename: src/components/TransmissionPanel/TransmissionPanel.css */
-.hud-comms { display: flex; flex-direction: column; gap: 6px; min-inline-size: 0; min-block-size: 3.75rem; }
-.hud-author
-{
+.hud-comms {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-inline-size: 0;
+  min-block-size: 3.75rem;
+}
+.hud-author {
   max-inline-size: 100%;
   margin: 0;
   overflow: hidden;
@@ -14,8 +19,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.hud-message
-{
+.hud-message {
   display: -webkit-box;
   margin: 0;
   overflow: hidden;

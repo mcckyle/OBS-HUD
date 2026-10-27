@@ -1,8 +1,7 @@
 /* Filename: src/components/HudHeader/HudHeader.css */
 
 /* System Meta Header Styles. */
-.hud-header
-{
+.hud-header {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -13,14 +12,12 @@
 
   border-block-end: 1px solid var(--hud-divider);
 }
-.hud-system
-{
+.hud-system {
   display: grid;
   gap: 6px;
   min-inline-size: 0;
 }
-.hud-title
-{
+.hud-title {
   margin: 0;
   color: var(--hud-text);
   font-size: 0.875rem;
@@ -31,8 +28,7 @@
   text-transform: uppercase;
   white-space: nowrap;
 }
-.hud-system-id
-{
+.hud-system-id {
   color: var(--hud-text-muted);
   font-size: var(--font-size-label);
   font-weight: var(--font-weight-label);
@@ -41,8 +37,7 @@
   text-transform: uppercase;
   white-space: nowrap;
 }
-.hud-clock
-{
+.hud-clock {
   display: grid;
   justify-items: end;
   gap: 4px;
@@ -50,8 +45,7 @@
 
   text-align: end;
 }
-.hud-clock-sol
-{
+.hud-clock-sol {
   color: var(--hud-accent);
   font-size: var(--font-size-meta);
   font-weight: var(--font-weight-label);
@@ -60,8 +54,7 @@
   text-transform: uppercase;
   white-space: nowrap;
 }
-.hud-clock-time
-{
+.hud-clock-time {
   color: var(--hud-text-secondary);
   font-family: var(--font-display);
   font-size: 0.75rem;
@@ -72,9 +65,15 @@
   white-space: nowrap;
 }
 
-@media (max-width: 380px)
-{
-  .hud-header { gap: 12px; }
-  .hud-title { font-size: 0.75rem; letter-spacing: 0.12em; }
-  .hud-clock-time { font-size: 0.6875rem; }
+@media (max-width: 380px) {
+  .hud-header {
+    gap: 12px;
+  }
+  .hud-title {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+  }
+  .hud-clock-time {
+    font-size: 0.6875rem;
+  }
 }

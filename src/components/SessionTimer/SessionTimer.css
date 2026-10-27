@@ -1,6 +1,5 @@
 /* Filename: src/components/SessionTimer/SessionTimer.css */
-.session-timer
-{
+.session-timer {
   display: block;
   color: var(--hud-text);
   font-family: var(--font-display);
