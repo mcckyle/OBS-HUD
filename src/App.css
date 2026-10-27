@@ -17,9 +17,6 @@
 /* Translucent Shipboard Console Styles. */
 .hud-panel
 {
-  position: relative;
-  isolation: isolate;
-
   display: grid;
   gap: var(--hud-gap);
 
@@ -30,29 +27,25 @@
 
   background: linear-gradient(
     155deg,
-    rgb(29 42 48 / 65%) 0%,
-    rgb(17 25 30 / 70%) 48%,
-    rgb(10 16 20 / 74%) 100%
+    rgb(29 42 48 / 52%) 0%,
+    rgb(17 25 30 / 58%) 48%,
+    rgb(10 16 20 / 64%) 100%
   );
   color: var(--hud-text);
 
-  border: 1px solid var(--hud-border);
-  border-radius: var(--hud-radius);
-  box-shadow: var(--hud-shadow);
-
-  backdrop-filter: var(--hud-backdrop);
-  -webkit-backdrop-filter: var(--hud-backdrop);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
-.hud-panel::before
+/*.hud-panel::before
 {
-  /* Subtle Constellation Amber Instrument Highlight Styles. */
   content: "";
   position: absolute;
   inset: 0 12% auto;
   block-size: 1px;
   background: linear-gradient(90deg, transparent, rgb(var(--hud-accent-rgb) / 45%), transparent);
   pointer-events: none;
-}
+}*/
 .hud-sections { display: grid; gap: var(--hud-gap); min-inline-size: 0; }
 
 @media (max-width: 480px)

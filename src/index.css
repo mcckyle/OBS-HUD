@@ -9,6 +9,12 @@
     --hud-surface-deep: #0a1014;
     --hud-texture: #1b272d;
 
+    /* Flat, unobtrusive overlay surfaces. */
+    --hud-border: transparent;
+    --hud-radius: 0px;
+    --hud-backdrop: none;
+    --hud-shadow: none;
+
     /* Telemetry */
     --hud-text: #edf5f7;
     --hud-text-secondary: #b7c7cd;
@@ -19,7 +25,6 @@
     --hud-accent-rgb: 226 179 76;
 
     /* Structural Details. */
-    --hud-border: rgb(190 211 219 / 10%);
     --hud-divider: rgb(190 211 219 / 9%);
 
     /* ---------- Layout. ---------- */
@@ -27,7 +32,6 @@
     --hud-gutter: 28px;
     --hud-panel-padding: 20px;
     --hud-gap: 16px;
-    --hud-radius: 11px;
 
     /* ---------- Fonts. ---------- */
     --font-ui: Inter, "Segoe UI", system-ui, sans-serif;
@@ -45,11 +49,6 @@
     --tracking-label: 0.14em;
     --tracking-display: -0.045em;
     --tracking-title: 0.16em;
-
-    /* ---------- Effects. ---------- */
-    --hud-backdrop: blur(16px) saturate(115%);
-    --hud-shadow: 0 18px 44px rgb(0 0 0 / 24%),
-                  0 3px 10px rgb(0 0 0 / 12%);
 }
 *, *::before, *::after { box-sizing: border-box; }
 html, body, #root { inline-size: 100%; block-size: 100%; margin: 0; overflow: hidden; background: transparent; }
