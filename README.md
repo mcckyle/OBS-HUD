@@ -7,9 +7,9 @@
 
 ---
 
-## Screenshot
+## Demo
 
-![Overlay Screenshot](./public/images/obs-hud-08062026.png)
+![App Demo](./public/images/output.gif)
 *A minimal telemetry overlay designed to blend naturally with Starfield's visual language.*
 
 ---
