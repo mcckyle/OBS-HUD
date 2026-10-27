@@ -10,10 +10,11 @@
   block-size: 100%;
   padding: var(--hud-gutter);
 
+  background: transparent;
   pointer-events: none;
 }
 
-/* HUD Console Styles. */
+/* Translucent Shipboard Console Styles. */
 .hud-panel
 {
   position: relative;
@@ -27,7 +28,12 @@
   padding: var(--hud-panel-padding);
   overflow: hidden;
 
-  background: linear-gradient(155deg, rgb(29 42 48 / 95%) 0%, var(--hud-surface) 48%, var(--hud-surface-deep) 100%);
+  background: linear-gradient(
+    155deg,
+    rgb(29 42 48 / 65%) 0%,
+    rgb(17 25 30 / 70%) 48%,
+    rgb(10 16 20 / 74%) 100%
+  );
   color: var(--hud-text);
 
   border: 1px solid var(--hud-border);
@@ -39,7 +45,7 @@
 }
 .hud-panel::before
 {
-  /* App Single Illuminated Console Edge Styles. */
+  /* Subtle Constellation Amber Instrument Highlight Styles. */
   content: "";
   position: absolute;
   inset: 0 12% auto;

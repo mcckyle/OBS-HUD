@@ -1,5 +1,5 @@
 /* Filename: src/components/TransmissionPanel/TransmissionPanel.css */
-.hud-comms { display: flex; flex-direction: column; gap: 6px; min-block-size: 3.75rem; }
+.hud-comms { display: flex; flex-direction: column; gap: 6px; min-inline-size: 0; min-block-size: 3.75rem; }
 .hud-author
 {
   max-inline-size: 100%;

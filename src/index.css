@@ -52,12 +52,10 @@
                   0 3px 10px rgb(0 0 0 / 12%);
 }
 *, *::before, *::after { box-sizing: border-box; }
-html, body, #root { inline-size: 100%; block-size: 100%; }
+html, body, #root { inline-size: 100%; block-size: 100%; margin: 0; overflow: hidden; background: transparent; }
 html, body { overflow: hidden; }
 body
 {
-    margin: 0;
-    background: transparent;
     color: var(--hud-text);
 
     font-family: var(--font-ui);
