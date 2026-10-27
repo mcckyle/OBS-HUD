@@ -1,12 +1,10 @@
 /* Filename: src/components/HudSection/HudSection.css */
-.hud-item
-{
+.hud-item {
   display: grid;
   gap: 7px;
   min-inline-size: 0;
 }
-.hud-section-label
-{
+.hud-section-label {
   margin: 0;
   color: var(--hud-text-muted);
   font-size: var(--font-size-label);
