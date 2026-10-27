@@ -5,9 +5,9 @@
     color-scheme: dark;
 
     /* Instrument Surfaces. */
-    --hud-surface: #11191e;
-    --hud-surface-deep: #0a1014;
-    --hud-texture: #1b272d;
+    --hud-surface: #18242b;
+    --hud-surface-deep: #0c1419;
+    --hud-texture: #25343b;
 
     /* Flat, unobtrusive overlay surfaces. */
     --hud-border: transparent;
@@ -16,16 +16,18 @@
     --hud-shadow: none;
 
     /* Telemetry */
-    --hud-text: #edf5f7;
-    --hud-text-secondary: #b7c7cd;
-    --hud-text-muted: #80969e;
+    --hud-text: #edf4f6;
+    --hud-text-secondary: #c0cdd1;
+    --hud-text-muted: #91a3a9;
 
-    /* Constellation Amber. */
-    --hud-accent: #e2b34c;
-    --hud-accent-rgb: 226 179 76;
+    /* Atmospheric Sunlight. */
+    --hud-accent: #f2c66d;
+    --hud-accent-rgb: 242 198 109;
+    --hud-accent-orange: #d97745;
+    --hud-accent-red: #c85b4a;
 
     /* Structural Details. */
-    --hud-divider: rgb(190 211 219 / 9%);
+    --hud-divider: rgb(211 225 230 / 13%);
 
     /* ---------- Layout. ---------- */
     --hud-width: 420px;
