@@ -40,26 +40,33 @@
       var(--hud-atmosphere-gold),
       transparent 52%
     ),
-  linear-gradient(
-    145deg,
-    rgb(var(--hud-space-rgb) / 0.96) 0%,
-    rgb(var(--hud-space-rgb) / 0.88) 55%,
-    rgb(var(--hud-space-rgb) / 0.94) 100%
-  );
+    linear-gradient(
+      145deg,
+      rgb(var(--hud-space-rgb) / 0.96) 0%,
+      rgb(var(--hud-space-rgb) / 0.88) 55%,
+      rgb(var(--hud-space-rgb) / 0.94) 100%
+    );
   color: var(--hud-text);
 
   border: 0;
   border-radius: 0;
   box-shadow: none;
 }
-.hud-panel::before
-{
+.hud-panel::before {
   content: "";
   position: absolute;
   inset-block-start: 0;
   inset-inline: 0;
   block-size: 3px;
-  background: linear-gradient(90deg, var(--hud-gold) 0%, var(--hud-gold) 34%, var(--hud-orange) 34%, var(--hud-orange) 67%, var(--hud-red) 67%, var(--hud-red) 100%);
+  background: linear-gradient(
+    90deg,
+    var(--hud-gold) 0%,
+    var(--hud-gold) 34%,
+    var(--hud-orange) 34%,
+    var(--hud-orange) 67%,
+    var(--hud-red) 67%,
+    var(--hud-red) 100%
+  );
   pointer-events: none;
 }
 .hud-sections {
