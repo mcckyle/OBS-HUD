@@ -28,7 +28,7 @@
   --hud-accent: var(--hud-gold);
 
   /* ---------- Atmospheric Surfaces. ---------- */
-  --hud-atmosphere-gold: rgb(var(--hud-gold-rgb) / 0.10);
+  --hud-atmosphere-gold: rgb(var(--hud-gold-rgb) / 0.1);
   --hud-atmosphere-orange: rgb(var(--hud-orange-rgb) / 0.13);
   --hud-atmosphere-red: rgb(var(--hud-red-rgb) / 0.12);
 

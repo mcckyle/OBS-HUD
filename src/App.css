@@ -39,21 +39,29 @@
       ellipse at 50% 0%,
       rgb(var(--hud-gold-rgb) / 0.07) 0%,
       transparent 55%
-    ),rgb(var(--hud-space-rgb) / 0.12);
+    ),
+    rgb(var(--hud-space-rgb) / 0.12);
   color: var(--hud-text);
 
   border: 0;
   border-radius: 0;
   box-shadow: none;
 }
-.hud-panel::before
-{
+.hud-panel::before {
   content: "";
   position: absolute;
   inset-block-start: 0;
   inset-inline: 0;
   block-size: 3px;
-  background: linear-gradient(90deg, var(--hud-gold) 0%, var(--hud-gold) 34%, var(--hud-orange) 34%, var(--hud-orange) 67%, var(--hud-red) 67%, var(--hud-red) 100%);
+  background: linear-gradient(
+    90deg,
+    var(--hud-gold) 0%,
+    var(--hud-gold) 34%,
+    var(--hud-orange) 34%,
+    var(--hud-orange) 67%,
+    var(--hud-red) 67%,
+    var(--hud-red) 100%
+  );
   pointer-events: none;
 }
 .hud-sections {
