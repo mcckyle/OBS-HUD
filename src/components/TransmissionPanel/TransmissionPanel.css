@@ -10,7 +10,7 @@
   max-inline-size: 100%;
   margin: 0;
   overflow: hidden;
-  color: rgb(var(--hud-accent-rgb) / 90%);
+  color: var(--hud-gold);
   font-size: var(--font-size-label);
   font-weight: var(--font-weight-label);
   line-height: 1.25;
@@ -26,8 +26,8 @@
   color: var(--hud-text-secondary);
   font-size: var(--font-size-body);
   line-height: 1.5;
-  overflow-wrap: anywhere;
 
+  overflow-wrap: anywhere;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3; /* Three line messages MAX. */
 }

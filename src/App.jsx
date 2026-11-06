@@ -1,6 +1,6 @@
 //Filename: App.jsx
 //Author: Kyle McColgan
-//Date: 10 September 2026
+//Date: 5 November 2026
 //Description: This file contains the App component for the OBS HUD project.
 
 import { motion, useReducedMotion } from 'motion/react';
@@ -15,7 +15,7 @@ import './App.css';
 
 const PANEL_VARIANTS = {
   hidden: { opacity: 0, y: 5, },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.40, ease: [0.22, 1, 0.36, 1], }, },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1], }, },
 };
 
 export default function App()

@@ -13,8 +13,9 @@
   pointer-events: none;
 }
 
-/* Translucent Shipboard Console Styles. */
+/* Constellation Instrument Panel Styles. */
 .hud-panel {
+  position: relative;
   display: grid;
   gap: var(--hud-gap);
 
@@ -23,11 +24,27 @@
   padding: var(--hud-panel-padding);
   overflow: hidden;
 
-  background: linear-gradient(
-    155deg,
-    rgb(29 42 48 / 52%) 0%,
-    rgb(17 25 30 / 58%) 48%,
-    rgb(10 16 20 / 64%) 100%
+  background:
+    radial-gradient(
+      ellipse at 100% 100%,
+      var(--hud-atmosphere-red),
+      transparent 48%
+    ),
+    radial-gradient(
+      ellipse at 82% 100%,
+      var(--hud-atmosphere-orange),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at 65% 0%,
+      var(--hud-atmosphere-gold),
+      transparent 52%
+    ),
+  linear-gradient(
+    145deg,
+    rgb(var(--hud-space-rgb) / 0.96) 0%,
+    rgb(var(--hud-space-rgb) / 0.88) 55%,
+    rgb(var(--hud-space-rgb) / 0.94) 100%
   );
   color: var(--hud-text);
 
@@ -35,15 +52,16 @@
   border-radius: 0;
   box-shadow: none;
 }
-/*.hud-panel::before
+.hud-panel::before
 {
   content: "";
   position: absolute;
-  inset: 0 12% auto;
-  block-size: 1px;
-  background: linear-gradient(90deg, transparent, rgb(var(--hud-accent-rgb) / 45%), transparent);
+  inset-block-start: 0;
+  inset-inline: 0;
+  block-size: 3px;
+  background: linear-gradient(90deg, var(--hud-gold) 0%, var(--hud-gold) 34%, var(--hud-orange) 34%, var(--hud-orange) 67%, var(--hud-red) 67%, var(--hud-red) 100%);
   pointer-events: none;
-}*/
+}
 .hud-sections {
   display: grid;
   gap: var(--hud-gap);

@@ -46,7 +46,7 @@
   text-align: end;
 }
 .hud-clock-sol {
-  color: var(--hud-accent);
+  color: var(--hud-gold);
   font-size: var(--font-size-meta);
   font-weight: var(--font-weight-label);
   line-height: 1;
