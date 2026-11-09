@@ -19,8 +19,8 @@
 
   /* ---------- Interface Colors. ---------- */
   --hud-text: var(--hud-paper);
-  --hud-text-secondary: rgb(var(--hud-paper-rgb) / 0.82);
-  --hud-text-muted: rgb(var(--hud-paper-rgb) / 0.6);
+  --hud-text-secondary: rgb(var(--hud-paper-rgb) / 0.9);
+  --hud-text-muted: rgb(var(--hud-paper-rgb) / 0.78);
 
   --hud-divider: rgb(var(--hud-paper-rgb) / 0.16);
   --hud-outline: rgb(var(--hud-paper-rgb) / 0.12);
