@@ -40,7 +40,11 @@
       var(--hud-atmosphere-gold) 0%,
       transparent 60%
     ),
-    radial-gradient(circle at center, transparent 35%, var(--hud-vignette) 100%),
+    radial-gradient(
+      circle at center,
+      transparent 35%,
+      var(--hud-vignette) 100%
+    ),
     var(--hud-surface);
   color: var(--hud-text);
   backdrop-filter: blur(4px) saturate(110%);
