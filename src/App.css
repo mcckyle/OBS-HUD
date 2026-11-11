@@ -19,7 +19,7 @@
   display: grid;
   gap: var(--hud-gap);
 
-  inline-size: min(var(--hud-width), calc(100vw - 2 * var(--hud-gutter)));
+  inline-size: min(var(--hud-width), 100%);
   min-inline-size: 0;
   padding: var(--hud-panel-padding);
   overflow: hidden;
@@ -27,24 +27,24 @@
   background:
     radial-gradient(
       ellipse at 100% 100%,
-      rgb(var(--hud-red-rgb) / 0.06) 0%,
+      var(--hud-atmosphere-red) 0%,
       transparent 60%
     ),
     radial-gradient(
       ellipse at 75% 100%,
-      rgb(var(--hud-orange-rgb) / 0.05) 0%,
+      var(--hud-atmosphere-orange) 0%,
       transparent 65%
     ),
     radial-gradient(
       ellipse at 50% 0%,
-      rgb(var(--hud-gold-rgb) / 0.04) 0%,
+      var(--hud-atmosphere-gold) 0%,
       transparent 60%
     ),
-    radial-gradient(circle at center, transparent 35%, rgb(0 0 0 / 0.12) 100%),
-    rgb(var(--hud-space-rgb) / 0.78);
+    radial-gradient(circle at center, transparent 35%, var(--hud-vignette) 100%),
+    var(--hud-surface);
   color: var(--hud-text);
-  backdrop-filter: blur(6px) saturate(115%);
-  -webkit-backdrop-filter: blur(6px) saturate(115%);
+  backdrop-filter: blur(4px) saturate(110%);
+  -webkit-backdrop-filter: blur(4px) saturate(110%);
 
   border: 0;
   border-radius: 0;

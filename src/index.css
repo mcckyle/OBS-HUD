@@ -23,14 +23,15 @@
   --hud-text-muted: rgb(var(--hud-paper-rgb) / 0.78);
 
   --hud-divider: rgb(var(--hud-paper-rgb) / 0.16);
-  --hud-outline: rgb(var(--hud-paper-rgb) / 0.12);
-
   --hud-accent: var(--hud-gold);
 
   /* ---------- Atmospheric Surfaces. ---------- */
-  --hud-atmosphere-gold: rgb(var(--hud-gold-rgb) / 0.1);
-  --hud-atmosphere-orange: rgb(var(--hud-orange-rgb) / 0.13);
-  --hud-atmosphere-red: rgb(var(--hud-red-rgb) / 0.12);
+  --hud-atmosphere-gold: rgb(var(--hud-gold-rgb) / 0.04);
+  --hud-atmosphere-orange: rgb(var(--hud-orange-rgb) / 0.05);
+  --hud-atmosphere-red: rgb(var(--hud-red-rgb) / 0.06);
+
+  --hud-vignette: rgb(var(--hud-space-rgb) / 0.12);
+  --hud-surface: rgb(var(--hud-space-rgb) / 0.78);
 
   /* ---------- Layout. ---------- */
   --hud-width: 420px;
