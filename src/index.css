@@ -31,7 +31,7 @@
   --hud-atmosphere-red: rgb(var(--hud-red-rgb) / 0.06);
 
   --hud-vignette: rgb(var(--hud-space-rgb) / 0.12);
-  --hud-surface: rgb(var(--hud-space-rgb) / 0.78);
+  --hud-surface: rgb(var(--hud-space-rgb) / 0.35);
 
   /* ---------- Layout. ---------- */
   --hud-width: 420px;
