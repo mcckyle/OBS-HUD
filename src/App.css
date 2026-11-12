@@ -25,27 +25,23 @@
   overflow: hidden;
 
   background:
-  radial-gradient(
-    ellipse at 100% 100%,
-    rgb(var(--hud-red-rgb) / 0.08) 0%,
-    transparent 60%
-  ),
-  radial-gradient(
-    ellipse at 75% 100%,
-    rgb(var(--hud-orange-rgb) / 0.07) 0%,
-    transparent 65%
-  ),
-  radial-gradient(
-    ellipse at 50% 0%,
-    rgb(var(--hud-gold-rgb) / 0.06) 0%,
-    transparent 60%
-  ),
-  radial-gradient(
-    circle at center,
-    transparent 35%,
-    rgb(0 0 0 / 0.18) 100%
-  ),
-  var(--hud-surface);
+    radial-gradient(
+      ellipse at 100% 100%,
+      rgb(var(--hud-red-rgb) / 0.08) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 75% 100%,
+      rgb(var(--hud-orange-rgb) / 0.07) 0%,
+      transparent 65%
+    ),
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgb(var(--hud-gold-rgb) / 0.06) 0%,
+      transparent 60%
+    ),
+    radial-gradient(circle at center, transparent 35%, rgb(0 0 0 / 0.18) 100%),
+    var(--hud-surface);
   color: var(--hud-text);
   backdrop-filter: blur(2px) saturate(110%);
   -webkit-backdrop-filter: blur(2px) saturate(110%);
