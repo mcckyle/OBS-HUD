@@ -1,21 +1,25 @@
 //Filename: useYouTubeData.jsx
 //Author: Kyle McColgan
-//Date: 26 August 2026
+//Date: 16 November 2026
 //Description: This file contains the YouTube API integration for the OBS HUD project.
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 //API.
 const YOUTUBE_API = "https://www.googleapis.com/youtube/v3";
-const CHANNELS_ENDPOINT = "channels";
-const COMMENT_THREADS_ENDPOINT = "commentThreads";
+const SEARCH_ENDPOINT = "search";
+const VIDEOS_ENDPOINT = "videos";
+const LIVE_CHAT_ENDPOINT = "liveChat/messages";
 
 //Polling.
-const POLL_INTERVAL_MS = 2 * 60 * 1000;
+const DISCOVERY_INTERVAL_MS = 5 * 60 * 1000;
+const VIEWER_POLL_INTERVAL_MS = 60 * 1000;
+const CHAT_RETRY_INTERVAL_MS = 15 * 1000;
 
 //Display.
-const MAX_COMMENT_LENGTH = 72;
-const INITIAL_SUBSCRIBER_COUNT = "---";
+const MAX_CHAT_MESSAGES = 3;
+const CHAT_MAX_RESULTS = 200;
+const MAX_MESSAGE_LENGTH = 100;
 const DEFAULT_MESSAGES = Object.freeze({
   connecting: Object.freeze({
     id: "connecting",
@@ -50,41 +54,57 @@ function getYouTubeConfig()
   };
 }
 
-function createYouTubeUrl(endpoint, params)
+async function fetchYouTube(endpoint, params, apiKey, signal)
 {
-  const searchParams = new URLSearchParams(params);
-  return `${YOUTUBE_API}/${endpoint}?${searchParams.toString()}`;
+  //Read API credentials from the Browser Souce URL.
+  const url = new URL(`${YOUTUBE_API}/${endpoint}`);
+
+  for (const [key, value] of Object.entries(params))
+  {
+    if (value != null)
+    {
+      url.searchParams.set(key, value);
+    }
+  }
+
+  url.searchParams.set("key", apiKey);
+  const response = await fetch(url, { signal });
+  const data = await response.json();
+
+  if (!response.ok)
+  {
+    throw new Error(data.error?.message || `YouTube API error: ${response.status}`);
+  }
+
+  return data;
 }
 
-function truncateComment(text)
+function truncateMessage(text)
 {
   const normalized = text?.trim() ?? "";
 
-  if (normalized.length <= MAX_COMMENT_LENGTH)
+  if (normalized.length <= MAX_MESSAGE_LENGTH)
   {
     return normalized;
   }
 
-  const truncated = normalized.slice(0, MAX_COMMENT_LENGTH);
-  const clean = truncated.replace(/\s+\S*$/, "").trimEnd();
+  //Reserve one character for the ellipsis...
+  const limit = MAX_MESSAGE_LENGTH - 1;
+  const boundary = normalized.lastIndexOf(" ", limit);
+  const end = boundary > 0 ? boundary : limit;
 
-  return `${clean}…`;
-}
-
-const SUBSCRIBER_FORMATTER = new Intl.NumberFormat("en-US");
-function formatSubscriberCount(count)
-{
-  const value = Number(count);
-  return Number.isFinite(value)
-    ? SUBSCRIBER_FORMATTER.format(value)
-    : INITIAL_SUBSCRIBER_COUNT;
+  return `${normalized.slice(0, end).trimEnd()}…`;
 }
 
 export function useYouTubeData()
 {
-  const [subscriberCount, setSubscriberCount] = useState(INITIAL_SUBSCRIBER_COUNT);
-  const [latestMessage, setLatestMessage] = useState(DEFAULT_MESSAGES.connecting);
-  const requestControllerRef = useRef(null);
+  const [streamStatus, setStreamStatus] = useState("connecting");
+  const [viewerCount, setViewerCount] = useState(null);
+
+  const [chatMessages, setChatMessages] = useState([]);
+  const [chatEnabled, setChatEnabled] = useState(false);
+  const [chatStatus, setChatStatus] = useState("waiting");
+  const [error, setError] = useState(null);
   const { apiKey, channelId } = getYouTubeConfig();
 
   useEffect(() =>
@@ -92,125 +112,260 @@ export function useYouTubeData()
     //If variables are truly missing, stop execution.
     if ((!apiKey) || (!channelId))
     {
-      console.warn("Missing YouTube configuration in Browser Source URL.");
-      setLatestMessage(DEFAULT_MESSAGES.config);
+      setStreamStatus("config");
+      setError("Missing YouTube API configuration.");
       return;
     }
 
     let disposed = false;
+    let discoveryTimer = null;
+    let viewerTimer = null;
+    let chatTimer = null;
+    let activeVideoId = null;
+    let activeChatId = null;
+    let pageToken = null;
+    const seenMessageIds = new Set();
+    const controller = new AbortController();
+    const request = (endpoint, params) =>
+      fetchYouTube(endpoint, params, apiKey, controller.signal);
 
-    const refreshYouTubeData = async () =>
+    function clearChat()
     {
-      requestControllerRef.current?.abort();
+      clearTimeout(chatTimer);
+      activeChatId = null;
+      pageToken = null;
+      seenMessageIds.clear();
+      setChatMessages([]);
+      setChatEnabled(false);
+      setChatStatus("waiting");
+    }
 
-      const controller = new AbortController();
-      requestControllerRef.current = controller;
+    function scheduleDiscovery()
+    {
+      if (disposed)
+      {
+        return;
+      }
 
-      const requestOptions = { signal: controller.signal, };
+      clearTimeout(discoveryTimer);
 
-      const statsUrl = createYouTubeUrl(CHANNELS_ENDPOINT, {
-        part: "statistics",
-        id: channelId,
-        key: apiKey,
-      });
+      discoveryTimer = setTimeout(discoveryBroadcast, DISCOVERY_INTERVAL_MS);
+    }
 
-      const commsUrl = createYouTubeUrl(COMMENT_THREADS_ENDPOINT, {
-        part: "snippet",
-        allThreadsRelatedToChannelId: channelId,
-        maxResults: "1",
-        order: "time",
-        key: apiKey,
-      });
+    //1. Discover the active public broadcast.
+    async function discoveryBroadcast()
+    {
+      if (disposed)
+      {
+        return;
+      }
 
       try
       {
-        //1. Fetch subscriber statistics.
-        const [statsResponse, commsResponse] = await Promise.all([
-          fetch(statsUrl, requestOptions),
-          fetch(commsUrl, requestOptions),
-        ]);
+        const data = await request(SEARCH_ENDPOINT, {
+          part: "snippet",
+          channelId,
+          eventType: "live",
+          type: "video",
+          order: "date",
+          maxResults: "1",
+        });
 
         if (disposed)
         {
           return;
         }
 
-        if (statsResponse.ok)
-        {
-            const statsData = await statsResponse.json();
-            const count = statsData.items?.[0]?.statistics?.subscriberCount;
+        const videoId = data.items?.[0]?.id?.videoId;
 
-            if (count != null)
-            {
-              //Format to nicely readable string e.g. "1,250".
-              setSubscriberCount(formatSubscriberCount(count));
-            }
-        }
-        else
+        if (!videoId)
         {
-          console.warn(`YouTube statistics request failed: ${statsResponse.status}`);
-        }
-
-        if (!commsResponse.ok)
-        {
-          console.warn(`YouTube comments request failed: ${commsResponse.status}`);
-          setLatestMessage(DEFAULT_MESSAGES.error);
+          activeVideoId = null;
+          setStreamStatus("offline");
+          setViewerCount(null);
+          clearChat();
+          scheduleDiscovery();
           return;
         }
 
-        const commsData = await commsResponse.json();
-
-        //2. Fetch latest channel comment.
-        const latestThread = commsData.items?.[0];
-        const comment = latestThread?.snippet?.topLevelComment?.snippet;
-
-        if ((!latestThread) || (!comment))
+        activeVideoId = videoId;
+        await refreshBroadcast();
+      }
+      catch (err)
+      {
+        if ((disposed) || (err.name === "AbortError"))
         {
-          setLatestMessage(DEFAULT_MESSAGES.empty);
           return;
         }
 
-        setLatestMessage({
-            id: latestThread.id,
-            author: comment.authorDisplayName?.trim() || "UNKNOWN",
-            message: truncateComment(comment.textDisplay),
+        console.error("Broadcast discovery failed:", err);
+        setStreamStatus("error");
+        setError(err.message);
+        scheduleDiscovery();
+      }
+    }
+
+    //2. Retrieve viewer statistics and active chat ID.
+    async function refreshBroadcast()
+    {
+      if ((disposed) || (!activeVideoId))
+      {
+        return;
+      }
+
+      try
+      {
+        const data = await request(VIDEOS_ENDPOINT, {
+          part: "liveStreamingDetails",
+          id: activeVideoId,
         });
-      }
-      catch (error)
-      {
-        if ((error.name === "AbortError") || (disposed))
+
+        if (disposed)
         {
           return;
         }
 
-        console.error("Error fetching data from YouTube API:", error);
-        setLatestMessage(DEFAULT_MESSAGES.error);
-      }
-      finally
-      {
-        if (requestControllerRef.current === controller)
+        const video = data.items?.[0];
+        const details = video?.liveStreamingDetails;
+
+        if ((!video) || (!details) || (details.actualEndTime))
         {
-          requestControllerRef.current = null;
+          activeVideoId = null;
+          setStreamStatus("offline");
+          setViewerCount(null);
+          clearChat();
+          scheduleDiscovery();
+          return;
         }
+
+        setStreamStatus("live");
+        setError(null);
+        const viewers = details.concurrentViewers;
+        setViewerCount(viewers != null && Number.isFinite(Number(viewers)) ? Number(viewers) : null);
+
+        //Discover chat whenever the active chat ID changes.
+        const chatId = details.activeLiveChatId ?? null;
+
+        if (chatId !== activeChatId)
+        {
+          clearChat();
+
+          if (chatId)
+          {
+            activeChatId = chatId;
+            setChatEnabled(true);
+            setChatStatus("connecting");
+            pollChat();
+          }
+          else
+          {
+            setChatStatus("disabled");
+          }
+        }
+
+        viewerTimer = setTimeout(refreshBroadcast, VIEWER_POLL_INTERVAL_MS);
       }
-    };
+      catch (err)
+      {
+        if ((disposed) || (err.name === "AbortError"))
+        {
+          return;
+        }
 
-    //Initial fetch.
-    refreshYouTubeData();
+        console.error("Broadcast telemetry failed:", err);
+        setError(err.message);
+        viewerTimer = setTimeout(refreshBroadcast, VIEWER_POLL_INTERVAL_MS);
+      }
+    }
 
-    //Poll YouTube once every 2 minutes.
-    const pollInterval = setInterval(refreshYouTubeData, POLL_INTERVAL_MS);
+    //3. Retrieve actual YouTube live chat messages.
+    async function pollChat(nextPageToken = pageToken)
+    {
+      if ((disposed) || (!activeChatId))
+      {
+        return;
+      }
+
+      try
+      {
+        const data = await request(LIVE_CHAT_ENDPOINT, {
+          part: "id,snippet,authorDetails",
+          liveChatId: activeChatId,
+          maxResults: String(CHAT_MAX_RESULTS),
+          pageToken: nextPageToken,
+        });
+
+        const incomingMessages = (data.items ?? [])
+          .filter(item =>
+            item.snippet?.type === "textMessageEvent" &&
+            item.snippet?.textMessageDetails?.messageText
+          )
+          .map(item => ({
+            id: item.id,
+            author: item.authorDetails?.displayName?.trim() || "UNKNOWN",
+            message: truncateMessage(item.snippet.textMessageDetails.messageText),
+            publishedAt: item.snippet.publishedAt,
+          }))
+          .filter(message => {
+            if (seenMessageIds.has(message.id))
+            {
+              return false;
+            }
+
+            seenMessageIds.add(message.id);
+            return true;
+          });
+
+        if (incomingMessages.length > 0)
+        {
+          setChatMessages(previous => [
+            ...previous,
+            ...incomingMessages,
+          ].slice(-MAX_CHAT_MESSAGES));
+        }
+
+        pageToken = data.nextPageToken ?? pageToken;
+        setChatEnabled(true);
+        setChatStatus("active");
+
+        //YouTube determines the next permitted polling interval.
+        const pollingInterval = data.pollingIntervalMillis ?? 5000;
+        chatTimer = setTimeout(() => pollChat(pageToken), pollingInterval);
+      }
+      catch (err)
+      {
+        if ((disposed) || (err.name === "AbortError"))
+        {
+          return;
+        }
+
+        console.error("Live chat retrieval failed:", err);
+        const terminalError = /liveChatEnded|liveChatDisabled|liveChatNotFound|quotaExceeded|dailyLimitExceeded/i.test(err.message);
+        if (terminalError)
+        {
+          setChatEnabled(false);
+          setChatStatus("disabled");
+          return;
+        }
+        setChatStatus("error");
+        chatTimer = setTimeout(() => pollChat(pageToken), CHAT_RETRY_INTERVAL_MS);
+      }
+    }
+
+    //Initial discovery.
+    discoveryBroadcast();
 
     return () =>
     {
         disposed = true;
 
-        requestControllerRef.current?.abort();
-        requestControllerRef.current = null;
+        clearTimeout(discoveryTimer);
+        clearTimeout(viewerTimer);
+        clearTimeout(chatTimer);
 
-        clearInterval(pollInterval);
+        controller.abort();
     };
   }, [apiKey, channelId]);
 
-  return { subscriberCount, latestMessage };
+  return { streamStatus, viewerCount, chatMessages, chatEnabled, chatStatus, error, };
 };

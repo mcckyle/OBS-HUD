@@ -1,6 +1,6 @@
 //Filename: App.jsx
 //Author: Kyle McColgan
-//Date: 5 November 2026
+//Date: 16 November 2026
 //Description: This file contains the App component for the OBS HUD project.
 
 import { motion, useReducedMotion } from 'motion/react';
@@ -8,8 +8,8 @@ import { useYouTubeData } from "./hooks/useYouTubeData";
 import HudHeader from "./components/HudHeader/HudHeader.jsx";
 import HudSection from "./components/HudSection/HudSection.jsx";
 import SessionTimer from "./components/SessionTimer/SessionTimer.jsx";
-import CrewPanel from "./components/CrewPanel/CrewPanel.jsx";
-import TransmissionPanel from "./components/TransmissionPanel/TransmissionPanel.jsx";
+import ViewerCount from "./components/ViewerCount/ViewerCount.jsx";
+import LiveChatPanel from "./components/LiveChatPanel/LiveChatPanel.jsx";
 
 import './App.css';
 
@@ -21,17 +21,17 @@ const PANEL_VARIANTS = {
 export default function App()
 {
   const reduceMotion = useReducedMotion();
-  const { subscriberCount, latestMessage } = useYouTubeData();
+  const { viewerCount, chatMessages, chatEnabled } = useYouTubeData();
 
   //Transparent wrapper that spans the OBS canvas...
   return (
     <main className="hud-stage">
       <motion.section
         className="hud-panel"
+        aria-label="Starfield livestream HUD"
         initial={reduceMotion ? false : "hidden"}
         animate={reduceMotion ? undefined : "visible"}
         variants={reduceMotion ? undefined : PANEL_VARIANTS}
-        aria-label="Starfield livestream HUD"
       >
         {/* System Header. */}
         <HudHeader />
@@ -42,15 +42,17 @@ export default function App()
             <SessionTimer />
           </HudSection>
 
-          {/* Section 2: Live Subscriber Count. */}
-          <HudSection label="CREW SIZE">
-            <CrewPanel subscriberCount={subscriberCount} />
+          {/* Section 2: Concurrent Viewer Count. */}
+          <HudSection label="CONCURRENT VIEWERS">
+            <ViewerCount viewerCount={viewerCount} />
           </HudSection>
 
           {/* Section 3: Comms. */}
-          <HudSection label="TRANSMISSION">
-            <TransmissionPanel message={latestMessage} />
-          </HudSection>
+          {chatEnabled && chatMessages.length > 0 && (
+            <HudSection label="LIVE CHAT">
+              <LiveChatPanel messages={chatMessages} />
+            </HudSection>
+          )}
         </div>
       </motion.section>
     </main>
