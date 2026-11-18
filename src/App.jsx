@@ -1,15 +1,15 @@
 //Filename: App.jsx
 //Author: Kyle McColgan
-//Date: 16 November 2026
+//Date: 17 November 2026
 //Description: This file contains the App component for the OBS HUD project.
 
 import { motion, useReducedMotion } from 'motion/react';
-import { useYouTubeData } from "./hooks/useYouTubeData";
-import HudHeader from "./components/HudHeader/HudHeader.jsx";
-import HudSection from "./components/HudSection/HudSection.jsx";
-import SessionTimer from "./components/SessionTimer/SessionTimer.jsx";
-import ViewerCount from "./components/ViewerCount/ViewerCount.jsx";
-import LiveChatPanel from "./components/LiveChatPanel/LiveChatPanel.jsx";
+import { useYouTubeData } from './hooks/useYouTubeData';
+import HudHeader from './components/HudHeader/HudHeader.jsx';
+import HudSection from './components/HudSection/HudSection.jsx';
+import SessionTimer from './components/SessionTimer/SessionTimer.jsx';
+import ViewerCount from './components/ViewerCount/ViewerCount.jsx';
+import LiveChatPanel from './components/LiveChatPanel/LiveChatPanel.jsx';
 
 import './App.css';
 
@@ -21,7 +21,7 @@ const PANEL_VARIANTS = {
 export default function App()
 {
   const reduceMotion = useReducedMotion();
-  const { viewerCount, chatMessages, chatEnabled } = useYouTubeData();
+  const { viewerCount, chatMessages = [], chatEnabled } = useYouTubeData();
 
   //Transparent wrapper that spans the OBS canvas...
   return (
@@ -29,8 +29,8 @@ export default function App()
       <motion.section
         className="hud-panel"
         aria-label="Starfield livestream HUD"
-        initial={reduceMotion ? false : "hidden"}
-        animate={reduceMotion ? undefined : "visible"}
+        initial={reduceMotion ? false : 'hidden'}
+        animate={reduceMotion ? undefined : 'visible'}
         variants={reduceMotion ? undefined : PANEL_VARIANTS}
       >
         {/* System Header. */}
@@ -57,4 +57,4 @@ export default function App()
       </motion.section>
     </main>
   );
-};
+}

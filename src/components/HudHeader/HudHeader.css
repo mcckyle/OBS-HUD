@@ -9,7 +9,6 @@
 
   min-inline-size: 0;
   padding-block-end: 13px;
-
   border-block-end: 1px solid var(--hud-divider);
 }
 .hud-system {
@@ -42,8 +41,6 @@
   justify-items: end;
   gap: 4px;
   flex: 0 0 auto;
-
-  text-align: end;
 }
 .hud-clock-sol {
   color: var(--hud-gold);

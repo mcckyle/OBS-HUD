@@ -3,7 +3,6 @@
   display: grid;
   gap: 11px;
   min-inline-size: 0;
-  min-block-size: 4.5rem;
 }
 .hud-chat-message {
   display: grid;
@@ -11,7 +10,6 @@
   min-inline-size: 0;
 }
 .hud-chat-author {
-  max-inline-size: 100%;
   margin: 0;
   overflow: hidden;
 

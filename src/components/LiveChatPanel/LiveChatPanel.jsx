@@ -1,10 +1,10 @@
 //Filename: LiveChatPanel.jsx
 //Author: Kyle McColgan
-//Date: 16 November 2026
+//Date: 17 November 2026
 //Description: This file contains the live chat panel component for the OBS HUD project.
 
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
-import './LiveChatPanel.css'
+import './LiveChatPanel.css';
 
 const MESSAGE_VARIANTS = {
     initial: { opacity: 0, y: 4, },
@@ -21,16 +21,15 @@ export default function LiveChatPanel({ messages = [] })
     }
 
     return (
-      <div className="hud-chat" aria-label="Recent live chat messages">
+      <div className="hud-chat">
         <AnimatePresence initial={false}>
           {messages.slice(-3).map(message => (
               <motion.article
                 key={message.id}
                 className="hud-chat-message"
-                aria-label={`Message from ${message.author}`}
-                initial={reduceMotion ? false : "initial"}
-                animate={reduceMotion ? undefined : "enter"}
-                exit={reduceMotion ? undefined : "exit"}
+                initial={reduceMotion ? false : 'initial'}
+                animate={reduceMotion ? undefined : 'enter'}
+                exit={reduceMotion ? undefined : 'exit'}
                 variants={reduceMotion ? undefined : MESSAGE_VARIANTS}
               >
                 <p className="hud-chat-author">{message.author}</p>

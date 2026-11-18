@@ -8,8 +8,6 @@
   inline-size: 100%;
   block-size: 100%;
   padding: var(--hud-gutter);
-
-  background: transparent;
   pointer-events: none;
 }
 
@@ -27,23 +25,18 @@
   background:
     radial-gradient(
       ellipse at 100% 100%,
-      var(--hud-atmosphere-red) 0%,
+      var(--hud-atmosphere-red),
       transparent 60%
     ),
     radial-gradient(
       ellipse at 75% 100%,
-      var(--hud-atmosphere-orange) 0%,
+      var(--hud-atmosphere-orange),
       transparent 65%
     ),
     radial-gradient(
       ellipse at 50% 0%,
-      var(--hud-atmosphere-gold) 0%,
+      var(--hud-atmosphere-gold),
       transparent 60%
-    ),
-    radial-gradient(
-      circle at center,
-      transparent 35%,
-      var(--hud-vignette) 100%
     ),
     var(--hud-surface);
   color: var(--hud-text);
@@ -61,12 +54,9 @@
   block-size: 3px;
   background: linear-gradient(
     90deg,
-    var(--hud-gold) 0%,
-    var(--hud-gold) 34%,
-    var(--hud-orange) 34%,
-    var(--hud-orange) 67%,
-    var(--hud-red) 67%,
-    var(--hud-red) 100%
+    var(--hud-gold) 0 34%,
+    var(--hud-orange) 34% 67%,
+    var(--hud-red) 67% 100%
   );
   pointer-events: none;
 }
@@ -77,9 +67,14 @@
 }
 
 @media (max-width: 480px) {
-  :root {
-    --hud-gutter: 16px;
-    --hud-panel-padding: 17px;
-    --hud-gap: 14px;
+  .hud-stage {
+    padding: 16px;
+  }
+  .hud-panel {
+    padding: 17px;
+    gap: 14px;
+  }
+  .hud-sections {
+    gap: 14px;
   }
 }

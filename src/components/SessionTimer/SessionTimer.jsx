@@ -3,9 +3,9 @@
 //Date: 12 August 2026
 //Description: This file contains the session timer component for the OBS HUD project.
 
-import { formatTime } from "../../utils/time";
-import { useSessionTimer } from "../../hooks/useSessionTimer";
-import "./SessionTimer.css";
+import { formatTime } from '../../utils/time';
+import { useSessionTimer } from '../../hooks/useSessionTimer';
+import './SessionTimer.css';
 
 export default function SessionTimer()
 {
